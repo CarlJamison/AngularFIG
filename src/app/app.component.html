@@ -1,7 +1,11 @@
 ﻿<!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+<nav class="navbar navbar-expand" *ngIf="currentUser">
     <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/">Home</a>
+        <img src="./assets/itg.png" style="width:100px" >
+        <a class="nav-item nav-link" routerLink="/">Search</a>
+        <a class="nav-item nav-link" routerLink="/bookings">Bookings</a>
+        <a class="nav-item nav-link" routerLink="/account">Account</a>
+        <a class="nav-item nav-link" routerLink="/admin">Administration</a>
         <a class="nav-item nav-link" (click)="logout()">Logout</a>
     </div>
 </nav>
@@ -9,14 +13,4 @@
 <!-- main app container -->
 <div class="container">
     <router-outlet></router-outlet>
-</div>
-
-<!-- credits -->
-<div class="text-center mt-4">
-    <p>
-        <a href="https://jasonwatmore.com/post/2019/06/26/angular-8-basic-http-authentication-tutorial-example" target="_top">Angular 8 - Basic HTTP Authentication Example & Tutorial</a>
-    </p>
-    <p>
-        <a href="https://jasonwatmore.com" target="_top">JasonWatmore.com</a>
-    </p>
 </div>
