@@ -1,0 +1,30 @@
+﻿<div class="col-md-6 offset-md-3 mt-5">
+    <div class="card">
+        <h4 class="card-header">ITGTravel Forgot Password</h4>
+        <div class="card-body">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div *ngIf="!success" class="form-group">
+                    <label for="email">Email</label>
+                    <input placeholder="example@example.com" type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                    </div>
+                </div>
+                <button *ngIf="!success" [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Send Password Reset Email
+                </button>
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                <div *ngIf="success" style="text-align: center" class="mt-3 mb-0">Password reset email has been sent</div>
+                <div class="text-center mt-4">
+                    <p>
+                        <a routerLink="/login">Back to Login</a>
+                    </p>
+                    <p>
+                        <a routerLink="/createAccount">Create Account</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,10 +1,10 @@
-﻿<div class="card mt-4">
-    <h4 class="card-header">You're logged in with Angular 8 & Basic HTTP Authentication!!</h4>
-    <div class="card-body">
-        <h6>Users from secure api end point</h6>
-        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-        <ul *ngIf="users">
-            <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-        </ul>
+﻿<div class="card mt-5"style="flex-direction: row;
+height: 80%; border: none;">
+    <div class="side-nav">
+        <div class="nav-tab" (click)="tab = 0" [ngClass]="{'active-side-nav-tab': tab == 0}" ><span class="material-icons">face</span>Users</div>
+        <div class="nav-tab" (click)="tab = 1" [ngClass]="{'active-side-nav-tab': tab == 1}" ><span class="material-icons">groups</span>Clients</div>
+        <div class="nav-tab" (click)="tab = 2" [ngClass]="{'active-side-nav-tab': tab == 2}" ><span class="material-icons">sell</span>Pricing</div>
+        <div class="nav-tab" (click)="tab = 3" [ngClass]="{'active-side-nav-tab': tab == 3}" ><span class="material-icons">airplane_ticket</span>Bookings</div>
     </div>
+    <div>{{ users }}</div>
 </div>

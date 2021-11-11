@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -21,7 +21,16 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
+        let body = new HttpParams()
+        .set('grant_type', 'password')
+        .set('password', password)
+        .set('username', username);
+
+        return this.http.post<any>(`${environment.apiUrl}/Token`, body, {
+            headers: new HttpHeaders()
+              .set('Content-Type', 'application/x-www-form-urlencoded')
+              .set('Accept', '*/*')
+            })
             .pipe(map(user => {
                 // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
                 user.authdata = window.btoa(username + ':' + password);
@@ -30,6 +39,7 @@ export class AuthenticationService {
                 return user;
             }));
     }
+
 
     logout() {
         // remove user from local storage to log user out

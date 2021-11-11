@@ -5,4 +5,5 @@
     firstName: string;
     lastName: string;
     authdata?: string;
+    access_token: string;
 }

@@ -1,0 +1,26 @@
+.nav-tab{
+    padding: 16px;
+    color: #007db0;
+    font-size: 20px;
+    letter-spacing: 1px;
+    background-color: #007db0;
+    color: white;
+}
+
+.side-nav{
+    width: 250px;
+    background-color: #007db0;
+}
+
+.nav-tab .material-icons{
+    vertical-align: bottom;
+    padding-right: 16px;
+    height: 26px;
+}
+
+.nav-tab:hover,
+.active-side-nav-tab{
+    background-color: #72b2cc;
+    cursor: pointer;
+    transition: all 0.25s;
+}

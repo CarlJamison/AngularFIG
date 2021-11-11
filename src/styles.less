@@ -1,8 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 a { cursor: pointer }
 
-html {background-image: url("./assets/bg.jpg"); background-size: cover; background-repeat: no-repeat;}
-body {background-color: unset;}
+html {
+    background-image: url("./assets/bg.jpg"); 
+    background-size: cover; 
+    background-repeat: no-repeat;
+    height: -webkit-fill-available;;
+}
+body {
+    background-color: unset;
+    height: -webkit-fill-available;
+}
+app{
+    display: flex;
+    flex-direction: column;
+    height: -webkit-fill-available;
+}
+
+.container{
+    height: -webkit-fill-available;
+}
 
 .card{
     box-shadow: #3232324a 0px 3px 8px;
@@ -16,6 +33,29 @@ body {background-color: unset;}
     box-shadow: #3232324a 0px 3px 15px 0px;
 }
 
+/*.nav-item{
+    color:white;
+    flex: 20%;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.25s;
+    transition: background-color 0.5s;
+    margin:auto 8px;
+    border-radius: 8px;
+}
+
+.nav-item:hover{
+    color:#a2daf0;
+}
+
+.active-tab.nav-item,
+.active-tab.nav-item:hover{
+    background-color: #007db0;
+    color:white;
+}*/
+
+
 .nav-item{
     color:white;
     flex: 20%;
@@ -23,12 +63,21 @@ body {background-color: unset;}
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.25s;
-    margin:auto;
+    padding-top: 20px;
+}
+
+.navbar{
+    padding: 0 20px;
 }
 
 .nav-item:hover{
     color:#a2daf0;
 }
+
+.active-tab.nav-item{
+    background-color: whitesmoke;
+}
+
 
 .navbar-nav{
     display: flex;

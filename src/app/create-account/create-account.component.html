@@ -1,33 +1,41 @@
 ﻿<div class="col-md-6 offset-md-3 mt-5">
     <div class="card">
-        <h4 class="card-header">ITGTravel Login</h4>
+        <h4 class="card-header">ITGTravel Register</h4>
         <div class="card-body">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <div class="form-group">
+                <div *ngIf="!success" class="form-group">
                     <label for="username">Email</label>
                     <input placeholder="example@example.com" type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                         <div *ngIf="f.username.errors.required">Username is required</div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div *ngIf="!success" class="form-group">
                     <label for="password">Password</label>
                     <input placeholder="password" type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                         <div *ngIf="f.password.errors.required">Password is required</div>
                     </div>
                 </div>
-                <button [disabled]="loading" class="btn btn-primary">
+                <div *ngIf="!success" class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input placeholder="Password" type="password" formControlName="confirm_password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirm_password.errors }" />
+                    <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
+                        <div *ngIf="f.confirm_password.errors.required">Password is required</div>
+                    </div>
+                </div>
+                <button *ngIf="!success" [disabled]="loading" class="btn btn-primary">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Login
+                    Register
                 </button>
                 <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                <div *ngIf="success" style="text-align: center" class="mt-3 mb-0">Account has been created.  You will recieve an email when we confirm your account.</div>
                 <div class="text-center mt-4">
                     <p>
                         <a routerLink="/forgotPassword">Forgot your password?</a>
                     </p>
                     <p>
-                        <a routerLink="/createAccount">Create Account</a>
+                        <a routerLink="/login">Back to login</a>
                     </p>
                 </div>
             </form>

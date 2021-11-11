@@ -16,8 +16,11 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.authenticationService.logout();
                 location.reload();
             }
-
-            const error = err.error.message || err.statusText;
+            var error = err.error.ModelState || err.error.error_description || err.statusText;
+            if(err.error.Message == 'The request is invalid.'){
+                error = Object.values(err.error.ModelState)[0];
+            }
+            
             return throwError(error);
         }))
     }
