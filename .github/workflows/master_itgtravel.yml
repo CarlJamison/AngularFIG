@@ -24,8 +24,8 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm run build --prod
+        working-directory: .
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -51,6 +51,5 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'itgtravel'
-          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B254EAE16B054A1A82ED102DD8BD227D }}
-          package: .
+          package: ./dist/itgtravel
