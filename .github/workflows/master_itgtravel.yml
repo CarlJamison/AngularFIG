@@ -21,10 +21,11 @@ jobs:
         with:
           node-version: '14.x'
 
-      - name: npm install, build, and test
+      - name: npm install, build, and copy web config
         run: |
           npm install
           npm run build --prod
+          copy .\Web.config .\dist
         working-directory: .
       
       - name: Upload artifact for deployment job
