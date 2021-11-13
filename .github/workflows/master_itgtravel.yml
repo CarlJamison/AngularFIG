@@ -52,4 +52,4 @@ jobs:
         with:
           app-name: 'itgtravel'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B254EAE16B054A1A82ED102DD8BD227D }}
-          package: ./dist/itgtravel
+          package: ./dist
