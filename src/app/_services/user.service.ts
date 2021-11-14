@@ -9,6 +9,6 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     getAll() {
-        return this.http.get<User[]>(`${environment.apiUrl}/api/Admin/ConfirmationRequests`);
+        return this.http.get<User[]>(`${environment.apiUrl}/api/Admin/Users`);
     }
 }

@@ -5,6 +5,7 @@
     letter-spacing: 1px;
     background-color: #007db0;
     color: white;
+    width: 250px;
 }
 
 .side-nav{
@@ -23,4 +24,9 @@
     background-color: #72b2cc;
     cursor: pointer;
     transition: all 0.25s;
+}
+
+.alert-link{
+    padding-left: 16px;
+    cursor: pointer;
 }

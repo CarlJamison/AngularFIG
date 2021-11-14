@@ -9,6 +9,10 @@ export class AccountService {
 
     private profile: Observable<any>;
 
+    ConfirmAccount(email) {
+        return this.http.put<any>(`${environment.apiUrl}/api/Admin/ConfirmAccount?email=${email}`, null).toPromise();
+    }
+
     ForgotPassword(email) {
         return this.http.put<any>(`${environment.apiUrl}/api/Account/ForgotPassword?email=${email}`, null);
     }
