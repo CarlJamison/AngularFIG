@@ -12,6 +12,7 @@ import { LoginComponent } from './login';
 import { AdminComponent } from './admin';
 import { ForgotAccountComponent } from './forgot-account';
 import { CreateAccountComponent } from './create-account';
+import { AccountComponent } from './account';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { CreateAccountComponent } from './create-account';
         LoginComponent,
         AdminComponent,
         ForgotAccountComponent,
-        CreateAccountComponent
+        CreateAccountComponent,
+        AccountComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },

@@ -6,13 +6,14 @@ import { LoginComponent } from './login';
 import { AuthGuard } from './_helpers';
 import { CreateAccountComponent } from './create-account';
 import { AdminGuard } from './admin/admin.guard';
+import { AccountComponent } from './account';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminGuard]  },
     { path: 'bookings', component: AdminComponent, canActivate: [AuthGuard, AdminGuard]  },
-    { path: 'account', component: AdminComponent, canActivate: [AuthGuard, AdminGuard]  },
+    { path: 'account', component: AccountComponent, canActivate: [AuthGuard]  },
     { path: 'forgotPassword', component: ForgotAccountComponent },
     { path: 'createAccount', component: CreateAccountComponent },
 

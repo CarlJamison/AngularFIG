@@ -1,0 +1,12 @@
+.profile-section{
+    max-width: 600px;
+    padding-left: 8px;
+    padding-bottom: 32px;
+}
+
+.profile-label{
+    border-bottom: 1px lightgray solid;
+    display: flex;
+    flex-direction: row;
+    padding: 4px;
+}
