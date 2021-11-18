@@ -1,12 +1,11 @@
-﻿<div class="card mt-5"style="flex-direction: row;
-height: 80%; border: none;">
+﻿<div class="card"style="flex-direction: row; border: none;">
     <div class="side-nav">
         <div class="nav-tab" (click)="tab = 0" [ngClass]="{'active-side-nav-tab': tab == 0}" ><span class="material-icons">face</span>Users</div>
         <div class="nav-tab" (click)="tab = 1" [ngClass]="{'active-side-nav-tab': tab == 1}" ><span class="material-icons">groups</span>Clients</div>
         <div class="nav-tab" (click)="tab = 2" [ngClass]="{'active-side-nav-tab': tab == 2}" ><span class="material-icons">sell</span>Pricing</div>
         <div class="nav-tab" (click)="tab = 3" [ngClass]="{'active-side-nav-tab': tab == 3}" ><span class="material-icons">airplane_ticket</span>Bookings</div>
     </div>
-    <div style="width: 100%">
+    <div style="width: 100%; overflow: auto;">
         <div style="padding: 16px" [ngSwitch]="tab">
             <div *ngSwitchCase="0">
                 <div *ngFor="let user of unconfirmed" class="alert alert-warning" role="alert">
@@ -15,7 +14,8 @@ height: 80%; border: none;">
                     <span *ngIf="user.loading" class="spinner-border spinner-border-sm mr-1"></span>
                 </div>
                 
-                <table class="table">
+                <div style="overflow: auto;">
+                  <table class="table">
                     <thead>
                       <tr>
                         <th scope="col">Email</th>
@@ -33,9 +33,31 @@ height: 80%; border: none;">
                       </tr>
                     </tbody>
                   </table>
+                </div>
             </div>
-            <div *ngSwitchCase="1">Clients</div>
-            <div *ngSwitchCase="2">Admin</div>
+            <div *ngSwitchCase="1">
+              Clients
+            </div>
+            <div *ngSwitchCase="2">
+              <form [formGroup]="pricingForm" (ngSubmit)="onSubmit()" style="max-width: 300px">
+                <div class="form-group">
+                  <label for="published">Published</label>
+                  <input placeholder="$0.00" type="number" formControlName="published" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                </div>
+                <div class="form-group">
+                  <label for="consolidated">Consolidated</label>
+                  <input placeholder="$0.00" type="number" formControlName="consolidated" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                </div>
+                <div class="form-group">
+                  <label for="humanitarian">Humanitarian</label>
+                  <input placeholder="$0.00" type="number" formControlName="humanitarian" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                </div>
+                <button [disabled]="loading" class="btn btn-primary">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                  Save Changes
+              </button>
+              </form>
+            </div>
             <div *ngSwitchCase="3">Bookings</div>
         </div>
     </div>

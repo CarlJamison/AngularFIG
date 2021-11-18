@@ -1,12 +1,19 @@
 ﻿<!-- nav -->
-<nav class="navbar navbar-expand" *ngIf="currentUser">
-    <div class="navbar-nav">
+<nav class="mb-5 navbar navbar-expand" *ngIf="currentUser">
+    <div class="d-none d-sm-flex navbar-nav">
         <img src="./assets/itg.png" style="width:100px" >
         <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active-tab">Search</a>
         <a class="nav-item nav-link" routerLink="/bookings" routerLinkActive="active-tab">Bookings</a>
         <a class="nav-item nav-link" routerLink="/account" routerLinkActive="active-tab">Account</a>
         <a *ngIf="profile && profile.IsAdmin" class="nav-item nav-link" routerLink="/admin" routerLinkActive="active-tab">Administration</a>
         <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    </div>
+    <div class="d-flex d-sm-none navbar-nav">
+        <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active-tab"><span class="material-icons">search</span></a>
+        <a class="nav-item nav-link" routerLink="/bookings" routerLinkActive="active-tab"><span class="material-icons">airplane_ticket</span></a>
+        <a class="nav-item nav-link" routerLink="/account" routerLinkActive="active-tab"><span class="material-icons">face</span></a>
+        <a *ngIf="profile && profile.IsAdmin" class="nav-item nav-link" routerLink="/admin" routerLinkActive="active-tab"><span class="material-icons">settings</span></a>
+        <a class="nav-item nav-link" (click)="logout()"><span class="material-icons">logout</span></a>
     </div>
 </nav>
 

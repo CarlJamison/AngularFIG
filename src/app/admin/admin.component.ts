@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { AccountService, UserService } from '@app/_services';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({ templateUrl: 'admin.component.html', styleUrls: ['admin.component.css'] })
 export class AdminComponent implements OnInit {
@@ -8,13 +9,25 @@ export class AdminComponent implements OnInit {
     users: any[];
     unconfirmed: any[];
     tab = 0;
+    pricingForm: FormGroup;
 
     constructor(
+        private formBuilder: FormBuilder,
         private userService: UserService,
         private accountService: AccountService) { }
 
     ngOnInit() {
+        this.pricingForm = this.formBuilder.group({
+            published: ['', Validators.required],
+            consolidated: ['', Validators.required],
+            humanitarian: ['', Validators.required]
+        });
+
         this.getUsers();
+    }
+
+    onSubmit(){
+        console.log("Saved")
     }
 
     getUsers(){
