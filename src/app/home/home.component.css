@@ -15,7 +15,7 @@
 }
 
 .widget-search-filter{
-    margin: 8px 16px;
+    margin: 8px 8px;
 }
 
 .widget-search-filter input{
@@ -27,18 +27,22 @@
     margin-top: 4px;
 }
 .widget-search-filter button{
-    margin-top: 35px;
-    height: 42px;
+    margin-top: 32px;
+    height: 38px;
     color: #007db0;
     background-color: #ffd389;
     border: 0;
     flex-grow: 1;
     width: 210px;
-    border-radius: 2px;
+    border-radius: 4px;
     font-size: 16px;
 }
 .widget-search-filter button:hover{
     background-color: #dcb778;
     cursor: pointer;
     transition: all 0.25s;
+}
+
+.widget .form-group{
+    margin: 8px;
 }

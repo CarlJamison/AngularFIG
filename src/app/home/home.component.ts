@@ -3,19 +3,31 @@ import { first } from 'rxjs/operators';
 
 import { User } from '@app/_models';
 import { UserService } from '@app/_services';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({ templateUrl: 'home.component.html', styleUrls: ['home.component.css'] })
 export class HomeComponent {
     loading = false;
-    users: User[];
+    submitted = false;
+    searchForm: FormGroup;
 
-    constructor(private userService: UserService) { }
+    constructor(
+        private formBuilder: FormBuilder) { }
 
     ngOnInit() {
-        this.loading = true;
-        this.userService.getAll().pipe(first()).subscribe(users => {
-            this.loading = false;
-            this.users = users;
+        this.searchForm = this.formBuilder.group({
+            from: ['', Validators.required],
+            to: ['', Validators.required],
+            adtPassengers: ['', Validators.required],
+            depDate: ['', Validators.required],
+            retDate: ['', Validators.required]
         });
     }
+    
+    get f() { return this.searchForm.controls; }
+
+    search(){
+        console.log("Search");
+    }
+    
 }

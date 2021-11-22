@@ -42,17 +42,17 @@
               <form [formGroup]="pricingForm" (ngSubmit)="onSubmit()" style="max-width: 300px">
                 <div class="form-group">
                   <label for="published">Published</label>
-                  <input placeholder="$0.00" type="number" formControlName="published" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                  <input placeholder="$0.00" type="number" formControlName="published" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.published.errors }" />
                 </div>
                 <div class="form-group">
                   <label for="consolidated">Consolidated</label>
-                  <input placeholder="$0.00" type="number" formControlName="consolidated" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                  <input placeholder="$0.00" type="number" formControlName="consolidated" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.consolidated.errors }" />
                 </div>
                 <div class="form-group">
                   <label for="humanitarian">Humanitarian</label>
-                  <input placeholder="$0.00" type="number" formControlName="humanitarian" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                  <input placeholder="$0.00" type="number" formControlName="humanitarian" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.humanitarian.errors }" />
                 </div>
-                <button [disabled]="loading" class="btn btn-primary">
+                <button [disabled]="loading" class="widget-search-filter btn btn-primary">
                   <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                   Save Changes
               </button>

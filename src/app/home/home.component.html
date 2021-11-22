@@ -1,36 +1,33 @@
-﻿<div class="widget">
-    <div class="widget-search-filter">
-        <label for="from">From</label><br>
-        <input type="text" id="from" value="MSP">
-    </div>
-    <div class="widget-search-filter">
-        <label for="from">To</label><br>
-        <input type="text" id="To" value="DEN">
-    </div>
-    <div class="widget-search-filter">
-        <label for="from">Number of passengers</label><br>
-        <input type="text" id="from" name="from" value="2">
-    </div>
-    <div class="widget-search-filter">
-        <label for="from">Depart</label><br>
-        <input type="text" id="from" name="from" value="11/19/2021">
-    </div>
-    <div class="widget-search-filter">
-        <label for="from">Return</label><br>
-        <input type="text" id="from" name="from" value="11/30/2021">
-    </div>
-    <div class="widget-search-filter">
-        <button type="button" id="from" name="from" value="Search">SEARCH</button>
-    </div>
-</div>
-
-<!--<div class="card mt-4">
-    <h4 class="card-header">You're logged in with Angular 8 & Basic HTTP Authentication!!</h4>
-    <div class="card-body">
-        <h6>Users from secure api end point</h6>
-        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-        <ul *ngIf="users">
-            <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-        </ul>
-    </div>
-</div>-->
+﻿
+    <form [formGroup]="searchForm" (ngSubmit)="search()" class="card widget">
+        <div class="form-group">
+          <label for="published">From</label>
+          <input placeholder="MSP" type="text" formControlName="from" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.from.errors }" />
+        </div>
+        <div class="form-group">
+          <label for="consolidated">To</label>
+          <input placeholder="LON" type="text" formControlName="to" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.to.errors }" />
+        </div>
+        <div class="form-group">
+          <label for="humanitarian">Adult passengers</label>
+          <input placeholder="2" type="number" formControlName="adtPassengers" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.adtPassengers.errors }" />
+        </div>
+          <mat-form-field style="margin: 8px" appearance="fill" class="search-date">
+            <mat-label>Departure date</mat-label>
+            <input matInput [matDatepicker]="depPicker">
+            <mat-datepicker-toggle matSuffix [for]="depPicker"></mat-datepicker-toggle>
+            <mat-datepicker #depPicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field style="margin: 8px" appearance="fill" class="search-date">
+            <mat-label>Return date</mat-label>
+            <input matInput [matDatepicker]="retPicker">
+            <mat-datepicker-toggle matSuffix [for]="retPicker"></mat-datepicker-toggle>
+            <mat-datepicker #retPicker></mat-datepicker>
+          </mat-form-field>
+          <div class="widget-search-filter">
+            <button [disabled]="loading" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Search
+            </button>
+          </div>
+      </form>

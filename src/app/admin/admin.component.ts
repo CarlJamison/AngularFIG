@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { AccountService, UserService } from '@app/_services';
+import { AccountService, UserService, AdminService } from '@app/_services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({ templateUrl: 'admin.component.html', styleUrls: ['admin.component.css'] })
@@ -14,9 +14,16 @@ export class AdminComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private userService: UserService,
+        private adminService: AdminService,
         private accountService: AccountService) { }
 
     ngOnInit() {
+        this.adminService.GetPricing().then(data => {
+            this.f.published.setValue(data.Published);
+            this.f.consolidated.setValue(data.Consolidated);
+            this.f.humanitarian.setValue(data.Humanitarian);
+        });
+
         this.pricingForm = this.formBuilder.group({
             published: ['', Validators.required],
             consolidated: ['', Validators.required],
@@ -25,9 +32,18 @@ export class AdminComponent implements OnInit {
 
         this.getUsers();
     }
+    
+    get f() { return this.pricingForm.controls; }
 
     onSubmit(){
-        console.log("Saved")
+        if(!this.loading){
+            this.loading = true;
+            this.adminService.SavePricing({
+                Published: this.f.published.value,
+                Consolidated: this.f.consolidated.value,
+                Humanitarian: this.f.humanitarian.value
+            }).then(() => this.loading = false);
+        }
     }
 
     getUsers(){
