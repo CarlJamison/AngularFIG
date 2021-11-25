@@ -20,6 +20,7 @@ import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
     imports: [
@@ -32,7 +33,8 @@ import { MatInputModule } from '@angular/material/input';
         FormsModule,
         BrowserAnimationsModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatAutocompleteModule
     ],
     declarations: [
         AppComponent,

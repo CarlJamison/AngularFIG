@@ -1,26 +1,38 @@
 ﻿
     <form [formGroup]="searchForm" (ngSubmit)="search()" class="card widget">
-        <div class="form-group">
-          <label for="published">From</label>
-          <input placeholder="MSP" type="text" formControlName="from" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.from.errors }" />
-        </div>
-        <div class="form-group">
-          <label for="consolidated">To</label>
-          <input placeholder="LON" type="text" formControlName="to" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.to.errors }" />
-        </div>
-        <div class="form-group">
-          <label for="humanitarian">Adult passengers</label>
-          <input placeholder="2" type="number" formControlName="adtPassengers" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.adtPassengers.errors }" />
-        </div>
+        <mat-form-field style="margin: 8px; width: 300px" appearance="fill">
+            <mat-label>From</mat-label>
+            <input type="text" placeholder="From airport" matInput formControlName="from" 
+                   [matAutocomplete]="fromAirport">
+            <mat-autocomplete autoActiveFirstOption #fromAirport="matAutocomplete">
+              <mat-option *ngFor="let option of filteredFromOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field style="margin: 8px; width: 300px" appearance="fill">
+            <mat-label>To</mat-label>
+            <input type="text" placeholder="To airport" matInput formControlName="to" 
+                   [matAutocomplete]="toAirport">
+            <mat-autocomplete autoActiveFirstOption #toAirport="matAutocomplete">
+              <mat-option *ngFor="let option of filteredToOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field style="margin: 8px; width: 244px" appearance="fill">
+            <mat-label>Adult Passengers</mat-label>
+            <input type="number" placeholder="Number of passengers" matInput formControlName="adtPassengers">
+          </mat-form-field>
           <mat-form-field style="margin: 8px" appearance="fill" class="search-date">
             <mat-label>Departure date</mat-label>
-            <input matInput [matDatepicker]="depPicker">
+            <input formControlName="depDate" matInput [matDatepicker]="depPicker">
             <mat-datepicker-toggle matSuffix [for]="depPicker"></mat-datepicker-toggle>
             <mat-datepicker #depPicker></mat-datepicker>
           </mat-form-field>
           <mat-form-field style="margin: 8px" appearance="fill" class="search-date">
             <mat-label>Return date</mat-label>
-            <input matInput [matDatepicker]="retPicker">
+            <input formControlName="retDate" matInput [matDatepicker]="retPicker">
             <mat-datepicker-toggle matSuffix [for]="retPicker"></mat-datepicker-toggle>
             <mat-datepicker #retPicker></mat-datepicker>
           </mat-form-field>
@@ -31,3 +43,5 @@
             </button>
           </div>
       </form>
+
+      <div class="itinerary" *ngFor="let itinerary of itineraries">{{ itinerary.totalCashPrice }}</div>
