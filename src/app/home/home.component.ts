@@ -17,6 +17,8 @@ export class HomeComponent {
     toControl = new FormControl();
     filteredToOptions: Observable<string[]>;
     options: string[] = [];
+    error: string;
+
     constructor(
         private airportService: AirportService,
         private searchService: SearchService,
@@ -45,7 +47,7 @@ export class HomeComponent {
         const filterValue = value.toLowerCase();
     
         return this.options.filter(option => option.toLowerCase().includes(filterValue)).slice(0, 5);
-      }
+    }
     
     get f() { return this.searchForm.controls; }
 
@@ -54,18 +56,23 @@ export class HomeComponent {
     }
 
     search(){
+        this.error = null;
         // stop here if form is invalid
-        if (this.searchForm.invalid) {
+        if (this.searchForm.invalid || this.loading) {
             return;
         }
+        
+        this.loading = true;
 
         this.searchService.Search({
             start: this.airportService.GetCode(this.f.from.value),
             end: this.airportService.GetCode(this.f.to.value),
             adtPassengers: this.f.adtPassengers.value,
-            departure: new Date(this.f.depDate.value).toISOString().split('T')[0],
-            return: new Date(this.f.retDate.value).toISOString().split('T')[0]
-        }).then(data => this.itineraries = data);
+            departureDate: new Date(this.f.depDate.value).toISOString().split('T')[0],
+            returnDate: new Date(this.f.retDate.value).toISOString().split('T')[0]
+        }).then(data => this.itineraries = data,
+                error => this.error = error)
+                .finally(()=> this.loading = false);
     }
     
 }

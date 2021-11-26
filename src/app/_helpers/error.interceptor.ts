@@ -16,7 +16,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.authenticationService.logout();
                 location.reload();
             }
-            var error = err.error.ModelState || err.error.error_description || err.statusText;
+            var error = err.error.ModelState || err.error.error_description || err.error.Message;
             if(err.error.Message == 'The request is invalid.'){
                 error = Object.values(err.error.ModelState)[0];
             }
