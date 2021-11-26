@@ -44,4 +44,10 @@
           </div>
       </form>
 
-      <div class="itinerary" *ngFor="let itinerary of itineraries">{{ itinerary.totalCashPrice }}</div>
+      <div class="itinerary" *ngFor="let itinerary of itineraries">
+          {{ itinerary.totalCashPrice }}
+          <div *ngFor="let flight of itinerary.flights">{{flight.carrierCode}} {{flight.flightNumber}}
+               - {{dateString(flight.departureAirportDate)}} {{flight.departureAirport}} 
+              -> {{dateString(flight.arrivalAirportDate)}} {{flight.arrivalAirport}}
+          </div>
+        </div>

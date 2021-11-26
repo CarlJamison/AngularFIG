@@ -14,13 +14,16 @@ import { ForgotAccountComponent } from './forgot-account';
 import { CreateAccountComponent } from './create-account';
 import { AccountComponent } from './account';
 
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-import {FormsModule} from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule} from '@angular/material/core';
+import { FormsModule} from '@angular/forms';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatAutocompleteModule} from '@angular/material/autocomplete';
+
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 @NgModule({
     imports: [
@@ -34,7 +37,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
         BrowserAnimationsModule,
         MatFormFieldModule,
         MatInputModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        LoadingBarRouterModule,
+        LoadingBarHttpClientModule
     ],
     declarations: [
         AppComponent,

@@ -49,6 +49,10 @@ export class HomeComponent {
     
     get f() { return this.searchForm.controls; }
 
+    dateString(date: string){
+        return (new Date(date)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
     search(){
         // stop here if form is invalid
         if (this.searchForm.invalid) {
@@ -58,7 +62,9 @@ export class HomeComponent {
         this.searchService.Search({
             start: this.airportService.GetCode(this.f.from.value),
             end: this.airportService.GetCode(this.f.to.value),
-            adtPassengers: this.f.adtPassengers.value
+            adtPassengers: this.f.adtPassengers.value,
+            departure: new Date(this.f.depDate.value).toISOString().split('T')[0],
+            return: new Date(this.f.retDate.value).toISOString().split('T')[0]
         }).then(data => this.itineraries = data);
     }
     
