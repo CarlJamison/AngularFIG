@@ -46,8 +46,8 @@
       <div *ngIf="error" style="max-width: 500px; margin: 16px auto;" class="alert alert-danger mt-3">{{error}}</div>
       
       <div class="itinerary" *ngFor="let itinerary of itineraries">
-          {{ itinerary.totalCashPrice }}
-          <div *ngFor="let flight of itinerary.flights">{{flight.carrierCode}} {{flight.flightNumber}}
+          <div class="itinerary-title">{{ itinerary.contractDescription }} Fare: ${{ itinerary.totalCashPrice }}</div>
+          <div style="padding-left: 20px" *ngFor="let flight of itinerary.flights">{{flight.carrierCode}} {{flight.flightNumber}}
                - {{dateString(flight.departureAirportDate)}} {{flight.departureAirport}} 
               -> {{dateString(flight.arrivalAirportDate)}} {{flight.arrivalAirport}}
           </div>
