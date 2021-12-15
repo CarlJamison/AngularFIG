@@ -1,7 +1,7 @@
 ﻿<div class="card"style="flex-direction: row; border: none;">
     <div class="side-nav">
         <div class="nav-tab" (click)="tab = 0" [ngClass]="{'active-side-nav-tab': tab == 0}" ><span class="material-icons">face</span>Users</div>
-        <div class="nav-tab" (click)="tab = 1" [ngClass]="{'active-side-nav-tab': tab == 1}" ><span class="material-icons">groups</span>Clients</div>
+        <div class="nav-tab" (click)="tab = 1" [ngClass]="{'active-side-nav-tab': tab == 1}" ><span class="material-icons">groups</span>Organization</div>
         <div class="nav-tab" (click)="tab = 2" [ngClass]="{'active-side-nav-tab': tab == 2}" ><span class="material-icons">sell</span>Pricing</div>
         <div class="nav-tab" (click)="tab = 3" [ngClass]="{'active-side-nav-tab': tab == 3}" ><span class="material-icons">airplane_ticket</span>Bookings</div>
     </div>
@@ -36,7 +36,70 @@
                 </div>
             </div>
             <div *ngSwitchCase="1">
-              Clients
+              <div style="display: flex">
+                <h4 style="flex: 100; padding: 8px">Organizations</h4>
+                <button mat-icon-button color="primary">
+                  <span class="material-icons md-32">add</span>
+                </button>
+              </div>
+
+              <div class="list-group">
+                <div class="list-group-item list-group-item-action" style="margin-top: 1px;" *ngFor="let org of orgs">
+                  <div (click)="currentOrg = org.Name == currentOrg ? '' : org.Name" style="display: flex">
+                    <div style="flex: 100; padding: 8px">
+                      {{ org.Name }}</div>
+                    <button mat-icon-button color="primary">
+                      <span class="material-icons md-32">
+                        {{ currentOrg == org.Name ? 'expand_more' : 'expand_less' }}</span>
+                    </button>
+                  </div>
+                  <div class="org-section" *ngIf="currentOrg == org.Name">
+                    <div class="org-label">
+                      <div style="flex: 100">Address</div>
+                      <div>Value</div>
+                    </div>
+                    <div class="org-label">
+                      <div style="flex: 100">City</div>
+                      <div>Value</div>
+                    </div>
+                    <div class="org-label">
+                      <div style="flex: 100">State</div>
+                      <div>Value</div>
+                    </div>
+                    <div class="org-label">
+                      <div style="flex: 100">Zip Code</div>
+                      <div>Value</div>
+                    </div>
+                    <div class="org-label">
+                      <div style="flex: 100">Phone Number</div>
+                      <div>Value</div>
+                    </div>
+
+                    <div class="info-section">
+                      <h6>Managers</h6>
+                      <div>Joe Norman</div>
+                      <div>Noe Jorman</div>
+                    </div>
+
+                    <div class="info-section">
+                      <h6>Main Contact</h6>
+                      <div class="org-label">
+                        <div style="flex: 100">Name</div>
+                        <div>Value</div>
+                      </div>
+                      <div class="org-label">
+                        <div style="flex: 100">Phone Number</div>
+                        <div>Value</div>
+                      </div>
+                      <div class="org-label">
+                        <div style="flex: 100">Email</div>
+                        <div>Value</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
             <div *ngSwitchCase="2">
               <form [formGroup]="pricingForm" (ngSubmit)="onSubmit()" style="max-width: 300px">

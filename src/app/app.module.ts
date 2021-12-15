@@ -21,9 +21,11 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatButtonModule} from '@angular/material/button';
 
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
     imports: [
@@ -38,8 +40,10 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
         MatFormFieldModule,
         MatInputModule,
         MatAutocompleteModule,
+        MatButtonModule,
         LoadingBarRouterModule,
-        LoadingBarHttpClientModule
+        LoadingBarHttpClientModule,
+        MatIconModule
     ],
     declarations: [
         AppComponent,

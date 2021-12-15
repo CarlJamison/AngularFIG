@@ -31,3 +31,27 @@
     padding-left: 16px;
     cursor: pointer;
 }
+
+.list-group-item-action{
+    cursor: pointer;
+    z-index: 1;
+}
+
+.org-label{
+    border-bottom: 1px lightgray solid;
+    display: flex;
+    flex-direction: row;
+    padding: 4px;
+}
+
+.org-section{
+    border-top: 1px lightgray solid;
+    padding: 8px 16px;
+}
+
+.info-section{
+    border: 1px solid #007db0;
+    border-radius: 10px;
+    padding: 16px;
+    margin: 16px 0;
+}
