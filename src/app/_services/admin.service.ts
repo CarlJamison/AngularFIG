@@ -13,4 +13,12 @@ export class AdminService {
     GetPricing() {
         return this.http.get<any>(`${environment.apiUrl}/api/Admin/Pricing`).toPromise();
     }
+
+    GetOrganizations() {
+        return this.http.get<any>(`${environment.apiUrl}/api/Admin/Organizations`).toPromise();
+    }
+
+    SaveOrganization(org){
+        return this.http.post<any>(`${environment.apiUrl}/api/Admin/Organizations`, org).toPromise();
+    }
 }

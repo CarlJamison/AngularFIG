@@ -1,0 +1,45 @@
+<h1 mat-dialog-title>{{ data.Id ? 'Edit Organization' : 'Create Organization'}}</h1>
+<div mat-dialog-content style="width: 50%; min-width:300px;">
+    <form [formGroup]="orgForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="published">Address</label>
+          <input placeholder="Address" type="text" formControlName="Address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Address.errors }" />
+        </div>
+        <div class="form-group">
+          <label for="published">City</label>
+          <input placeholder="City" type="text" formControlName="City" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.City.errors }" />
+        </div>
+        <div class="form-group">
+          <label for="published">State</label>
+          <input placeholder="State" type="text" formControlName="State" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.State.errors }" />
+        </div>
+        <div class="form-group">
+          <label for="published">Zip Code</label>
+          <input placeholder="Zip Code" type="text" formControlName="Zipcode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Zipcode.errors }" />
+        </div>
+        <div class="form-group">
+          <label for="published">Phone Number</label>
+          <input placeholder="123-456-7890" type="text" formControlName="PhoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.PhoneNumber.errors }" />
+        </div>
+        <div class="form-group">
+          <label for="published">Main Contact First Name</label>
+          <input placeholder="First Name" type="text" formControlName="ContactFirstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ContactFirstName.errors }" />
+        </div>
+        <div class="form-group">
+          <label for="published">Main Contact Last Name</label>
+          <input placeholder="Last Name" type="text" formControlName="ContactLastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ContactLastName.errors }" />
+        </div>
+        <div class="form-group">
+          <label for="published">Main Contact Email</label>
+          <input placeholder="example@email.com" type="text" formControlName="ContactEmail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ContactEmail.errors }" />
+        </div>
+        <div class="form-group">
+          <label for="published">Main Contact Phone Number</label>
+          <input placeholder="123-456-7890" type="text" formControlName="ContactPhoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ContactPhoneNumber.errors }" />
+        </div>
+        <button [disabled]="loading" class="widget-search-filter btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          {{ data.Id ? 'Save' : 'Add'}}
+      </button>
+      </form>
+</div>

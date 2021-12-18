@@ -9,7 +9,7 @@ import { appRoutingModule } from './app.routing';
 import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
-import { AdminComponent } from './admin';
+import { AddEditOrganizationDialog, AdminComponent } from './admin';
 import { ForgotAccountComponent } from './forgot-account';
 import { CreateAccountComponent } from './create-account';
 import { AccountComponent } from './account';
@@ -21,7 +21,8 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
@@ -43,7 +44,8 @@ import {MatIconModule} from '@angular/material/icon';
         MatButtonModule,
         LoadingBarRouterModule,
         LoadingBarHttpClientModule,
-        MatIconModule
+        MatIconModule,
+        MatDialogModule
     ],
     declarations: [
         AppComponent,
@@ -52,7 +54,8 @@ import {MatIconModule} from '@angular/material/icon';
         AdminComponent,
         ForgotAccountComponent,
         CreateAccountComponent,
-        AccountComponent
+        AccountComponent,
+        AddEditOrganizationDialog
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },

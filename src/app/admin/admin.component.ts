@@ -1,7 +1,7 @@
-﻿import { Component, OnInit } from '@angular/core';
-import { first } from 'rxjs/operators';
+﻿import { Component, Inject, OnInit } from '@angular/core';
 import { AccountService, UserService, AdminService } from '@app/_services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({ templateUrl: 'admin.component.html', styleUrls: ['admin.component.css'] })
 export class AdminComponent implements OnInit {
@@ -14,6 +14,7 @@ export class AdminComponent implements OnInit {
     currentOrg: ""
 
     constructor(
+        public dialog: MatDialog,
         private formBuilder: FormBuilder,
         private userService: UserService,
         private adminService: AdminService,
@@ -25,6 +26,8 @@ export class AdminComponent implements OnInit {
             this.f.consolidated.setValue(data.Consolidated);
             this.f.humanitarian.setValue(data.Humanitarian);
         });
+
+        this.adminService.GetOrganizations().then(data => this.orgs = data );
 
         this.pricingForm = this.formBuilder.group({
             published: ['', Validators.required],
@@ -60,5 +63,62 @@ export class AdminComponent implements OnInit {
     confirmAccount(user){
         user.loading = true;
         this.accountService.ConfirmAccount(user.Email).then(() => this.getUsers().then(() => user.loading = false));
+    }
+
+    createOrganization() {
+        this.dialog.open(AddEditOrganizationDialog, {
+          data: {},
+        });
+      }
+}
+
+@Component({ templateUrl: 'add-edit-organization-dialog.html', styleUrls: [] })
+export class AddEditOrganizationDialog implements OnInit {
+    constructor(
+        private adminService: AdminService,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private formBuilder: FormBuilder) {}
+
+    loading=false
+    submitted=false
+    orgForm: FormGroup;
+
+    ngOnInit() {
+        this.orgForm = this.formBuilder.group({
+            Name: ['', Validators.required],
+            Address: ['', Validators.required],
+            City: ['', Validators.required],
+            State: ['', Validators.required],
+            Zipcode: ['', Validators.required],
+            PhoneNumber: ['', Validators.required],
+            ContactFirstName: ['', Validators.required],
+            ContactLastName: ['', Validators.required],
+            ContactEmail: ['', Validators.required],
+            ContactPhoneNumber: ['', Validators.required]
+        });
+    }
+
+    get f() { return this.orgForm.controls; }
+
+    onSubmit(){
+        this.submitted = true;
+        if (this.orgForm.invalid || this.loading) {
+            return;
+        }
+
+        this.loading = true;
+        this.adminService.SaveOrganization({
+            Id : this.data.Id ? this.data.Id : 0,
+            Name: this.f.Name.value,
+            Address: this.f.Address.value,
+            City: this.f.City.value,
+            State: this.f.State.value,
+            Zipcode: this.f.Zipcode.value,
+            PhoneNumber: this.f.PhoneNumber.value,
+            ContactFirstName: this.f.ContactFirstName.value,
+            ContactLastName: this.f.ContactLastName.value,
+            ContactPhoneNumber: this.f.ContactPhoneNumber.value,
+            ContactEmail: this.f.ContactEmail.value
+        }).then(() => this.loading = false);
     }
 }
