@@ -1,7 +1,7 @@
 ﻿import { Component, Inject, OnInit } from '@angular/core';
 import { AccountService, UserService, AdminService } from '@app/_services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({ templateUrl: 'admin.component.html', styleUrls: ['admin.component.css'] })
 export class AdminComponent implements OnInit {
@@ -65,16 +65,20 @@ export class AdminComponent implements OnInit {
         this.accountService.ConfirmAccount(user.Email).then(() => this.getUsers().then(() => user.loading = false));
     }
 
-    createOrganization() {
-        this.dialog.open(AddEditOrganizationDialog, {
-          data: {},
+    editOrganization(org = null) {
+        var dialogRef = this.dialog.open(AddEditOrganizationDialog, {
+          data: org,
+          width: '600px',
         });
-      }
+
+        dialogRef.afterClosed().subscribe(data => this.orgs = data ? data : this.orgs);
+    }
 }
 
 @Component({ templateUrl: 'add-edit-organization-dialog.html', styleUrls: [] })
 export class AddEditOrganizationDialog implements OnInit {
     constructor(
+        public dialogRef: MatDialogRef<AddEditOrganizationDialog>,
         private adminService: AdminService,
         @Inject(MAT_DIALOG_DATA) public data: any,
         private formBuilder: FormBuilder) {}
@@ -96,6 +100,19 @@ export class AddEditOrganizationDialog implements OnInit {
             ContactEmail: ['', Validators.required],
             ContactPhoneNumber: ['', Validators.required]
         });
+
+        if(this.data){
+            this.f.Name.setValue(this.data.Name);
+            this.f.Address.setValue(this.data.Address);
+            this.f.City.setValue(this.data.City);
+            this.f.State.setValue(this.data.State);
+            this.f.Zipcode.setValue(this.data.ZipCode);
+            this.f.PhoneNumber.setValue(this.data.PhoneNumber);
+            this.f.ContactFirstName.setValue(this.data.ContactFirstName);
+            this.f.ContactLastName.setValue(this.data.ContactLastName);
+            this.f.ContactEmail.setValue(this.data.ContactEmail);
+            this.f.ContactPhoneNumber.setValue(this.data.ContactPhoneNumber);
+        }
     }
 
     get f() { return this.orgForm.controls; }
@@ -119,6 +136,6 @@ export class AddEditOrganizationDialog implements OnInit {
             ContactLastName: this.f.ContactLastName.value,
             ContactPhoneNumber: this.f.ContactPhoneNumber.value,
             ContactEmail: this.f.ContactEmail.value
-        }).then(() => this.loading = false);
+        }).then(data => this.dialogRef.close(data));
     }
 }
