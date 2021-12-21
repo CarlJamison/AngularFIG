@@ -103,6 +103,11 @@
                         <div>{{ org.ContactEmail }}</div>
                       </div>
                     </div>
+                    <div *ngIf="org.CanDelete" style="justify-content: right; display: flex;">
+                      <button mat-icon-button (click)="deleteOrganization(org)" color="primary">
+                        <span class="material-icons">delete</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
 

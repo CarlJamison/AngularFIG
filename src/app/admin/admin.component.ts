@@ -73,6 +73,12 @@ export class AdminComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(data => this.orgs = data ? data : this.orgs);
     }
+
+    deleteOrganization(org){
+        if(confirm("Are you sure to delete " + org.Name)) {
+            this.adminService.DeleteOrganization(org.Id).then(data => this.orgs = data);
+        }
+    }
 }
 
 @Component({ templateUrl: 'add-edit-organization-dialog.html', styleUrls: [] })
