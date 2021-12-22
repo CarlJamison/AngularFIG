@@ -61,18 +61,40 @@ export class HomeComponent {
         if (this.searchForm.invalid || this.loading) {
             return;
         }
+
+        var start = this.getCode(this.f.from.value);
+        var end = this.getCode(this.f.to.value);
+
+        if(!start || !end){
+            this.error = "Invalid start or end location"
+            return;
+        }
         
         this.loading = true;
-
         this.searchService.Search({
-            start: this.airportService.GetCode(this.f.from.value),
-            end: this.airportService.GetCode(this.f.to.value),
+            start: start,
+            end: end,
             adtPassengers: this.f.adtPassengers.value,
             departureDate: new Date(this.f.depDate.value).toISOString().split('T')[0],
             returnDate: new Date(this.f.retDate.value).toISOString().split('T')[0]
         }).then(data => this.itineraries = data,
                 error => this.error = error)
                 .finally(()=> this.loading = false);
+    }
+
+    getCode(airport){
+        airport = airport.toUpperCase();
+
+        if(airport.length >= 5){
+            airport =  this.airportService.GetCode(airport);
+        }
+
+        if(airport.length == 3){
+            return this.airportService.List()
+                .some(a => this.airportService.GetCode(a) == airport) ? airport : null
+        }else{
+            return null
+        }
     }
     
 }
