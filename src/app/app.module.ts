@@ -23,10 +23,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
     imports: [
@@ -35,6 +35,7 @@ import {MatIconModule} from '@angular/material/icon';
         HttpClientModule,
         appRoutingModule,
         MatDatepickerModule,
+        MatCheckboxModule,
         MatNativeDateModule,
         FormsModule,
         BrowserAnimationsModule,

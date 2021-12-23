@@ -74,6 +74,18 @@ export class AdminComponent implements OnInit {
         dialogRef.afterClosed().subscribe(data => this.orgs = data ? data : this.orgs);
     }
 
+    saveOrganization(org){
+        var saveData = {
+            Id: org.Id,
+            HasCON: org.HasCON,
+            HasPUB: org.HasPUB,
+            HasMIS: org.HasMIS,
+            AdditionalMarkUp: org.AdditionalMarkUp
+        }
+
+        this.adminService.SaveAdminOrganization(saveData).then(data => this.orgs = data);
+    }
+
     deleteOrganization(org){
         if(confirm("Are you sure to delete " + org.Name)) {
             this.adminService.DeleteOrganization(org.Id).then(data => this.orgs = data);

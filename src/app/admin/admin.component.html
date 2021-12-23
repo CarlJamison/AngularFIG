@@ -103,7 +103,20 @@
                         <div>{{ org.ContactEmail }}</div>
                       </div>
                     </div>
+                    <div style="display: flex;">
+                      <mat-checkbox style="flex: 33" class="mat-primary" [(ngModel)]="org.HasPUB">Published</mat-checkbox>
+                      <mat-checkbox style="flex: 33" class="mat-primary" [(ngModel)]="org.HasCON">Consolidated</mat-checkbox>
+                      <mat-checkbox style="flex: 33" class="mat-primary" [(ngModel)]="org.HasMIS">Humanitarian</mat-checkbox>
+                    </div>
+                    <div class="form-group">
+                      <label for="published">Additional Markup</label>
+                      <input placeholder="$0.00" type="number" name="published" [(ngModel)]="org.AdditionalMarkUp" class="form-control" />
+                    </div>
                     <div *ngIf="org.CanDelete" style="justify-content: right; display: flex;">
+                      <button mat-icon-button (click)="saveOrganization(org)" color="primary">
+                        <span class="material-icons">save</span>
+                      </button>
+                      <span style="flex: 100"></span>
                       <button mat-icon-button (click)="deleteOrganization(org)" color="primary">
                         <span class="material-icons">delete</span>
                       </button>

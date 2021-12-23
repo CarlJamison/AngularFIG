@@ -22,6 +22,10 @@ export class AdminService {
         return this.http.post<any>(`${environment.apiUrl}/api/Admin/Organizations`, org).toPromise();
     }
 
+    SaveAdminOrganization(org){
+        return this.http.post<any>(`${environment.apiUrl}/api/Admin/Organizations/Admin`, org).toPromise();
+    }
+
     DeleteOrganization(orgId){
         return this.http.put<any>(`${environment.apiUrl}/api/Admin/Organizations/Delete?orgId=${orgId}`, null).toPromise();
     }
