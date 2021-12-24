@@ -15,7 +15,7 @@ const routes: Routes = [
     { path: 'bookings', component: AdminComponent, canActivate: [AuthGuard, AdminGuard]  },
     { path: 'account', component: AccountComponent, canActivate: [AuthGuard]  },
     { path: 'forgotPassword', component: ForgotAccountComponent },
-    { path: 'createAccount', component: CreateAccountComponent },
+    { path: 'Register', component: CreateAccountComponent },
 
 
     // otherwise redirect to home

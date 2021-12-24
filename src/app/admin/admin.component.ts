@@ -143,7 +143,7 @@ export class AddEditOrganizationDialog implements OnInit {
 
         this.loading = true;
         this.adminService.SaveOrganization({
-            Id : this.data.Id ? this.data.Id : 0,
+            Id : this.data ? this.data.Id : 0,
             Name: this.f.Name.value,
             Address: this.f.Address.value,
             City: this.f.City.value,

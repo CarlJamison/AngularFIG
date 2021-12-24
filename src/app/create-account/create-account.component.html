@@ -11,6 +11,27 @@
                     </div>
                 </div>
                 <div *ngIf="!success" class="form-group">
+                    <label for="username">First Name</label>
+                    <input placeholder="First name" type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                        <div *ngIf="f.firstName.errors.required">Username is required</div>
+                    </div>
+                </div>
+                <div *ngIf="!success" class="form-group">
+                    <label for="username">Last Name</label>
+                    <input placeholder="Last name" type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                        <div *ngIf="f.lastName.errors.required">Username is required</div>
+                    </div>
+                </div>
+                <div *ngIf="!success" class="form-group">
+                    <label for="username">Phone Number</label>
+                    <input placeholder="example@example.com" type="text" formControlName="phoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" />
+                    <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+                        <div *ngIf="f.phoneNumber.errors.required">Username is required</div>
+                    </div>
+                </div>
+                <div *ngIf="!success" class="form-group">
                     <label for="password">Password</label>
                     <input placeholder="password" type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
