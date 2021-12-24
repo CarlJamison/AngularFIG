@@ -60,6 +60,10 @@ export class AdminComponent implements OnInit {
         });
     }
 
+    getLink(org){
+        return `${window.location.host}/Register?Code=${org.ShareableSuffix}`
+    }
+
     confirmAccount(user){
         user.loading = true;
         this.accountService.ConfirmAccount(user.Email).then(() => this.getUsers().then(() => user.loading = false));

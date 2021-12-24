@@ -27,6 +27,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { MatIconModule } from '@angular/material/icon';
+import { ClipboardModule } from '@angular/cdk/clipboard'
 
 @NgModule({
     imports: [
@@ -46,7 +47,8 @@ import { MatIconModule } from '@angular/material/icon';
         LoadingBarRouterModule,
         LoadingBarHttpClientModule,
         MatIconModule,
-        MatDialogModule
+        MatDialogModule,
+        ClipboardModule
     ],
     declarations: [
         AppComponent,

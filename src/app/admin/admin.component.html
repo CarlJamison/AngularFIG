@@ -88,6 +88,20 @@
                       <div>Noe Jorman</div>
                     </div>
 
+                    <div style="display: flex;" *ngIf="org.ShareableSuffix">
+                      <div style="flex: 100">
+                        <div class="org-label">
+                          <div style="flex: 100; padding-top: 6px">Link</div>
+                          <div>
+                            {{ getLink(org) }}
+                            <button mat-icon-button [cdkCopyToClipboard]="getLink(org)" color="primary">
+                              <span class="material-icons">content_copy</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     <div class="info-section">
                       <h6>Main Contact</h6>
                       <div class="org-label">
