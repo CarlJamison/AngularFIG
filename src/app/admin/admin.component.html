@@ -126,12 +126,12 @@
                       <label for="published">Additional Markup</label>
                       <input placeholder="$0.00" type="number" name="published" [(ngModel)]="org.AdditionalMarkUp" class="form-control" />
                     </div>
-                    <div *ngIf="org.CanDelete" style="justify-content: right; display: flex;">
+                    <div style="justify-content: right; display: flex;">
                       <button mat-icon-button (click)="saveOrganization(org)" color="primary">
                         <span class="material-icons">save</span>
                       </button>
                       <span style="flex: 100"></span>
-                      <button mat-icon-button (click)="deleteOrganization(org)" color="primary">
+                      <button *ngIf="org.CanDelete" mat-icon-button (click)="deleteOrganization(org)" color="primary">
                         <span class="material-icons">delete</span>
                       </button>
                     </div>

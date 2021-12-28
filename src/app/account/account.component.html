@@ -9,27 +9,28 @@
                 </button>
             </div>
             
-            <div class="profile-section">
+            <div class="profile-section" *ngIf="profile">
                 <div class="profile-label" style="margin-bottom: 16px;">
                     <div style="flex: 100">Email</div>
-                    <div>Value</div>
+                    <div>{{ profile.Email }} </div>
                 </div>
                 <div class="profile-label" style="margin-bottom: 16px;">
                     <div style="flex: 100">Name</div>
-                    <div>Value</div>
+                    <div>{{ profile.FirstName }} {{ profile.LastName }}</div>
                 </div>
                 <div class="profile-label" style="margin-bottom: 16px;">
                     <div style="flex: 100">Phone Number</div>
-                    <div>Value</div>
+                    <div>{{ profile.PhoneNumber }}</div>
                 </div>
                 <div class="profile-label" style="margin-bottom: 16px;">
                     <div style="flex: 100">Organization</div>
-                    <div>Value</div>
+                    <div>{{ profile.OrganizationName }}</div>
                 </div>
                 <button class="btn btn-primary">
                     Change Password
                 </button>
             </div>
+            <div *ngIf="!profile">Loading . . .</div>
         </div>
     </div>
 </div>

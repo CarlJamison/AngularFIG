@@ -24,4 +24,12 @@ export class AccountService {
     Profile() {
         return this.http.get<any>(`${environment.apiUrl}/api/Account/Profile`);
     }
+
+    ProfileDetails() {
+        return this.http.get<any>(`${environment.apiUrl}/api/Account/ProfileDetails`).toPromise();;
+    }
+
+    SaveProfileDetails(profile) {
+        return this.http.post<any>(`${environment.apiUrl}/api/Account/ProfileDetails`, profile).toPromise();
+    }
 }
