@@ -78,6 +78,15 @@ export class AdminComponent implements OnInit {
         dialogRef.afterClosed().subscribe(data => this.orgs = data ? data : this.orgs);
     }
 
+    editManagers(org) {
+        var dialogRef = this.dialog.open(AddRemoveManagerDialog, {
+          data: org,
+          width: '650px',
+        });
+
+        dialogRef.afterClosed().subscribe(data => this.orgs = data ? data : this.orgs);
+    }
+
     saveOrganization(org){
         var saveData = {
             Id: org.Id,
@@ -159,5 +168,61 @@ export class AddEditOrganizationDialog implements OnInit {
             ContactPhoneNumber: this.f.ContactPhoneNumber.value,
             ContactEmail: this.f.ContactEmail.value
         }).then(data => this.dialogRef.close(data));
+    }
+}
+
+@Component({ templateUrl: 'add-remove-managers-dialog.html', styleUrls: ['admin.component.css'] })
+export class AddRemoveManagerDialog implements OnInit {
+    constructor(
+        public dialogRef: MatDialogRef<AddEditOrganizationDialog>,
+        private adminService: AdminService,
+        private userService: UserService,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private formBuilder: FormBuilder) {}
+
+    loading=false
+    submitted=false
+    form: FormGroup;
+    searchResults: any[];
+    managers:any[] = [];
+
+    users(){ 
+        return this.searchResults.filter(u => !this.managers.some(m => m.Id == u.Id));
+    }
+
+    ngOnInit() {
+        this.form = this.formBuilder.group({
+            FirstName: [''],
+            LastName: ['']
+        });
+
+        this.managers = this.data.Managers
+    }
+
+    add(user){
+        this.managers.push(user)
+    }
+
+    remove(user){
+        this.managers = this.managers.filter(m => m.Id != user.Id);
+    }
+
+    get f() { return this.form.controls; }
+
+    search(){
+        if (this.loading) return;
+        if (!this.f.FirstName.value.length && !this.f.LastName.value.length) return;
+
+        this.userService.search(this.f.FirstName.value, this.f.LastName.value).then((data: any[]) => {
+            this.searchResults = data;
+            this.loading = false;
+        })
+    }
+
+    save(){
+        if (this.loading) return;
+        this.loading = true;
+        this.adminService.UpdateManagers(this.data.Id, this.managers.map(m => m.Id))
+            .then(data => this.dialogRef.close(data));
     }
 }

@@ -29,4 +29,8 @@ export class AdminService {
     DeleteOrganization(orgId){
         return this.http.put<any>(`${environment.apiUrl}/api/Admin/Organizations/Delete?orgId=${orgId}`, null).toPromise();
     }
+
+    UpdateManagers(orgId, managerList){
+        return this.http.post<any>(`${environment.apiUrl}/api/Admin/Organizations/Managers?orgId=${orgId}`, managerList).toPromise();
+    }
 }

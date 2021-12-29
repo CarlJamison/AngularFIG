@@ -9,7 +9,7 @@ import { appRoutingModule } from './app.routing';
 import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
-import { AddEditOrganizationDialog, AdminComponent } from './admin';
+import { AddEditOrganizationDialog, AddRemoveManagerDialog, AdminComponent } from './admin';
 import { ForgotAccountComponent } from './forgot-account';
 import { CreateAccountComponent } from './create-account';
 import { AccountComponent, ChangePasswordDialog, EditProfileDialog } from './account';
@@ -60,7 +60,8 @@ import { ClipboardModule } from '@angular/cdk/clipboard'
         AccountComponent,
         AddEditOrganizationDialog,
         EditProfileDialog,
-        ChangePasswordDialog
+        ChangePasswordDialog,
+        AddRemoveManagerDialog
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },

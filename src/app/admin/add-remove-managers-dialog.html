@@ -1,0 +1,55 @@
+<h1 mat-dialog-title>Update Managers</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form" (ngSubmit)="search()">
+        <div class="layout-wrap">
+          <div class="form-group">
+            <label for="published">First Name</label>
+            <input placeholder="First Name" type="text" formControlName="FirstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }" />
+        </div>
+        <div class="form-group">
+          <label for="published">Last Name</label>
+          <input placeholder="Last Name" type="text" formControlName="LastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }" />
+        </div>
+          
+        </div>
+      </form>
+
+      <button style="margin: 8px 16px" (click)="search()" [disabled]="loading" class="widget-search-filter btn btn-primary">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Search
+      </button>
+
+      <div class="info-section" *ngIf="searchResults">
+        <h6 style="flex: 100">Search Results</h6>
+        
+        <div *ngFor="let user of users()">
+          {{ user.FirstName }} {{ user.LastName }}
+          <button mat-icon-button (click)="add(user)" color="primary">
+            <span class="material-icons">add</span>
+          </button>
+        </div>
+        
+        <div *ngIf="!searchResults.length">No users match your search</div>
+      </div>
+
+      <div class="info-section">
+        <h6 style="flex: 100">Managers</h6>
+        
+        <div *ngFor="let user of managers">
+          {{ user.FirstName }} {{ user.LastName }}
+          <button mat-icon-button (click)="remove(user)" color="primary">
+            <span class="material-icons">remove</span>
+          </button>
+        </div>
+        
+        <div *ngIf="!managers.length">No managers assigned</div>
+      </div>
+
+      <div style="display: flex;">
+        <button style="margin: 8px 16px" (click)="save()" [disabled]="loading" class="widget-search-filter btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Save
+        </button>
+        <button mat-button (click)="dialogRef.close()">Cancel</button>
+      </div>
+</div>

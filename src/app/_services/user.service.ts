@@ -1,6 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { environment } from '@environments/environment';
 import { User } from '@app/_models';
 
@@ -10,5 +9,11 @@ export class UserService {
 
     getAll() {
         return this.http.get<User[]>(`${environment.apiUrl}/api/Admin/Users`);
+    }
+
+    search(firstName, lastName) {
+        return this.http.get<User[]>
+            (`${environment.apiUrl}/api/Admin/Users/Search?FirstName=${firstName}&LastName=${lastName}`)
+            .toPromise();
     }
 }

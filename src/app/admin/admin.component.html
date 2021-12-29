@@ -83,9 +83,16 @@
                     </div>
 
                     <div class="info-section">
-                      <h6>Managers</h6>
-                      <div>Joe Norman</div>
-                      <div>Noe Jorman</div>
+                      <div style="display: flex;">
+                        <h6 style="flex: 100">Managers</h6>
+                        <button mat-icon-button (click)="editManagers(org)" color="primary">
+                          <span class="material-icons">edit</span>
+                        </button>
+                      </div>
+                      
+                      <div *ngFor="let manager of org.Managers">
+                        {{ manager.FirstName }} {{ manager.LastName }}</div>
+                      <div *ngIf="!org.Managers.length">There are currently no managers assigned</div>
                     </div>
 
                     <div style="display: flex;" *ngIf="org.ShareableSuffix">
