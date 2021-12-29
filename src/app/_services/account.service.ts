@@ -17,6 +17,10 @@ export class AccountService {
         return this.http.put<any>(`${environment.apiUrl}/api/Account/ForgotPassword?email=${email}`, null);
     }
 
+    ChangePassword(change) {
+        return this.http.post<any>(`${environment.apiUrl}/api/Account/ChangePassword`, change).toPromise();
+    }
+
     Register(user) {
         return this.http.post<any>(`${environment.apiUrl}/api/Account/Register`, user);
     }

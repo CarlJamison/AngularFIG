@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Edit Profile</h1>
+<div mat-dialog-content>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <div class="layout-wrap">
+          <div class="form-group">
+              <label for="published">First Name</label>
+              <input placeholder="FirstName" type="text" formControlName="FirstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }" />
+          </div>
+          <div class="form-group">
+            <label for="published">Last Name</label>
+            <input placeholder="LastName" type="text" formControlName="LastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }" />
+          </div>
+          <div class="form-group">
+            <label for="published">Phone Number</label>
+            <input placeholder="123-456-7890" type="text" formControlName="PhoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.PhoneNumber.errors }" />
+          </div>
+        </div>
+      </form>
+      <div style="display: flex;">
+        <button style="margin: 8px 16px" (click)="onSubmit()" [disabled]="loading" class="widget-search-filter btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Save
+        </button>
+        <button mat-button (click)="dialogRef.close()">Cancel</button>
+      </div>
+</div>
