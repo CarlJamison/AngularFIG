@@ -30,7 +30,15 @@ export class AccountService {
     }
 
     ProfileDetails() {
-        return this.http.get<any>(`${environment.apiUrl}/api/Account/ProfileDetails`).toPromise();;
+        return this.http.get<any>(`${environment.apiUrl}/api/Account/ProfileDetails`).toPromise();
+    }
+
+    Organization() {
+        return this.http.get<any>(`${environment.apiUrl}/api/Account/Organization`).toPromise();
+    }
+
+    SaveOrganization(org) {
+        return this.http.post<any>(`${environment.apiUrl}/api/Account/Organization`, org).toPromise();
     }
 
     SaveProfileDetails(profile) {

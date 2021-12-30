@@ -1,11 +1,13 @@
 ﻿import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AddEditOrganizationDialog } from '@app/admin';
 import { AccountService } from '@app/_services';
 
 @Component({ templateUrl: 'account.component.html', styleUrls: ['account.component.css']  })
 export class AccountComponent implements OnInit {
     profile = null;
+    org = null;
 
     constructor(
         public dialog: MatDialog,
@@ -13,13 +15,32 @@ export class AccountComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.accountService.ProfileDetails().then(data => this.profile = data)
+        this.accountService.ProfileDetails().then(data => {
+            this.profile = data
+            if(this.profile.IsManager){
+                this.accountService.Organization().then(data => this.org = data);
+            }
+        });
+    }
+
+    getLink(){
+        return `${window.location.host}/Register?Code=${this.org.ShareableSuffix}`
     }
 
     changePassword(){
         this.dialog.open(ChangePasswordDialog, {
             width: '600px',
           });
+    }
+
+    editOrganization(org = null) {
+        org.isAdmin = false;
+        var dialogRef = this.dialog.open(AddEditOrganizationDialog, {
+          data: org,
+          width: '600px'
+        });
+
+        dialogRef.afterClosed().subscribe(data => this.org = data ? data : this.org);
     }
 
     editProfile(){

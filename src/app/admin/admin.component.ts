@@ -70,6 +70,7 @@ export class AdminComponent implements OnInit {
     }
 
     editOrganization(org = null) {
+        org.isAdmin = true;
         var dialogRef = this.dialog.open(AddEditOrganizationDialog, {
           data: org,
           width: '600px',
@@ -111,6 +112,7 @@ export class AddEditOrganizationDialog implements OnInit {
     constructor(
         public dialogRef: MatDialogRef<AddEditOrganizationDialog>,
         private adminService: AdminService,
+        private accountService: AccountService,
         @Inject(MAT_DIALOG_DATA) public data: any,
         private formBuilder: FormBuilder) {}
 
@@ -155,7 +157,8 @@ export class AddEditOrganizationDialog implements OnInit {
         }
 
         this.loading = true;
-        this.adminService.SaveOrganization({
+
+        var saveModel = {
             Id : this.data ? this.data.Id : 0,
             Name: this.f.Name.value,
             Address: this.f.Address.value,
@@ -167,7 +170,15 @@ export class AddEditOrganizationDialog implements OnInit {
             ContactLastName: this.f.ContactLastName.value,
             ContactPhoneNumber: this.f.ContactPhoneNumber.value,
             ContactEmail: this.f.ContactEmail.value
-        }).then(data => this.dialogRef.close(data));
+        }
+
+        if(this.data.isAdmin){
+            this.adminService.SaveOrganization(saveModel)
+                .then(data => this.dialogRef.close(data));
+        }else{
+            this.accountService.SaveOrganization(saveModel)
+                .then(data => this.dialogRef.close(data));
+        }
     }
 }
 
@@ -222,6 +233,7 @@ export class AddRemoveManagerDialog implements OnInit {
     save(){
         if (this.loading) return;
         this.loading = true;
+        
         this.adminService.UpdateManagers(this.data.Id, this.managers.map(m => m.Id))
             .then(data => this.dialogRef.close(data));
     }

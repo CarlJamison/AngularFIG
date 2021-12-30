@@ -30,6 +30,69 @@
                     Change Password
                 </button>
             </div>
+
+            <div *ngIf="org" >
+                <div style="padding-bottom: 8px">You manage {{ org.Name }}</div>
+            <div style="display: flex;">
+                
+                <div style="flex: 100">
+                  <div class="org-label">
+                    <div style="flex: 100">Address</div>
+                    <div>{{ org.Address }}</div>
+                  </div>
+                  <div class="org-label">
+                    <div style="flex: 100">City</div>
+                    <div>{{ org.City }}</div>
+                  </div>
+                  <div class="org-label">
+                    <div style="flex: 100">State</div>
+                    <div>{{ org.State }}</div>
+                  </div>
+                  <div class="org-label">
+                    <div style="flex: 100">Zip Code</div>
+                    <div>{{ org.ZipCode }}</div>
+                  </div>
+                  <div class="org-label">
+                    <div style="flex: 100">Phone Number</div>
+                    <div>{{ org.PhoneNumber }}</div>
+                  </div>
+                </div>
+                <button mat-icon-button (click)="editOrganization(org)" color="primary">
+                  <span class="material-icons">edit</span>
+                </button>
+              </div>
+
+              <div style="display: flex;" *ngIf="org.ShareableSuffix">
+                <div style="flex: 100">
+                  <div class="org-label">
+                    <div style="flex: 100; padding-top: 6px">Link</div>
+                    <div>
+                      {{ getLink(org) }}
+                      <button mat-icon-button [cdkCopyToClipboard]="getLink(org)" color="primary">
+                        <span class="material-icons">content_copy</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="info-section">
+                <h6>Main Contact</h6>
+                <div class="org-label">
+                  <div style="flex: 100">Name</div>
+                  <div>{{ org.ContactFirstName }} {{ org.ContactLastName }}</div>
+                </div>
+                <div class="org-label">
+                  <div style="flex: 100">Phone Number</div>
+                  <div>{{ org.ContactPhoneNumber }}</div>
+                </div>
+                <div class="org-label">
+                  <div style="flex: 100">Email</div>
+                  <div>{{ org.ContactEmail }}</div>
+                </div>
+              </div>
+
+            </div>
             <div *ngIf="!profile">Loading . . .</div>
         </div>
     </div>
