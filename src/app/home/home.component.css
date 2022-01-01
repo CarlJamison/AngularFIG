@@ -6,9 +6,6 @@
     border-radius: 10px;
     color: white;
     box-shadow: #3232324a 0px 3px 8px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     letter-spacing: 0.8px;
     max-width:750px;
     padding-bottom: 32px;
@@ -26,7 +23,7 @@
     border-radius: 1px;
     margin-top: 4px;
 }
-.widget-search-filter button{
+button.widget-search-filter{
     height: 59px;
     color: #007db0;
     background-color: #ffd389;
@@ -38,7 +35,7 @@
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-.widget-search-filter button:hover{
+button.widget-search-filter:hover{
     background-color: #dcb778;
     cursor: pointer;
     transition: all 0.25s;
@@ -68,4 +65,10 @@
     padding: 8px 20px;
     margin-bottom: 8px;
     letter-spacing: 1.5px;
+}
+
+mat-radio-button{
+    flex: 100;
+    justify-content: center;
+    display: grid;
 }

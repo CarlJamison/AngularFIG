@@ -1,5 +1,12 @@
 ﻿    <form [formGroup]="searchForm" (ngSubmit)="search()" class="card widget">
-        <mat-form-field style="margin: 8px; width: 300px" appearance="fill">
+      <mat-radio-group class="mt-1 d-flex" [(ngModel)]="tripType" [ngModelOptions]="{standalone: true}">
+        <mat-radio-button value="RT">Round Trip</mat-radio-button>
+        <mat-radio-button value="OW">One Way</mat-radio-button>
+        <mat-radio-button value="OJ">Open Jaw</mat-radio-button>
+      </mat-radio-group>
+        <div *ngIf="tripType=='OJ'">Departure Trip</div>
+        <div style="display:flex; flex-wrap: wrap"  >
+          <mat-form-field style="flex: 100; margin: 8px" appearance="fill">
             <mat-label>From</mat-label>
             <input type="text" placeholder="From airport" matInput formControlName="from" 
                    [matAutocomplete]="fromAirport">
@@ -9,7 +16,7 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
-          <mat-form-field style="margin: 8px; width: 300px" appearance="fill">
+          <mat-form-field style="flex: 100; margin: 8px" appearance="fill">
             <mat-label>To</mat-label>
             <input type="text" placeholder="To airport" matInput formControlName="to" 
                    [matAutocomplete]="toAirport">
@@ -19,28 +26,62 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
-          <mat-form-field style="margin: 8px; width: 244px" appearance="fill">
-            <mat-label>Adult Passengers</mat-label>
-            <input type="number" placeholder="Number of passengers" matInput formControlName="adtPassengers">
+        </div>
+
+        <div *ngIf="tripType=='OJ'">Return Trip</div>
+        <div *ngIf="tripType=='OJ'" style="display:flex; flex-wrap: wrap">
+          <mat-form-field style="flex: 100; margin: 8px" appearance="fill">
+            <mat-label>From</mat-label>
+            <input type="text" placeholder="From airport" matInput formControlName="fromOJ" 
+                   [matAutocomplete]="fromAirport">
+            <mat-autocomplete autoActiveFirstOption #fromAirport="matAutocomplete">
+              <mat-option *ngFor="let option of filteredFromOJOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
-          <mat-form-field style="margin: 8px" appearance="fill" class="search-date">
+          <mat-form-field style="flex: 100; margin: 8px" appearance="fill">
+            <mat-label>To</mat-label>
+            <input type="text" placeholder="To airport" matInput formControlName="toOJ" 
+                   [matAutocomplete]="toAirport">
+            <mat-autocomplete autoActiveFirstOption #toAirport="matAutocomplete">
+              <mat-option *ngFor="let option of filteredToOJOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+          
+        <div style="display:flex; flex-wrap: wrap">
+          <mat-form-field style="flex: 100; margin: 8px" appearance="fill" class="search-date">
             <mat-label>Departure date</mat-label>
             <input formControlName="depDate" matInput [matDatepicker]="depPicker">
             <mat-datepicker-toggle matSuffix [for]="depPicker"></mat-datepicker-toggle>
             <mat-datepicker #depPicker></mat-datepicker>
           </mat-form-field>
-          <mat-form-field style="margin: 8px" appearance="fill" class="search-date">
+          <mat-form-field *ngIf="tripType != 'OW'" style="flex: 100; margin: 8px" appearance="fill" class="search-date">
             <mat-label>Return date</mat-label>
             <input formControlName="retDate" matInput [matDatepicker]="retPicker">
             <mat-datepicker-toggle matSuffix [for]="retPicker"></mat-datepicker-toggle>
             <mat-datepicker #retPicker></mat-datepicker>
           </mat-form-field>
-          <div class="widget-search-filter">
-            <button [disabled]="loading" class="btn btn-primary">
-                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                Search
-            </button>
-          </div>
+        </div>
+        
+        <div style="display:flex; flex-wrap: wrap">
+          <mat-form-field style="flex: 100; margin: 8px" appearance="fill">
+            <mat-label>Adult Passengers</mat-label>
+            <input type="number" placeholder="Adult Passengers" matInput formControlName="adtPassengers">
+          </mat-form-field>
+          <mat-form-field style="flex: 100; margin: 8px" appearance="fill">
+            <mat-label>Child Passengers</mat-label>
+            <input type="number" placeholder="Child Passengers" matInput formControlName="cldPassengers">
+          </mat-form-field>
+
+          <button [disabled]="loading" class="widget-search-filter btn btn-primary">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              Search
+          </button>
+        </div>
       </form>
 
       <div *ngIf="error" style="max-width: 500px; margin: 16px auto;" class="alert alert-danger mt-3">{{error}}</div>
