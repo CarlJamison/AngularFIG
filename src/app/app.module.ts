@@ -28,6 +28,7 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 import { ClipboardModule } from '@angular/cdk/clipboard'
 
 @NgModule({
@@ -50,7 +51,8 @@ import { ClipboardModule } from '@angular/cdk/clipboard'
         MatIconModule,
         MatDialogModule,
         ClipboardModule,
-        MatRadioModule
+        MatRadioModule,
+        MatSelectModule
     ],
     declarations: [
         AppComponent,

@@ -10,7 +10,7 @@ export class AdminComponent implements OnInit {
     unconfirmed: any[];
     tab = 0;
     pricingForm: FormGroup;
-    orgs: any[] = [{ Name: "Training Leaders International"}, { Name: "Raining Leaders"}, { Name: "Eaters International"}]
+    orgs: any[] = []
     currentOrg: ""
 
     constructor(

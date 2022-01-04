@@ -17,11 +17,16 @@ export class HomeComponent {
     options: string[] = [];
     error: string;
     tripType: string = "RT";
+    showAdvanced: boolean = false;
 
     constructor(
         private airportService: AirportService,
         private searchService: SearchService,
         private formBuilder: FormBuilder) { }
+
+    airlines(){
+        return this.airportService.Airlines();
+    }
 
     ngOnInit() {
         this.options = this.airportService.List();
@@ -34,11 +39,19 @@ export class HomeComponent {
             adtPassengers: ['', Validators.required],
             cldPassengers: ['', Validators.required],
             depDate: ['', Validators.required],
-            retDate: ['', Validators.required]
+            retDate: ['', Validators.required],
+            bundledFaresOnly: [''],
+            directFlights: [''],
+            connectionTime: [''],
+            airline: ['']
         });
 
         this.f.adtPassengers.setValue(1);
         this.f.cldPassengers.setValue(0);
+        this.f.bundledFaresOnly.setValue(false);
+        this.f.directFlights.setValue(false);
+        this.f.connectionTime.setValue(0);
+        this.f.airline.setValue("Any");
 
         this.filteredFromOptions = this.f.from.valueChanges.pipe(
             startWith(''),
@@ -70,7 +83,7 @@ export class HomeComponent {
 
     search(){
         this.error = null;
-        if(this.tripType == "OW" && !this.f.retDate.value.length){
+        if(this.tripType == "OW" && (!this.f.retDate.value || !this.f.retDate.value.length)){
             this.f.retDate.setValue(this.f.depDate.value);
         }
         // stop here if form is invalid
@@ -107,6 +120,10 @@ export class HomeComponent {
             type: this.tripType,
             adtPassengers: this.f.adtPassengers.value,
             cldPassengers: this.f.cldPassengers.value,
+            airline: this.f.airline.value == "Any" ? null : this.f.airline.value,
+            maxConnectionTime: this.f.connectionTime.value,
+            bundledFaresOnly: this.f.bundledFaresOnly.value,
+            directFlights: this.f.directFlights.value,
             departureDate: new Date(this.f.depDate.value).toISOString().split('T')[0],
             returnDate: new Date(this.f.retDate.value).toISOString().split('T')[0]
         }).then(data => this.itineraries = data,
