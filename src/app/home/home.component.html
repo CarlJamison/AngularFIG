@@ -125,6 +125,7 @@
           <div class="itinerary-title">{{ itinerary.contractDescription }} Fare: ${{ itinerary.totalCashPrice }}</div>
           <div style="padding-left: 20px" *ngFor="let flight of itinerary.flights">{{flight.carrierCode}} {{flight.flightNumber}}
                - {{dateString(flight.departureAirportDate)}} {{flight.departureAirport}} 
-              -> {{dateString(flight.arrivalAirportDate)}} {{flight.arrivalAirport}}
+               <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">east</span>
+              {{dateString(flight.arrivalAirportDate)}} {{flight.arrivalAirport}}
           </div>
         </div>
