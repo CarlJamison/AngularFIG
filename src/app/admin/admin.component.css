@@ -33,7 +33,7 @@
 }
 
 .list-group-item-action{
-    cursor: pointer;
+    background-color: white;
     z-index: 1;
 }
 

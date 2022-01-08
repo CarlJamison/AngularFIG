@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>{{ user.OrgId >= 0 ? 'Transfer' : 'Assign' }} User Organization</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div *ngIf="user.OrgId >= 0">Current Organization: {{ getOrgName() }}</div>
+      <mat-form-field appearance="fill" style="padding: 24px; width: 400px">
+        <mat-label>Org</mat-label>
+        <mat-select formControlName="transferOrg">
+          <mat-option [value]="-2">Unassigned</mat-option>
+          <mat-option *ngFor="let org of orgs" [value]="org.Id">
+            {{ org.Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </form>
+
+      <div style="display: flex;">
+        <button style="margin: 8px 16px" (click)="save()" [disabled]="loading" class="widget-search-filter btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Save
+        </button>
+        <button mat-button (click)="dialogRef.close()">Cancel</button>
+      </div>
+</div>

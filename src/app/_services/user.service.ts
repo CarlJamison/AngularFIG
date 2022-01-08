@@ -11,9 +11,17 @@ export class UserService {
         return this.http.get<User[]>(`${environment.apiUrl}/api/Admin/Users`);
     }
 
-    search(firstName, lastName) {
+    GetUnconfirmed() {
+        return this.http.get<User[]>(`${environment.apiUrl}/api/Admin/UnconfirmedUsers`);
+    }
+
+    search(firstName, lastName, orgId = -1) {
         return this.http.get<User[]>
-            (`${environment.apiUrl}/api/Admin/Users/Search?FirstName=${firstName}&LastName=${lastName}`)
+            (`${environment.apiUrl}/api/Admin/Users/Search?FirstName=${firstName}&LastName=${lastName}&OrgId=${orgId}`)
             .toPromise();
+    }
+
+    TransferUser(userId, orgId){
+        return this.http.put<any>(`${environment.apiUrl}/api/Admin/Users/Transfer?UserId=${userId}&OrgId=${orgId}`, null).toPromise();
     }
 }

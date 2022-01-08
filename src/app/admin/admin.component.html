@@ -8,28 +8,60 @@
     <div style="width: 100%; overflow: auto;">
         <div style="padding: 16px" [ngSwitch]="tab">
             <div *ngSwitchCase="0">
+                
                 <div *ngFor="let user of unconfirmed" class="alert alert-warning" role="alert">
                     <span>{{ user.Email }} is requesting account confirmation</span>
                     <span *ngIf="!user.loading" (click)="confirmAccount(user)" class="alert-link">Confirm</span>
                     <span *ngIf="user.loading" class="spinner-border spinner-border-sm mr-1"></span>
                 </div>
-                
-                <div style="overflow: auto;">
+                <form [formGroup]="searchForm" (ngSubmit)="search()">
+                  <div class="layout-wrap">
+                    <div class="form-group">
+                      <label >First Name</label>
+                      <input placeholder="First Name" type="text" formControlName="FirstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }" />
+                    </div>
+                    <div class="form-group">
+                      <label >Last Name</label>
+                      <input placeholder="Last Name" type="text" formControlName="LastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }" />
+                    </div>
+                    <mat-form-field appearance="fill" style="padding: 24px 0 0 16px">
+                      <mat-label>Org</mat-label>
+                      <mat-select formControlName="orgSearch">
+                        <mat-option [value]="-1">Any</mat-option>
+                        <mat-option [value]="-2">Unassigned</mat-option>
+                        <mat-option *ngFor="let org of orgs" [value]="org.Id">
+                          {{ org.Name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  
+                  <button style="margin: 8px 16px" (click)="search()" [disabled]="loading" class="widget-search-filter btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Search
+                  </button>
+                  <div class="m-1 pt-3" *ngIf="users">{{users.length}} results</div>
+                </form>
+                <div style="overflow: auto;" *ngIf="users && users.length">
                   <table class="table">
                     <thead>
                       <tr>
+                        <th scope="col">Name</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Confirmed</th>
+                        <th scope="col">Manager</th>
                         <th scope="col">Admin</th>
-                        <th scope="col">Demo Account</th>
+                        <th scope="col">Organization</th>
+                        <th scope="col"></th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr *ngFor="let user of users">
+                        <td>{{ user.FirstName }} {{ user.LastName }}</td>
                         <td>{{ user.Email }}</td>
-                        <td>{{ user.IsConfirmed ? 'Yes' : 'No'}}</td>
+                        <td>{{ user.IsManager ? 'Yes' : 'No'}}</td>
                         <td>{{ user.IsAdmin ? 'Yes' : 'No'}}</td>
-                        <td>{{ user.IsDemo ? 'Yes' : 'No'}}</td>
+                        <td>{{ getOrgName(user.OrgId) }}</td>
+                        <td><button (click)="transfer(user)" mat-button color="primary">Transfer</button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -46,7 +78,7 @@
               <div class="list-group">
                 <div class="list-group-item list-group-item-action" style="margin-top: 1px;" *ngFor="let org of orgs">
                   <div (click)="currentOrg = org.Name == currentOrg ? '' : org.Name" style="display: flex">
-                    <div style="flex: 100; padding: 8px">
+                    <div style="flex: 100; padding: 8px;">
                       {{ org.Name }}</div>
                     <button mat-icon-button color="primary">
                       <span class="material-icons md-32">

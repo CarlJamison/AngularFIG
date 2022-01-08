@@ -10,6 +10,7 @@ export class AdminComponent implements OnInit {
     unconfirmed: any[];
     tab = 0;
     pricingForm: FormGroup;
+    searchForm: FormGroup;
     orgs: any[] = []
     currentOrg: ""
 
@@ -35,10 +36,36 @@ export class AdminComponent implements OnInit {
             humanitarian: ['', Validators.required]
         });
 
-        this.getUsers();
+        this.searchForm = this.formBuilder.group({
+            FirstName: [''],
+            LastName: [''],
+            orgSearch: ['']
+        });
+
+        this.GetUnconfirmed();
     }
     
     get f() { return this.pricingForm.controls; }
+    get s() { return this.searchForm.controls; }
+    search(){
+        this.loading = true;
+        var orgId = this.s.orgSearch.value
+        return this.userService.search(this.s.FirstName.value, this.s.LastName.value, orgId ? orgId : -1).then(users => {
+            this.loading = false;
+            this.users = users;
+        });
+    }
+    getOrgName(id){
+        var org = this.orgs.find(o => o.Id == id);
+        return org ? org.Name : '(Unassigned)';
+    }
+    transfer(user){
+        var dialogRef = this.dialog.open(TransferUserDialog, {
+            data: { orgs: this.orgs, user }
+          });
+  
+          dialogRef.afterClosed().subscribe(data => user.OrgId = data ? data : user.OrgId);
+    }
 
     onSubmit(){
         if(!this.loading){
@@ -51,13 +78,8 @@ export class AdminComponent implements OnInit {
         }
     }
 
-    getUsers(){
-        this.loading = true;
-        return this.userService.getAll().toPromise().then(users => {
-            this.loading = false;
-            this.users = users;
-            this.unconfirmed = this.users.filter(u => !u.IsConfirmed);
-        });
+    GetUnconfirmed(){
+        return this.userService.GetUnconfirmed().toPromise().then(users => this.unconfirmed = users);
     }
 
     getLink(org){
@@ -66,7 +88,7 @@ export class AdminComponent implements OnInit {
 
     confirmAccount(user){
         user.loading = true;
-        this.accountService.ConfirmAccount(user.Email).then(() => this.getUsers().then(() => user.loading = false));
+        this.accountService.ConfirmAccount(user.Email).then(() => this.GetUnconfirmed().then(() => user.loading = false));
     }
 
     editOrganization(org = null) {
@@ -236,5 +258,42 @@ export class AddRemoveManagerDialog implements OnInit {
         
         this.adminService.UpdateManagers(this.data.Id, this.managers.map(m => m.Id))
             .then(data => this.dialogRef.close(data));
+    }
+}
+@Component({ templateUrl: 'transfer-user-dialog.html', styleUrls: ['admin.component.css'] })
+export class TransferUserDialog implements OnInit {
+    constructor(
+        public dialogRef: MatDialogRef<AddEditOrganizationDialog>,
+        private userService: UserService,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private formBuilder: FormBuilder) {}
+
+    loading=false
+    form: FormGroup;
+    orgs;
+    user;
+
+    ngOnInit() {
+        this.form = this.formBuilder.group({
+            transferOrg: ['', Validators.required]
+        });
+
+        this.orgs = this.data.orgs;
+        this.user = this.data.user;
+    }
+
+    getOrgName(){
+        var org = this.orgs.find(o => o.Id == this.user.OrgId);
+        return org ? org.Name : '(Unassigned)';
+    }
+
+    get f() { return this.form.controls; }
+
+    save(){
+        if (this.loading || this.form.invalid) return;
+        this.loading = true;
+        
+        this.userService.TransferUser(this.user.Id, this.f.transferOrg.value)
+            .then(() => this.dialogRef.close(this.f.transferOrg.value));
     }
 }
