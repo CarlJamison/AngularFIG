@@ -77,7 +77,7 @@
 
               <div class="list-group">
                 <div class="list-group-item list-group-item-action" style="margin-top: 1px;" *ngFor="let org of orgs">
-                  <div (click)="currentOrg = org.Name == currentOrg ? '' : org.Name" style="display: flex">
+                  <div (click)="currentOrg = org.Name == currentOrg ? '' : org.Name" style="display: flex; cursor: pointer">
                     <div style="flex: 100; padding: 8px;">
                       {{ org.Name }}</div>
                     <button mat-icon-button color="primary">

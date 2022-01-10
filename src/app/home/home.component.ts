@@ -69,6 +69,10 @@ export class HomeComponent {
 
     }
 
+    private getFlights(flights, id){
+        return flights.filter(f => f.tripId == id);
+    }
+
     private _filter(value: string): string[] {
         const filterValue = value.toLowerCase();
     

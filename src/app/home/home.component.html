@@ -121,11 +121,20 @@
 
       <div *ngIf="error" style="max-width: 500px; margin: 16px auto;" class="alert alert-danger mt-3">{{error}}</div>
       
+      <div style="transition: all 1s; height: 
+      {{ !loading && itineraries && itineraries.length ? '0' : '300' }}px"></div>
+
       <div class="itinerary" *ngFor="let itinerary of itineraries">
           <div class="itinerary-title">{{ itinerary.contractDescription }} Fare: ${{ itinerary.totalCashPrice }}</div>
-          <div style="padding-left: 20px" *ngFor="let flight of itinerary.flights">{{flight.carrierCode}} {{flight.flightNumber}}
+          <div style="padding-left: 20px" *ngFor="let flight of getFlights(itinerary.flights, '1')">{{flight.carrierCode}} {{flight.flightNumber}}
                - {{dateString(flight.departureAirportDate)}} {{flight.departureAirport}} 
                <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">east</span>
               {{dateString(flight.arrivalAirportDate)}} {{flight.arrivalAirport}}
+          </div>
+          <mat-divider style="margin: 12px;"></mat-divider>
+          <div style="padding-left: 20px" *ngFor="let flight of getFlights(itinerary.flights, '2')">{{flight.carrierCode}} {{flight.flightNumber}}
+            - {{dateString(flight.departureAirportDate)}} {{flight.departureAirport}} 
+            <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">east</span>
+           {{dateString(flight.arrivalAirportDate)}} {{flight.arrivalAirport}}
           </div>
         </div>
