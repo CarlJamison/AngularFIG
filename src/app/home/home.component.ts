@@ -17,6 +17,7 @@ export class HomeComponent {
     options: string[] = [];
     error: string;
     tripType: string = "RT";
+    cabinClass: string = "coach";
     showAdvanced: boolean = false;
 
     constructor(
@@ -69,6 +70,23 @@ export class HomeComponent {
 
     }
 
+    private getTotalCashPrice(itinerary){
+        return (itinerary.fares.reduce((partial_sum, a) => partial_sum + +a.numPax, 0) * +itinerary.markup + +itinerary.totalCashPrice).toFixed(2);
+    }
+
+    private getTotalCCPrice(itinerary){
+        return (itinerary.fares.reduce((partial_sum, a) => partial_sum + +a.numPax, 0) * +itinerary.markup + +itinerary.totalCcPrice).toFixed(2);
+    }
+
+    private toAmount(amount){
+        return (+amount).toFixed(2)
+    }
+
+    private getFareType(fare){
+        var fareType = fare.travelerType;
+        return fareType == 'ADT' ? 'Adult' : fareType == 'CHD' ? 'Child' : fareType;
+    }
+
     private getFlights(flights, id){
         return flights.filter(f => f.tripId == id);
     }
@@ -117,6 +135,7 @@ export class HomeComponent {
         
         this.loading = true;
         this.searchService.Search({
+            cabinClass: this.cabinClass,
             start: start,
             end: end,
             startOJ: startOJ,

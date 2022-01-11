@@ -47,7 +47,7 @@ button.widget-search-filter:hover{
 
 .itinerary{
     margin: auto;
-    max-width: 80%;
+    max-width: 700px;
     background-color: white;
     border-radius: 8px;
     margin-top: 32px;
@@ -71,4 +71,12 @@ mat-radio-button{
     flex: 100;
     justify-content: center;
     display: grid;
+}
+
+.fare{
+    border: 1px solid #007db0;
+    border-radius: 3px;
+    padding: 6px 16px;
+    margin: 16px 16px;
+    background-color: whitesmoke;
 }
