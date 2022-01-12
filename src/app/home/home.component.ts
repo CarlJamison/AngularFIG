@@ -149,7 +149,15 @@ export class HomeComponent {
             directFlights: this.f.directFlights.value,
             departureDate: new Date(this.f.depDate.value).toISOString().split('T')[0],
             returnDate: new Date(this.f.retDate.value).toISOString().split('T')[0]
-        }).then(data => this.itineraries = data,
+        }).then(data => {
+            this.itineraries = data;
+            this.itineraries.forEach(i => {
+                i.flights.foreach(f => {
+                    f.departureDateString = this.dateString(f.departureAirportDate);
+                    f.arrivalDateString = this.dateString(f.arrivalAirportDate);
+                });
+            })
+        },
                 error => this.error = error)
                 .finally(()=> this.loading = false);
     }

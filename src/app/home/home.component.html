@@ -144,15 +144,15 @@
             </div>
             <div>
               <div style="padding-left: 20px" *ngFor="let flight of getFlights(itinerary.flights, '1')">{{flight.carrierCode}} {{flight.flightNumber}}
-                - {{dateString(flight.departureAirportDate)}} {{flight.departureAirport}} 
+                - {{flight.departureDateString}} {{flight.departureAirport}} 
                 <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">east</span>
-               {{dateString(flight.arrivalAirportDate)}} {{flight.arrivalAirport}}
+               {{flight.arrivalDateString}} {{flight.arrivalAirport}}
               </div>
               <mat-divider style="margin: 12px;"></mat-divider>
               <div style="padding-left: 20px" *ngFor="let flight of getFlights(itinerary.flights, '2')">{{flight.carrierCode}} {{flight.flightNumber}}
-                - {{dateString(flight.departureAirportDate)}} {{flight.departureAirport}} 
+                - {{flight.departureDateString}} {{flight.departureAirport}} 
                 <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">east</span>
-                {{dateString(flight.arrivalAirportDate)}} {{flight.arrivalAirport}}
+                {{flight.arrivalDateString}} {{flight.arrivalAirport}}
               </div>
             </div>
 
