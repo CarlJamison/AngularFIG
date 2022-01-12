@@ -152,7 +152,7 @@ export class HomeComponent {
         }).then(data => {
             this.itineraries = data;
             this.itineraries.forEach(i => {
-                i.flights.foreach(f => {
+                i.flights.forEach(f => {
                     f.departureDateString = this.dateString(f.departureAirportDate);
                     f.arrivalDateString = this.dateString(f.arrivalAirportDate);
                 });
