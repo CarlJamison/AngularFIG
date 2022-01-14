@@ -70,12 +70,9 @@ export class HomeComponent {
 
     }
 
-    private getTotalCashPrice(itinerary){
-        return (itinerary.fares.reduce((partial_sum, a) => partial_sum + +a.numPax, 0) * +itinerary.markup + +itinerary.totalCashPrice).toFixed(2);
-    }
-
-    private getTotalCCPrice(itinerary){
-        return (itinerary.fares.reduce((partial_sum, a) => partial_sum + +a.numPax, 0) * +itinerary.markup + +itinerary.totalCcPrice).toFixed(2);
+    private getTotalPrice(itinerary){
+        var numberOfFares = itinerary.fares.reduce((partial_sum, a) => partial_sum + +a.numPax, 0);
+        return ((numberOfFares * +itinerary.markup + +itinerary.totalCcPrice) * 1.04).toFixed(2);
     }
 
     private toAmount(amount){
@@ -85,6 +82,10 @@ export class HomeComponent {
     private getFareType(fare){
         var fareType = fare.travelerType;
         return fareType == 'ADT' ? 'Adult' : fareType == 'CHD' ? 'Child' : fareType;
+    }
+
+    private getFareAmount(fare, itinerary){
+        return (+fare.ccPricePerPax + +itinerary.markup) * 1.04;
     }
 
     private getFlights(flights, id){
@@ -145,7 +146,7 @@ export class HomeComponent {
             cldPassengers: this.f.cldPassengers.value,
             airline: this.f.airline.value == "Any" ? null : this.f.airline.value,
             maxConnectionTime: this.f.connectionTime.value,
-            bundledFaresOnly: this.f.bundledFaresOnly.value,
+            bundledFaresOnly: !this.f.bundledFaresOnly.value,
             directFlights: this.f.directFlights.value,
             departureDate: new Date(this.f.depDate.value).toISOString().split('T')[0],
             returnDate: new Date(this.f.retDate.value).toISOString().split('T')[0]

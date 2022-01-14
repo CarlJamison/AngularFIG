@@ -101,7 +101,7 @@
               <mat-checkbox style="justify-content: center; flex: 100; display: flex"
                 class="mat-primary" formControlName="directFlights">Non Stop or Direct Flights only</mat-checkbox>
               <mat-checkbox style="justify-content: center; flex: 100; display: flex"
-                class="mat-primary" formControlName="bundledFaresOnly">Remove Basic Economy</mat-checkbox>
+                class="mat-primary" formControlName="bundledFaresOnly">Include Basic Economy</mat-checkbox>
             </div>
 
             <div class="d-flex mt-3">
@@ -131,18 +131,14 @@
       {{ !loading && itineraries && itineraries.length ? '0' : '300' }}px"></div>
 
       <div class="itinerary" *ngFor="let itinerary of itineraries">
-          <div class="itinerary-title">{{ itinerary.contractDescription }} Fare: ${{ getTotalCashPrice(itinerary) }} 
-            {{ itinerary.totalCashPrice != itinerary.totalCcPrice ? 'Cash' : '' }}</div>
+          <div class="itinerary-title">{{ itinerary.contractDescription }} Fare: ${{ getTotalPrice(itinerary) }}</div>
           <div class="d-flex">
             <div style="border-right: lightgray solid 1px">
-              <div style="margin: 0 16px" *ngIf="itinerary.totalCashPrice != itinerary.totalCcPrice">Credit Card Total: ${{ getTotalCCPrice(itinerary) }}</div>
               <div class="fare" *ngFor="let fare of itinerary.fares">
-                <div>Per {{ getFareType(fare) }}: ${{ toAmount(fare.ccPricePerPax) }}</div>
-                <div *ngIf="fare.ccPricePerPax != fare.cashPricePerPax">Cash Disc: - ${{ toAmount(fare.ccPricePerPax - fare.cashPricePerPax) }}</div>
-                <div>Markup: ${{ toAmount(itinerary.markup) }}</div>
+                <div>Per {{ getFareType(fare) }}: ${{ toAmount(getFareAmount(fare, itinerary)) }}</div>
               </div>
             </div>
-            <div>
+            <div style="flex: 100">
               <div style="padding-left: 20px" *ngFor="let flight of getFlights(itinerary.flights, '1')">{{flight.carrierCode}} {{flight.flightNumber}}
                 - {{flight.departureDateString}} {{flight.departureAirport}} 
                 <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">east</span>
@@ -154,6 +150,10 @@
                 <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">east</span>
                 {{flight.arrivalDateString}} {{flight.arrivalAirport}}
               </div>
+              <div style="justify-content: end;" class="d-flex">
+                <button class="confirm-button widget-search-filter btn btn-primary">Confirm</button>
+              </div>
+              
             </div>
 
           </div>
