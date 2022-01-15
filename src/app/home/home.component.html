@@ -55,13 +55,13 @@
         <div style="display:flex; flex-wrap: wrap">
           <mat-form-field style="flex: 100; margin: 8px" appearance="fill" class="search-date">
             <mat-label>Departure date</mat-label>
-            <input formControlName="depDate" matInput [matDatepicker]="depPicker">
+            <input (dateChange)="addEvent($event)" formControlName="depDate" matInput [matDatepicker]="depPicker">
             <mat-datepicker-toggle matSuffix [for]="depPicker"></mat-datepicker-toggle>
             <mat-datepicker #depPicker></mat-datepicker>
           </mat-form-field>
           <mat-form-field *ngIf="tripType != 'OW'" style="flex: 100; margin: 8px" appearance="fill" class="search-date">
             <mat-label>Return date</mat-label>
-            <input formControlName="retDate" matInput [matDatepicker]="retPicker">
+            <input (dateChange)="addEvent($event)" formControlName="retDate" matInput [matDatepicker]="retPicker">
             <mat-datepicker-toggle matSuffix [for]="retPicker"></mat-datepicker-toggle>
             <mat-datepicker #retPicker></mat-datepicker>
           </mat-form-field>
@@ -128,7 +128,7 @@
       <div *ngIf="error" style="max-width: 500px; margin: 16px auto;" class="alert alert-danger mt-3">{{error}}</div>
       
       <div style="transition: all 1s; height: 
-      {{ !loading && itineraries && itineraries.length ? '0' : '300' }}px"></div>
+      {{ loading && (!itineraries || !itineraries.length) ? '300' : '0' }}px"></div>
 
       <div class="itinerary" *ngFor="let itinerary of itineraries">
           <div class="itinerary-title">{{ itinerary.contractDescription }} Fare: ${{ getTotalPrice(itinerary) }}</div>
@@ -136,6 +136,9 @@
             <div style="border-right: lightgray solid 1px">
               <div class="fare" *ngFor="let fare of itinerary.fares">
                 <div>Per {{ getFareType(fare) }}: ${{ toAmount(getFareAmount(fare, itinerary)) }}</div>
+              </div>
+              <div class="fare" *ngIf="itinerary.fares.length > 1">
+                <div>Average: ${{ toAmount(getAverageAmount(itinerary)) }}</div>
               </div>
             </div>
             <div style="flex: 100">
@@ -151,11 +154,8 @@
                 {{flight.arrivalDateString}} {{flight.arrivalAirport}}
               </div>
               <div style="justify-content: end;" class="d-flex">
-                <button class="confirm-button widget-search-filter btn btn-primary">Confirm</button>
+                <button (click)="book(itinerary)" class="confirm-button widget-search-filter btn btn-primary">Confirm</button>
               </div>
-              
             </div>
-
           </div>
-          
         </div>

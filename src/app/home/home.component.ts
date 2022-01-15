@@ -1,8 +1,9 @@
 ﻿import { Component } from '@angular/core';
 import { map, startWith } from 'rxjs/operators';
-import { AirportService, SearchService } from '@app/_services';
+import { AirportService, BookingService, SearchService } from '@app/_services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({ templateUrl: 'home.component.html', styleUrls: ['home.component.css'] })
 export class HomeComponent {
@@ -23,6 +24,7 @@ export class HomeComponent {
     constructor(
         private airportService: AirportService,
         private searchService: SearchService,
+        private bookingService: BookingService,
         private formBuilder: FormBuilder) { }
 
     airlines(){
@@ -88,6 +90,11 @@ export class HomeComponent {
         return (+fare.ccPricePerPax + +itinerary.markup) * 1.04;
     }
 
+    private getAverageAmount(itinerary){
+        var numberOfFares = itinerary.fares.reduce((partial_sum, a) => partial_sum + +a.numPax, 0);
+        return (+this.getTotalPrice(itinerary) / numberOfFares).toFixed(2);
+    }
+
     private getFlights(flights, id){
         return flights.filter(f => f.tripId == id);
     }
@@ -96,6 +103,14 @@ export class HomeComponent {
         const filterValue = value.toLowerCase();
     
         return this.options.filter(option => option.toLowerCase().includes(filterValue)).slice(0, 5);
+    }
+
+    addEvent(event: MatDatepickerInputEvent<Date>) {
+        var now = new Date(Date.now());
+        event.value.setFullYear(now.getFullYear());
+        if(event.value < now){
+            event.value.setFullYear(event.value.getFullYear() + 1)
+        }
     }
     
     get f() { return this.searchForm.controls; }
@@ -133,6 +148,8 @@ export class HomeComponent {
                 return;
             }
         }
+
+        this.itineraries = [];
         
         this.loading = true;
         this.searchService.Search({
@@ -176,6 +193,11 @@ export class HomeComponent {
         }else{
             return null
         }
+    }
+
+    book(itinerary){
+        this.bookingService.set(itinerary)
+        console.log(itinerary);
     }
     
 }
