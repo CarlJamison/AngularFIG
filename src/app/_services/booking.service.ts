@@ -6,9 +6,11 @@ import { environment } from '@environments/environment';
 export class BookingService {
     constructor(private http: HttpClient) { }
 
-    private itinerary = null;
-
     set(itinerary) {
-        this.itinerary = null;
+        localStorage.setItem('currentItinerary', JSON.stringify(itinerary));
+    }
+
+    get(){
+        return JSON.parse(localStorage.getItem('currentItinerary'))
     }
 }

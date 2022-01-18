@@ -7,9 +7,11 @@ import { AuthGuard } from './_helpers';
 import { CreateAccountComponent } from './create-account';
 import { AdminGuard } from './admin/admin.guard';
 import { AccountComponent } from './account';
+import { BookComponent } from './book';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'book', component: BookComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminGuard]  },
     { path: 'bookings', component: AdminComponent, canActivate: [AuthGuard, AdminGuard]  },

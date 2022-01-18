@@ -4,6 +4,7 @@ import { AirportService, BookingService, SearchService } from '@app/_services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { Router } from '@angular/router';
 
 @Component({ templateUrl: 'home.component.html', styleUrls: ['home.component.css'] })
 export class HomeComponent {
@@ -24,6 +25,7 @@ export class HomeComponent {
     constructor(
         private airportService: AirportService,
         private searchService: SearchService,
+        private router: Router,
         private bookingService: BookingService,
         private formBuilder: FormBuilder) { }
 
@@ -198,6 +200,7 @@ export class HomeComponent {
     book(itinerary){
         this.bookingService.set(itinerary)
         console.log(itinerary);
+        this.router.navigate(['book']);
     }
     
 }

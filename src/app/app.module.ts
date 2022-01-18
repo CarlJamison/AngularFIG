@@ -9,6 +9,7 @@ import { appRoutingModule } from './app.routing';
 import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
+import { BookComponent } from './book'
 import { AddEditOrganizationDialog, AddRemoveManagerDialog, AdminComponent, TransferUserDialog } from './admin';
 import { ForgotAccountComponent } from './forgot-account';
 import { CreateAccountComponent } from './create-account';
@@ -30,7 +31,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
-import { ClipboardModule } from '@angular/cdk/clipboard'
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { CreditCardDirectivesModule } from 'angular-cc-library';
 
 @NgModule({
     imports: [
@@ -54,13 +56,15 @@ import { ClipboardModule } from '@angular/cdk/clipboard'
         ClipboardModule,
         MatRadioModule,
         MatSelectModule,
-        MatDividerModule
+        MatDividerModule,
+        CreditCardDirectivesModule
     ],
     declarations: [
         AppComponent,
         HomeComponent,
         LoginComponent,
         AdminComponent,
+        BookComponent,
         ForgotAccountComponent,
         CreateAccountComponent,
         AccountComponent,

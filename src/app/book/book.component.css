@@ -1,0 +1,4 @@
+::ng-deep .booking-form .mat-form-field-wrapper{
+    padding-bottom: 0;
+    width: 90px;
+}

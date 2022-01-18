@@ -1,0 +1,53 @@
+﻿<form *ngFor="let fare of fares; index as i;" [formGroup]="fare.form" (ngSubmit)="book()" class="m-3 pb-3 card widget">
+    <h5 class="m-3">Passenger {{i + 1}}: {{ fare.travelerType == 'CHD' ? 'Child' : fare.travelerType == 'ADT' ? 'Adult' : fare.travelerType }}</h5>
+    <div class="booking-form layout-wrap">
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" formControlName="FirstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }" />
+        </div>
+        <div class="form-group">
+          <label>Middle Name</label>
+          <input type="text" formControlName="MiddleName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.MiddleName.errors }" />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" formControlName="LastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }" />
+        </div>
+        <mat-form-field class="mt-3 ml-3" appearance="fill">
+            <mat-label>M/F</mat-label>
+            <mat-select formControlName="Gender">
+              <mat-option [value]="'M'">M</mat-option>
+              <mat-option [value]="'F'">F</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <!--Birthday-->
+        <!--Passport (country, exp date, id)-->
+      </div>
+  </form>
+
+  <div class="m-3 card widget">
+    <form [formGroup]="form" #demoForm="ngForm" (ngSubmit)="onSubmit(demoForm)" novalidate>
+        <div class="m-3 booking-form layout-wrap">
+            <div class="form-group">
+                <label>Card Number</label>
+                <input class="form-control" id="cc-number" formControlName="creditCard" type="tel" autocomplete="cc-number" ccNumber>
+            </div>
+            <div class="form-group">
+                <label>Expiration Date</label>
+                <input class="form-control" id="cc-exp-date" formControlName="expirationDate" type="tel" autocomplete="cc-exp" ccExp>
+            </div>
+            <div class="form-group">
+                <label>CVC</label>
+                <input class="form-control" id="cc-cvc" formControlName="cvc" type="tel" autocomplete="off" ccCvc>
+            </div>
+
+            <button [disabled]="loading" class="widget-search-filter btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Confirm
+            </button>
+        </div>
+    </form>
+  </div>
+
+      
