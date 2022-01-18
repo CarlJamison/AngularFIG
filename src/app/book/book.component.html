@@ -27,6 +27,7 @@
   </form>
 
   <div class="m-3 card widget">
+    <div class="p-3 mt-3 rules warn" style="margin: auto">Your booking session will expire at {{ expirationTime }}</div>
     <form [formGroup]="form" #demoForm="ngForm" (ngSubmit)="onSubmit(demoForm)" novalidate>
         <div class="m-3 booking-form layout-wrap">
             <div class="form-group">
@@ -48,6 +49,7 @@
             </button>
         </div>
     </form>
+    <div class="m-5 p-3 rules">{{ confirmation.rules }}</div>
   </div>
 
       

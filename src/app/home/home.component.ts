@@ -198,9 +198,9 @@ export class HomeComponent {
     }
 
     book(itinerary){
-        this.bookingService.set(itinerary)
-        console.log(itinerary);
-        this.router.navigate(['book']);
+        this.bookingService.set(itinerary);
+        this.bookingService.confirm().then(data => 
+            this.router.navigate(['book']));
     }
     
 }

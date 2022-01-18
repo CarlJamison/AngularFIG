@@ -6,11 +6,33 @@ import { environment } from '@environments/environment';
 export class BookingService {
     constructor(private http: HttpClient) { }
 
+    private itinerary = null;
+    private confirmation = null;
+
     set(itinerary) {
+        this.itinerary = itinerary;
         localStorage.setItem('currentItinerary', JSON.stringify(itinerary));
     }
 
     get(){
-        return JSON.parse(localStorage.getItem('currentItinerary'))
+        if(!this.itinerary){
+            this.itinerary = JSON.parse(localStorage.getItem('currentItinerary'));
+        }
+        return this.itinerary;
+    }
+
+    confirm(){
+        return this.http.post<any>(`${environment.apiUrl}/api/Search/Confirm`, this.get()).toPromise().then(data => {
+            this.confirmation = data;
+            localStorage.setItem('currentItineraryConfirmation', JSON.stringify(this.confirmation));
+            return true;
+        });
+    }
+
+    getConfirmation(){
+        if(!this.confirmation){
+            this.confirmation = JSON.parse(localStorage.getItem('currentItineraryConfirmation'));
+        }
+        return this.confirmation;
     }
 }

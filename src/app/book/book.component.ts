@@ -10,6 +10,8 @@ export class BookComponent {
     form: FormGroup;
     error: string;
     itinerary;
+    confirmation;
+    expirationTime;
     fares = [];
 
     constructor(
@@ -18,6 +20,7 @@ export class BookComponent {
 
     ngOnInit() { 
         this.itinerary = this.bookingService.get();
+        this.confirmation = this.bookingService.getConfirmation();
 
         this.itinerary.fares.forEach(f => {
             for(var i = 0; i < f.numPax; i++){
@@ -38,13 +41,15 @@ export class BookComponent {
             expirationDate: ['', [CreditCardValidators.validateExpDate]],
             cvc: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(4)]] 
         });
+
+        this.expirationTime = (new Date(this.confirmation.expiration)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
 
     book(){
     }
 
     onSubmit(value){
-        
+
     }
     
 }
