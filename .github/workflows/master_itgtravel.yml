@@ -21,10 +21,18 @@ jobs:
         with:
           node-version: '14.x'
 
-      - name: npm install, build, and copy web config
+      - name: npm install
         run: |
           npm install
-          ng build --configuration=production
+        working-directory: .
+        
+      - name: build
+        run: |
+          npm build
+        working-directory: .
+        
+      - name: copy web config
+        run: |
           copy .\Web.config .\dist
         working-directory: .
       
