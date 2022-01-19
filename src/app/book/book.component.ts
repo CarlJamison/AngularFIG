@@ -30,6 +30,7 @@ export class BookComponent {
                         LastName: ['', Validators.required],
                         MiddleName: ['', Validators.required],
                         Gender: ['', Validators.required],
+                        Birthday: ['', Validators.required]
                     }),
                     travelerType: f.travelerType
                 })

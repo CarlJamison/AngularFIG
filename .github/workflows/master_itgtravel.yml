@@ -24,7 +24,7 @@ jobs:
       - name: npm install, build, and copy web config
         run: |
           npm install
-          npm run build --prod
+          ng build --configuration=production
           copy .\Web.config .\dist
         working-directory: .
       
