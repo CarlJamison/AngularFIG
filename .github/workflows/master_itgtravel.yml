@@ -28,7 +28,7 @@ jobs:
         
       - name: build
         run: |
-          npm build
+          npm run build
         working-directory: .
         
       - name: copy web config
