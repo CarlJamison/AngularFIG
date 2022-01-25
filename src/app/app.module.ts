@@ -33,6 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { CreditCardDirectivesModule } from 'angular-cc-library';
+import { BookingsComponent } from './bookings';
 
 @NgModule({
     imports: [
@@ -65,6 +66,7 @@ import { CreditCardDirectivesModule } from 'angular-cc-library';
         LoginComponent,
         AdminComponent,
         BookComponent,
+        BookingsComponent,
         ForgotAccountComponent,
         CreateAccountComponent,
         AccountComponent,

@@ -25,8 +25,13 @@ export class BookingService {
         return this.http.post<any>(`${environment.apiUrl}/api/Search/Confirm`, this.get()).toPromise().then(data => {
             this.confirmation = data;
             localStorage.setItem('currentItineraryConfirmation', JSON.stringify(this.confirmation));
+            this.set(data.itinerary)
             return true;
         });
+    }
+
+    book(passengers){
+        return this.http.post<any>(`${environment.apiUrl}/api/Search/Book`, passengers).toPromise();
     }
 
     getConfirmation(){

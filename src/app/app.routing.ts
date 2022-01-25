@@ -8,13 +8,14 @@ import { CreateAccountComponent } from './create-account';
 import { AdminGuard } from './admin/admin.guard';
 import { AccountComponent } from './account';
 import { BookComponent } from './book';
+import { BookingsComponent } from './bookings';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'book', component: BookComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminGuard]  },
-    { path: 'bookings', component: AdminComponent, canActivate: [AuthGuard, AdminGuard]  },
+    { path: 'bookings', component: BookingsComponent, canActivate: [AuthGuard]  },
     { path: 'account', component: AccountComponent, canActivate: [AuthGuard]  },
     { path: 'forgotPassword', component: ForgotAccountComponent },
     { path: 'Register', component: CreateAccountComponent },

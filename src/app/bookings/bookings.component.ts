@@ -3,8 +3,8 @@ import { BookingService } from '@app/_services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreditCardValidators } from 'angular-cc-library';
 
-@Component({ templateUrl: 'book.component.html', styleUrls: ['book.component.css'] })
-export class BookComponent {
+@Component({ templateUrl: 'bookings.component.html', styleUrls: ['bookings.component.css'] })
+export class BookingsComponent {
     loading = false;
     submitted = false;
     form: FormGroup;
@@ -28,7 +28,7 @@ export class BookComponent {
                     form: this.formBuilder.group({
                         FirstName: ['', Validators.required],
                         LastName: ['', Validators.required],
-                        MiddleName: [''],
+                        MiddleName: ['', Validators.required],
                         Gender: ['', Validators.required],
                         Birthday: ['', Validators.required]
                     }),
@@ -38,40 +38,19 @@ export class BookComponent {
         });
 
         this.form = this.formBuilder.group({
-            phoneNumber: ['', [Validators.required]],
             creditCard: ['', [CreditCardValidators.validateCCNumber]],
             expirationDate: ['', [CreditCardValidators.validateExpDate]],
             cvc: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(4)]] 
         });
-        var expTime = new Date(this.confirmation.expiration)
-        expTime.setHours(expTime.getHours() + 1);
-        this.expirationTime = (expTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        this.expirationTime = (new Date(this.confirmation.expiration)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
 
-    onSubmit(){
-        this.submitted = true;
-        if (this.fares.some(f => f.form.invalid) || this.loading) {
-            return;
-        }
+    book(){
+    }
 
-        this.loading = true;
+    onSubmit(value){
 
-        var passengersArray = this.fares.map(f => ({
-            TravelerType: f.travelerType,
-            FirstName: f.form.controls.FirstName.value,
-            LastName: f.form.controls.LastName.value,
-            MiddleName: f.form.controls.MiddleName.value,
-            Gender: f.form.controls.Gender.value,
-            BirthDate: f.form.controls.Birthday.value               
-        }));
-
-        var passengers = {
-            Passengers: passengersArray,
-            PassengerPhone: this.form.controls.phoneNumber.value,
-            Itinerary: this.itinerary
-        };
-
-        this.bookingService.book(passengers).then(() => this.loading = false);
     }
     
 }
