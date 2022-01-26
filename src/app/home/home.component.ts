@@ -21,6 +21,7 @@ export class HomeComponent {
     tripType: string = "RT";
     cabinClass: string = "coach";
     showAdvanced: boolean = false;
+    numStops: any = {NonStop: true, OneStop: true, TwoStop: true};
 
     constructor(
         private airportService: AirportService,

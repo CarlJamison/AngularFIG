@@ -88,3 +88,23 @@ button.widget-search-filter.confirm-button{
     font-size: initial; 
     margin-right: 16px;
 }
+
+.post-search{
+    position: fixed;
+    left: 0;
+    top: 100px;
+    background-color: #007db0;
+    color: white;
+    border-radius: 0 4px 4px 0;
+    padding: 8px;
+}
+
+.stops{
+    display: flex;
+    flex-direction: column;
+    border: solid 1px white;
+    width: 125px;
+    padding: 12px;
+    border-radius: 4px;
+    margin: 12px;
+}
