@@ -31,6 +31,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSliderModule } from '@angular/material/slider';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { CreditCardDirectivesModule } from 'angular-cc-library';
 import { BookingsComponent } from './bookings';
@@ -58,6 +59,7 @@ import { BookingsComponent } from './bookings';
         MatRadioModule,
         MatSelectModule,
         MatDividerModule,
+        MatSliderModule,
         CreditCardDirectivesModule
     ],
     declarations: [

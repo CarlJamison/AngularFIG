@@ -108,3 +108,13 @@ button.widget-search-filter.confirm-button{
     border-radius: 4px;
     margin: 12px;
 }
+
+::ng-deep.from-slider .mat-slider-track-fill {
+    background-color: #004561;
+    z-index: 1;
+}
+
+::ng-deep .from-slider.mat-slider-min-value:not(.mat-slider-thumb-label-showing) .mat-slider-thumb {
+    background-color: #ffd389;
+    border-color: transparent;
+}

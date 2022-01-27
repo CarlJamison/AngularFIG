@@ -22,6 +22,8 @@ export class HomeComponent {
     cabinClass: string = "coach";
     showAdvanced: boolean = false;
     numStops: any = {NonStop: true, OneStop: true, TwoStop: true};
+    departureFromTime: number = 0;
+    departureToTime: number = 24;
 
     constructor(
         private airportService: AirportService,
@@ -202,6 +204,18 @@ export class HomeComponent {
         this.bookingService.set(itinerary);
         this.bookingService.confirm().then(data => 
             this.router.navigate(['book']));
+    }
+
+    formatLabel(value: number) {
+        var thing = ' am';
+
+        if(value > 12){
+            value -= 12;
+            thing = ' pm';
+        }
+    
+        var otherthing = value % 1 * 60;
+        return (value - (value % 1)) + ":" + otherthing + thing;
     }
     
 }
