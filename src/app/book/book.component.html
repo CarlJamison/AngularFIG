@@ -13,10 +13,12 @@
             <label>Last Name</label>
             <input type="text" formControlName="LastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && fare.form.controls.LastName.errors }" />
         </div>
-        <div class="form-group">
-            <label>Date of birth</label>
-            <input placeholder="YYYY-MM-DD" type="text" formControlName="Birthday" class="form-control" [ngClass]="{ 'is-invalid': submitted && fare.form.controls.Birthday.errors }" />
-        </div>
+        <mat-form-field appearance="fill" class="search-date">
+            <mat-label>Date of birth</mat-label>
+            <input formControlName="Birthday" matInput [matDatepicker]="Birthday">
+            <mat-datepicker-toggle matSuffix [for]="Birthday"></mat-datepicker-toggle>
+            <mat-datepicker #Birthday></mat-datepicker>
+        </mat-form-field>
         <mat-form-field class="mt-3 ml-3" appearance="fill">
             <mat-label>M/F</mat-label>
             <mat-select formControlName="Gender">
@@ -24,20 +26,66 @@
                 <mat-option [value]="'F'">F</mat-option>
             </mat-select>
         </mat-form-field>
-
+        
         <!--Passport (country, exp date, id)-->
       </div>
+      <div (click)="fare.showOptional = !fare.showOptional" style="display: flex; max-width: 200px">
+        <div style="flex: 100; padding: 16px; cursor: pointer;">Optional Fields</div>
+        <button class="mt-2" type="button" mat-icon-button>
+          <span class="material-icons md-32">
+            {{ fare.showOptional ? 'expand_more' : 'expand_less' }}</span>
+        </button>
+      </div>
+        <div *ngIf="fare.showOptional">
+            <div class="booking-form layout-wrap">
+                <div class="form-group">
+                    <label>Passport Id</label>
+                    <input type="text" formControlName="PassportId" class="form-control" />
+                </div>
+                <mat-form-field appearance="fill" class="search-date">
+                    <mat-label>Passport Expiration</mat-label>
+                    <input formControlName="PassportExpiration" matInput [matDatepicker]="PassportExpiration">
+                    <mat-datepicker-toggle matSuffix [for]="PassportExpiration"></mat-datepicker-toggle>
+                    <mat-datepicker #PassportExpiration></mat-datepicker>
+                </mat-form-field>
+                <div class="form-group">
+                    <label>Passport Country</label>
+                    <input type="text" formControlName="PassportCountry" class="form-control" />
+                </div>
+            </div>
+            <div class="booking-form layout-wrap">
+                <div class="form-group">
+                    <label>Redress Number</label>
+                    <input type="text" formControlName="RedressNumber" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Redress Country</label>
+                    <input type="text" formControlName="RedressCountry" class="form-control" />
+                </div>
+            </div>
+        </div>
 </form>
 
 <div class="m-3 card widget">
     <div class="p-3 mt-3 rules warn" style="margin: auto">Your booking session will expire at {{ expirationTime }}</div>
-    <form [formGroup]="form" #demoForm="ngForm" (ngSubmit)="onSubmit()" novalidate class="m-3">
+    <form [formGroup]="form" #demoForm="ngForm" (ngSubmit)="onSubmit()" class="m-3">
         <div class="booking-form layout-wrap">
             <div class="form-group">
                 <label>Passenger Phone Number</label>
-                <input placeholder="123-456-7890" class="form-control" formControlName="phoneNumber">
+                <input placeholder="123-456-7890" class="form-control" formControlName="phoneNumber" 
+                    [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }">
             </div>
             <div class="form-group">
+                <label>Contact Phone Number</label>
+                <input placeholder="123-456-7890" class="form-control" formControlName="contactPhoneNumber" 
+                    [ngClass]="{ 'is-invalid': submitted && f.contactPhoneNumber.errors }">
+            </div>
+            <div class="form-group">
+                <label>Contact Email</label>
+                <input placeholder="ExampleEmail@email.com" class="form-control" formControlName="contactEmail" 
+                    [ngClass]="{ 'is-invalid': submitted && f.contactEmail.errors }">
+            </div>
+            <!--<div class="form-group">
                 <label>Card Number</label>
                 <input class="form-control" id="cc-number" formControlName="creditCard" type="tel" autocomplete="cc-number" ccNumber>
             </div>
@@ -48,11 +96,11 @@
             <div class="form-group">
                 <label>CVC</label>
                 <input class="form-control" id="cc-cvc" formControlName="cvc" type="tel" autocomplete="off" ccCvc>
-            </div>
+            </div>-->
         </div>
         <button [disabled]="loading" class="m-3 widget-search-filter btn btn-primary">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            Confirm
+            Hold
         </button>
     </form>
     <div class="m-5 mt-1 p-3 rules">{{ confirmation.rules }}</div>

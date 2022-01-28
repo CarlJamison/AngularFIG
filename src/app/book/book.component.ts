@@ -30,7 +30,12 @@ export class BookComponent {
                         LastName: ['', Validators.required],
                         MiddleName: [''],
                         Gender: ['', Validators.required],
-                        Birthday: ['', Validators.required]
+                        Birthday: ['', Validators.required],
+                        PassportId: [''],
+                        PassportExpiration: [''],
+                        PassportCountry: [''],
+                        RedressNumber: [''],
+                        RedressCountry: ['']
                     }),
                     travelerType: f.travelerType
                 })
@@ -39,18 +44,22 @@ export class BookComponent {
 
         this.form = this.formBuilder.group({
             phoneNumber: ['', [Validators.required]],
-            creditCard: ['', [CreditCardValidators.validateCCNumber]],
+            contactPhoneNumber: ['', [Validators.required]],
+            contactEmail: ['', [Validators.required]],
+            /*creditCard: ['', [CreditCardValidators.validateCCNumber]],
             expirationDate: ['', [CreditCardValidators.validateExpDate]],
-            cvc: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(4)]] 
+            cvc: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(4)]]*/ 
         });
         var expTime = new Date(this.confirmation.expiration)
         expTime.setHours(expTime.getHours() + 1);
         this.expirationTime = (expTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
+        
+    get f() { return this.form.controls; }
 
     onSubmit(){
         this.submitted = true;
-        if (this.fares.some(f => f.form.invalid) || this.loading) {
+        if (this.fares.some(f => f.form.invalid) || this.form.invalid || this.loading) {
             return;
         }
 
@@ -62,12 +71,19 @@ export class BookComponent {
             LastName: f.form.controls.LastName.value,
             MiddleName: f.form.controls.MiddleName.value,
             Gender: f.form.controls.Gender.value,
-            BirthDate: f.form.controls.Birthday.value               
+            BirthDate: f.form.controls.Birthday.value,
+            PassportNumber: f.form.controls.PassportId.value,
+            PassportExpDate: f.form.controls.PassportExpiration.value,
+            PassportCountry: f.form.controls.PassportCountry.value,
+            RedressNumber: f.form.controls.RedressNumber.value,
+            RedressCountry: f.form.controls.RedressCountry.value               
         }));
 
         var passengers = {
             Passengers: passengersArray,
-            PassengerPhone: this.form.controls.phoneNumber.value,
+            PassengerPhone: this.f.phoneNumber.value,
+            ContactPhone: this.f.contactPhoneNumber.value,
+            ContactEmail: this.f.contactEmail.value,
             Itinerary: this.itinerary
         };
 

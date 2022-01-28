@@ -92,10 +92,10 @@ button.widget-search-filter.confirm-button{
 .post-search{
     position: fixed;
     left: 0;
-    top: 100px;
+    top: 116px;
     background-color: #007db0;
     color: white;
-    border-radius: 0 4px 4px 0;
+    border-radius: 0 10px 10px 0;
     padding: 8px;
 }
 

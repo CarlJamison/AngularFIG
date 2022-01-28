@@ -3,6 +3,11 @@
     width: 90px;
 }
 
+::ng-deep .booking-form .search-date .mat-form-field-wrapper{
+    padding: 16px;
+    width: 270px;
+}
+
 .rules{
     border: 1px solid #007db0;
     border-radius: 3px;

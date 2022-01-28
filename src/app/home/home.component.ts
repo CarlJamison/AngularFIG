@@ -24,6 +24,8 @@ export class HomeComponent {
     numStops: any = {NonStop: true, OneStop: true, TwoStop: true};
     departureFromTime: number = 0;
     departureToTime: number = 24;
+    arrivalFromTime: number = 0;
+    arrivalToTime: number = 24;
 
     constructor(
         private airportService: AirportService,
@@ -120,6 +122,19 @@ export class HomeComponent {
     
     get f() { return this.searchForm.controls; }
 
+    get filteredItineraries(){
+        return this.itineraries.filter(i => {
+            var stops = this.tripType == 'OW' ? i.flights.length : i.flights.length / 2;
+            //{NonStop: true, OneStop: true, TwoStop: true};
+
+            return (stops == 1 && this.numStops.NonStop)
+                || (stops == 2 && this.numStops.OneStop)
+                || (stops >= 3 && this.numStops.TwoStop);
+        }).filter(i => {
+            return true;
+        });
+    }
+
     dateString(date: string){
         return (new Date(date)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
@@ -207,15 +222,10 @@ export class HomeComponent {
     }
 
     formatLabel(value: number) {
-        var thing = ' am';
-
-        if(value > 12){
-            value -= 12;
-            thing = ' pm';
-        }
-    
-        var otherthing = value % 1 * 60;
-        return (value - (value % 1)) + ":" + otherthing + thing;
+        var date = new Date();
+        var minuteDec = value % 1;
+        date.setHours(value - minuteDec, minuteDec * 60);
+        return date.toLocaleTimeString("en-us", {hour: "2-digit", minute: "2-digit"});
     }
     
 }
