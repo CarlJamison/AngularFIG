@@ -1,6 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { map, startWith } from 'rxjs/operators';
-import { AirportService, BookingService, SearchService } from '@app/_services';
+import { AccountService, AirportService, BookingService, SearchService } from '@app/_services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
@@ -26,11 +26,13 @@ export class HomeComponent {
     departureToTime: number = 24;
     arrivalFromTime: number = 0;
     arrivalToTime: number = 24;
+    contractTypes: any[];
 
     constructor(
         private airportService: AirportService,
         private searchService: SearchService,
         private router: Router,
+        private accountService: AccountService,
         private bookingService: BookingService,
         private formBuilder: FormBuilder) { }
 
@@ -76,6 +78,13 @@ export class HomeComponent {
         this.filteredToOJOptions = this.f.toOJ.valueChanges.pipe(
             startWith(''),
             map(value => this._filter(value)));
+
+        this.accountService.ProfileDetails().then(c => {
+            this.contractTypes = [];
+            if(c.HasCON) this.contractTypes.push({ Value: "PRI", Name: "Consolidated", Include: true});
+            if(c.HasMIS) this.contractTypes.push({ Value: "MIS", Name: "Humanitarian", Include: true});
+            if(c.HasPUB) this.contractTypes.push({ Value: "PUB", Name: "Published", Include: true});
+        })
 
     }
 
@@ -186,7 +195,10 @@ export class HomeComponent {
             bundledFaresOnly: !this.f.bundledFaresOnly.value,
             directFlights: this.f.directFlights.value,
             departureDate: new Date(this.f.depDate.value).toISOString().split('T')[0],
-            returnDate: new Date(this.f.retDate.value).toISOString().split('T')[0]
+            returnDate: new Date(this.f.retDate.value).toISOString().split('T')[0],
+            hasCON: this.contractTypes.some(c => c.Value == "PRI" && c.Include),
+            hasMIS: this.contractTypes.some(c => c.Value == "MIS" && c.Include),
+            hasPUB: this.contractTypes.some(c => c.Value == "PUB" && c.Include)
         }).then(data => {
             this.itineraries = data;
             this.itineraries.forEach(i => {

@@ -71,9 +71,9 @@ export class BookComponent {
             LastName: f.form.controls.LastName.value,
             MiddleName: f.form.controls.MiddleName.value,
             Gender: f.form.controls.Gender.value,
-            BirthDate: f.form.controls.Birthday.value,
+            BirthDate: new Date(f.form.controls.Birthday.value).toISOString().split('T')[0],
             PassportNumber: f.form.controls.PassportId.value,
-            PassportExpDate: f.form.controls.PassportExpiration.value,
+            PassportExpDate: new Date(f.form.controls.PassportExpiration.value).toISOString().split('T')[0],
             PassportCountry: f.form.controls.PassportCountry.value,
             RedressNumber: f.form.controls.RedressNumber.value,
             RedressCountry: f.form.controls.RedressCountry.value               

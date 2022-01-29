@@ -66,7 +66,7 @@
             <mat-datepicker #retPicker></mat-datepicker>
           </mat-form-field>
         </div>
-        
+
         <div style="display:flex; flex-wrap: wrap">
           <mat-form-field style="flex: 100; margin: 8px" appearance="fill">
             <mat-label>Adult Passengers</mat-label>
@@ -81,6 +81,12 @@
               <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
               Search
           </button>
+        </div>
+                    
+        <div class="d-flex" *ngIf="contractTypes && contractTypes.length > 1">
+          <mat-checkbox *ngFor="let type of contractTypes" [ngModelOptions]="{standalone: true}"
+            style="justify-content: center; flex: 100; display: flex"
+            class="mat-primary" [(ngModel)]="type.Include">{{type.Name}}</mat-checkbox>
         </div>
 
         <div (click)="showAdvanced = !showAdvanced" style="display: flex; max-width: 200px">
