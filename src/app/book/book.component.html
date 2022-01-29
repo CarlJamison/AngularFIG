@@ -102,6 +102,7 @@
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Hold
         </button>
+        <div *ngIf="error && !loading" class="alert alert-danger m-3">{{error}}</div>
     </form>
     <div class="m-5 mt-1 p-3 rules">{{ confirmation.rules }}</div>
 </div>

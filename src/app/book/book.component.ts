@@ -2,6 +2,7 @@
 import { BookingService } from '@app/_services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreditCardValidators } from 'angular-cc-library';
+import { Router } from '@angular/router';
 
 @Component({ templateUrl: 'book.component.html', styleUrls: ['book.component.css'] })
 export class BookComponent {
@@ -16,6 +17,7 @@ export class BookComponent {
 
     constructor(
         private bookingService: BookingService,
+        private router: Router,
         private formBuilder: FormBuilder) { }
 
     ngOnInit() { 
@@ -59,6 +61,7 @@ export class BookComponent {
 
     onSubmit(){
         this.submitted = true;
+        this.error = null;
         if (this.fares.some(f => f.form.invalid) || this.form.invalid || this.loading) {
             return;
         }
@@ -73,7 +76,8 @@ export class BookComponent {
             Gender: f.form.controls.Gender.value,
             BirthDate: new Date(f.form.controls.Birthday.value).toISOString().split('T')[0],
             PassportNumber: f.form.controls.PassportId.value,
-            PassportExpDate: new Date(f.form.controls.PassportExpiration.value).toISOString().split('T')[0],
+            PassportExpDate: f.form.controls.PassportExpiration.value.length ? 
+                new Date(f.form.controls.PassportExpiration.value).toISOString().split('T')[0] : "",
             PassportCountry: f.form.controls.PassportCountry.value,
             RedressNumber: f.form.controls.RedressNumber.value,
             RedressCountry: f.form.controls.RedressCountry.value               
@@ -87,7 +91,10 @@ export class BookComponent {
             Itinerary: this.itinerary
         };
 
-        this.bookingService.book(passengers).then(() => this.loading = false);
+        this.bookingService.book(passengers)
+            .then(() => this.router.navigate(['bookings']))
+            .catch(error => this.error = error)
+            .finally(() => this.loading = false);
     }
     
 }
