@@ -40,4 +40,8 @@ export class BookingService {
         }
         return this.confirmation;
     }
+
+    getBookings(){
+        return this.http.get<any>(`${environment.apiUrl}/api/Account/Bookings`).toPromise();
+    }
 }

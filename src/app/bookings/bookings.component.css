@@ -1,17 +1,11 @@
-::ng-deep .booking-form .mat-form-field-wrapper{
-    padding-bottom: 0;
-    width: 90px;
-}
-
-.rules{
-    border: 1px solid #007db0;
-    border-radius: 3px;
-    padding: 6px 16px;
-    margin: 16px 16px;
-    background-color: whitesmoke;
-}
-
-.rules.warn{
-    border: 1px solid #ff7200;
-    background-color: #ffd5b3;
+.booking{
+    margin: auto;
+    max-width: 700px;
+    background-color: white;
+    border-radius: 8px;
+    margin-top: 32px;
+    color: #007db0;
+    box-shadow: #3232324a 0px 3px 8px;
+    letter-spacing: 1px;
+    padding-bottom: 8px;
 }

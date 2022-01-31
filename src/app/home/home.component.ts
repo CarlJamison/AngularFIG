@@ -26,6 +26,10 @@ export class HomeComponent {
     departureToTime: number = 24;
     arrivalFromTime: number = 0;
     arrivalToTime: number = 24;
+    retDepartureFromTime: number = 0;
+    retDepartureToTime: number = 24;
+    retArrivalFromTime: number = 0;
+    retArrivalToTime: number = 24;
     contractTypes: any[];
 
     constructor(
@@ -140,7 +144,24 @@ export class HomeComponent {
                 || (stops == 2 && this.numStops.OneStop)
                 || (stops >= 3 && this.numStops.TwoStop);
         }).filter(i => {
-            return true;
+            var outboundFlights = this.getFlights(i.flights, '1')
+            var depFlight = new Date(outboundFlights[0].departureAirportDate);
+            var arrFlight = new Date(outboundFlights[outboundFlights.length - 1].arrivalAirportDate);
+            var dep = depFlight.getHours() + (depFlight.getMinutes() / 60);
+            var arr = arrFlight.getHours() + (arrFlight.getMinutes() / 60)
+
+            return this.departureFromTime < dep && dep < this.departureToTime
+                && this.arrivalFromTime < arr && arr < this.arrivalToTime;
+        }).filter(i => {
+            if(this.tripType == 'OW') return true;
+            var returnFlights = this.getFlights(i.flights, '2')
+            var depFlight = new Date(returnFlights[0].departureAirportDate);
+            var arrFlight = new Date(returnFlights[returnFlights.length - 1].arrivalAirportDate);
+            var dep = depFlight.getHours() + (depFlight.getMinutes() / 60);
+            var arr = arrFlight.getHours() + (arrFlight.getMinutes() / 60);
+
+            return this.retDepartureFromTime < dep && dep < this.retDepartureToTime
+                && this.retArrivalFromTime < arr && arr < this.retArrivalToTime;
         });
     }
 
