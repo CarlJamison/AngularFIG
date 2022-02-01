@@ -19,8 +19,10 @@ export class HomeComponent {
     options: string[] = [];
     error: string;
     tripType: string = "RT";
+    searchedTripType: string;
     cabinClass: string = "coach";
     showAdvanced: boolean = false;
+    showPostSearch: boolean = true;
     numStops: any = {NonStop: true, OneStop: true, TwoStop: true};
     departureFromTime: number = 0;
     departureToTime: number = 24;
@@ -153,7 +155,7 @@ export class HomeComponent {
             return this.departureFromTime < dep && dep < this.departureToTime
                 && this.arrivalFromTime < arr && arr < this.arrivalToTime;
         }).filter(i => {
-            if(this.tripType == 'OW') return true;
+            if(this.searchedTripType == 'OW') return true;
             var returnFlights = this.getFlights(i.flights, '2')
             var depFlight = new Date(returnFlights[0].departureAirportDate);
             var arrFlight = new Date(returnFlights[returnFlights.length - 1].arrivalAirportDate);
@@ -200,7 +202,7 @@ export class HomeComponent {
         }
 
         this.itineraries = [];
-        
+        this.searchedTripType = this.tripType;
         this.loading = true;
         this.searchService.Search({
             cabinClass: this.cabinClass,

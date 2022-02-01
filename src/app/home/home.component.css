@@ -93,21 +93,30 @@ button.widget-search-filter.confirm-button{
     position: fixed;
     left: 0;
     top: 116px;
-    background-color: #007db0;
+    background-color: #007db0; /*#525252*/
     color: white;
     border-radius: 0 10px 10px 0;
     padding: 8px;
+    box-shadow: #3232324a 0px 3px 8px;
+}
+
+@media (max-width: 500px) {
+    .post-search {
+      width: 100%
+    }    
 }
 
 .stops{
     letter-spacing: 1px;
-    display: flex;
-    flex-direction: column;
     border: solid 1px white;
-    width: 125px;
     padding: 12px;
     border-radius: 4px;
     margin: 12px;
+    width: 125px;
+}
+
+.stops-row{
+    display: flex;
 }
 
 ::ng-deep.from-slider .mat-slider-track-fill {
