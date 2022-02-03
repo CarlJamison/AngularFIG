@@ -93,7 +93,7 @@ button.widget-search-filter.confirm-button{
     position: fixed;
     left: 0;
     top: 116px;
-    background-color: #007db0; /*#525252*/
+    background-color: #707070; /*#525252*/
     color: white;
     border-radius: 0 10px 10px 0;
     padding: 8px;
@@ -102,7 +102,12 @@ button.widget-search-filter.confirm-button{
 
 @media (max-width: 500px) {
     .post-search {
-      width: 100%
+      width: 100%;
+      border-radius: 0;
+    }
+    .unset-width.post-search {
+        width: initial;
+        border-radius: 0 10px 10px 0;
     }    
 }
 

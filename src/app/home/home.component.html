@@ -136,7 +136,7 @@
       <div style="transition: all 1s; height: 
       {{ loading && (!itineraries || !itineraries.length) ? '300' : '0' }}px"></div>
 
-      <div class="post-search" style="transition: all 1s; left: 
+      <div class="post-search" [ngClass]="{'unset-width': !showPostSearch}" style="transition: all 1s; left: 
       {{ itineraries && itineraries.length ? '0' : '-500' }}px">
         
         <div class="stops-row">
