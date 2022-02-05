@@ -92,6 +92,13 @@ export class BookComponent {
         };
 
         this.bookingService.book(passengers)
+            .then(booking => this.purchase(booking))
+            .catch(error => this.error = error)
+            .finally(() => this.loading = false);
+    }
+
+    purchase(booking){
+        this.bookingService.purchase(booking)
             .then(() => this.router.navigate(['bookings']))
             .catch(error => this.error = error)
             .finally(() => this.loading = false);

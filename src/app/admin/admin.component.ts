@@ -153,7 +153,8 @@ export class AddEditOrganizationDialog implements OnInit {
             ContactFirstName: ['', Validators.required],
             ContactLastName: ['', Validators.required],
             ContactEmail: ['', Validators.required],
-            ContactPhoneNumber: ['', Validators.required]
+            ContactPhoneNumber: ['', Validators.required],
+            DefaultAirport: ['']
         });
 
         if(this.data){
@@ -167,6 +168,7 @@ export class AddEditOrganizationDialog implements OnInit {
             this.f.ContactLastName.setValue(this.data.ContactLastName);
             this.f.ContactEmail.setValue(this.data.ContactEmail);
             this.f.ContactPhoneNumber.setValue(this.data.ContactPhoneNumber);
+            this.f.DefaultAirport.setValue(this.data.DefaultAirport);
         }
     }
 
@@ -191,7 +193,8 @@ export class AddEditOrganizationDialog implements OnInit {
             ContactFirstName: this.f.ContactFirstName.value,
             ContactLastName: this.f.ContactLastName.value,
             ContactPhoneNumber: this.f.ContactPhoneNumber.value,
-            ContactEmail: this.f.ContactEmail.value
+            ContactEmail: this.f.ContactEmail.value,
+            DefaultAirport: this.f.DefaultAirport.value
         }
 
         if(this.data.isAdmin){

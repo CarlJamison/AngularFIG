@@ -56,6 +56,10 @@
                     <div style="flex: 100">Phone Number</div>
                     <div>{{ org.PhoneNumber }}</div>
                   </div>
+                  <div class="org-label">
+                    <div style="flex: 100">Default Airport</div>
+                    <div>{{ org.DefaultAirport && org.DefaultAirport.length ? org.DefaultAirport : 'None'}}</div>
+                  </div>
                 </div>
                 <button mat-icon-button (click)="editOrganization(org)" color="primary">
                   <span class="material-icons">edit</span>

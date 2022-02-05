@@ -11,5 +11,4 @@ export class BookingsComponent {
     ngOnInit() { 
         this.bookingService.getBookings().then(data => this.bookings = data)
     }
-    
 }

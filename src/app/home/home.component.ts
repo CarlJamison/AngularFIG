@@ -90,6 +90,7 @@ export class HomeComponent {
             if(c.HasCON) this.contractTypes.push({ Value: "PRI", Name: "Consolidated", Include: true});
             if(c.HasMIS) this.contractTypes.push({ Value: "MIS", Name: "Humanitarian", Include: true});
             if(c.HasPUB) this.contractTypes.push({ Value: "PUB", Name: "Published", Include: true});
+            this.f.from.setValue(c.DefaultAirport);
         })
 
     }

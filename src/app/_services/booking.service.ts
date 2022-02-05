@@ -44,4 +44,8 @@ export class BookingService {
     getBookings(){
         return this.http.get<any>(`${environment.apiUrl}/api/Account/Bookings`).toPromise();
     }
+
+    purchase(recordLocater: string){
+        return this.http.put<any>(`${environment.apiUrl}/api/Search/Purchase?recordLocater=${recordLocater}`, null).toPromise();
+    }
 }

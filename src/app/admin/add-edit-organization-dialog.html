@@ -42,13 +42,18 @@
             <label for="published">Main Contact Phone Number</label>
             <input placeholder="123-456-7890" type="text" formControlName="ContactPhoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ContactPhoneNumber.errors }" />
           </div>
+          <div class="form-group">
+            <label for="published">Default Airport</label>
+            <input placeholder="MSP" type="text" formControlName="DefaultAirport" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.DefaultAirport.errors }" />
+          </div>
+          
+          <div style="display: flex; margin-top: 32px">
+            <button style="margin-left: 16px; height: 38px;" (click)="onSubmit()" [disabled]="loading" class="widget-search-filter btn btn-primary">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              {{ data ? 'Save' : 'Add'}}
+            </button>
+            <button mat-button (click)="dialogRef.close()">Cancel</button>
+          </div>
         </div>
       </form>
-      <div style="display: flex;">
-        <button style="margin: 8px 16px" (click)="onSubmit()" [disabled]="loading" class="widget-search-filter btn btn-primary">
-          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-          {{ data ? 'Save' : 'Add'}}
-        </button>
-        <button mat-button (click)="dialogRef.close()">Cancel</button>
-      </div>
 </div>
