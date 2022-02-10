@@ -1,9 +1,9 @@
-::ng-deep .booking-form .mat-form-field-wrapper{
-    padding-bottom: 0;
+::ng-deep .booking-form .gender-select .mat-form-field-wrapper{
+    padding: 0;
     width: 90px;
 }
 
-::ng-deep .booking-form .search-date .mat-form-field-wrapper{
+::ng-deep .booking-form .mat-form-field-wrapper{
     padding: 16px;
     width: 270px;
 }

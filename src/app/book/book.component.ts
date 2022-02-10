@@ -1,5 +1,5 @@
 ﻿import { Component } from '@angular/core';
-import { BookingService } from '@app/_services';
+import { AirportService, BookingService } from '@app/_services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreditCardValidators } from 'angular-cc-library';
 import { Router } from '@angular/router';
@@ -14,10 +14,12 @@ export class BookComponent {
     confirmation;
     expirationTime;
     fares = [];
+    doPurchaseStep = false;
 
     constructor(
         private bookingService: BookingService,
         private router: Router,
+        private airportService: AirportService,
         private formBuilder: FormBuilder) { }
 
     ngOnInit() { 
@@ -45,7 +47,6 @@ export class BookComponent {
         });
 
         this.form = this.formBuilder.group({
-            phoneNumber: ['', [Validators.required]],
             contactPhoneNumber: ['', [Validators.required]],
             contactEmail: ['', [Validators.required]],
             /*creditCard: ['', [CreditCardValidators.validateCCNumber]],
@@ -58,6 +59,7 @@ export class BookComponent {
     }
         
     get f() { return this.form.controls; }
+    get countries() { return this.airportService.Countries(); }
 
     onSubmit(){
         this.submitted = true;
@@ -85,7 +87,7 @@ export class BookComponent {
 
         var passengers = {
             Passengers: passengersArray,
-            PassengerPhone: this.f.phoneNumber.value,
+            PassengerPhone: this.f.contactPhoneNumber.value,
             ContactPhone: this.f.contactPhoneNumber.value,
             ContactEmail: this.f.contactEmail.value,
             Itinerary: this.itinerary
@@ -98,10 +100,14 @@ export class BookComponent {
     }
 
     purchase(booking){
-        this.bookingService.purchase(booking)
-            .then(() => this.router.navigate(['bookings']))
-            .catch(error => this.error = error)
-            .finally(() => this.loading = false);
+        if(!this.doPurchaseStep) {
+            this.router.navigate(['bookings']);
+        } else {
+            this.bookingService.purchase(booking)
+                .then(() => this.router.navigate(['bookings']))
+                .catch(error => this.error = error)
+                .finally(() => this.loading = false);
+        }
     }
     
 }
