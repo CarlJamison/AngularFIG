@@ -1,0 +1,17 @@
+.card{
+    color:rgb(70, 70, 70);
+}
+
+.tag{
+    color: #007db0;
+    border: gray solid 3px;
+    border-radius: 50px;
+    letter-spacing: 1.5px;
+    padding: 4px 16px;
+    background-color: #b3d8e7;
+    margin-bottom: 16px;
+}
+
+.mat-primary{
+    color: #007db0;
+}

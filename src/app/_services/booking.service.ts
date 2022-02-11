@@ -21,6 +21,10 @@ export class BookingService {
         return this.itinerary;
     }
 
+    getItinerary(id: number){
+        return this.http.get<any>(`${environment.apiUrl}/api/Search?id=${id}`).toPromise();
+    }
+
     confirm(){
         return this.http.post<any>(`${environment.apiUrl}/api/Search/Confirm`, this.get()).toPromise().then(data => {
             this.confirmation = data;

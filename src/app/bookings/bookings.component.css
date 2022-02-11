@@ -9,3 +9,8 @@
     letter-spacing: 1px;
     padding-bottom: 8px;
 }
+
+.booking:hover{
+    background-color: whitesmoke;
+    cursor: pointer;
+}

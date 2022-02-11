@@ -1,6 +1,6 @@
 ﻿
 
-      <div class="booking p-3 d-flex" *ngFor="let booking of bookings">
+      <div class="booking p-3 d-flex" (click)="goToItinerary(booking)" *ngFor="let booking of bookings">
         <span class="m-2" style="flex: 33">{{ booking.Name }}</span>
         <span class="m-2" style="flex: 33">Passengers: {{ booking.Passengers }}</span>
         <span class="m-2" style="flex: 33">{{ booking.RecordLocater }}</span>

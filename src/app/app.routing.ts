@@ -9,6 +9,7 @@ import { AdminGuard } from './admin/admin.guard';
 import { AccountComponent } from './account';
 import { BookComponent } from './book';
 import { BookingsComponent } from './bookings';
+import { ItineraryComponent } from './itinerary';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -19,7 +20,7 @@ const routes: Routes = [
     { path: 'account', component: AccountComponent, canActivate: [AuthGuard]  },
     { path: 'forgotPassword', component: ForgotAccountComponent },
     { path: 'Register', component: CreateAccountComponent },
-
+    { path: 'itinerary', component: ItineraryComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }

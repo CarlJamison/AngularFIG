@@ -35,6 +35,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { CreditCardDirectivesModule } from 'angular-cc-library';
 import { BookingsComponent } from './bookings';
+import { ItineraryComponent } from './itinerary';
 
 @NgModule({
     imports: [
@@ -76,7 +77,8 @@ import { BookingsComponent } from './bookings';
         EditProfileDialog,
         ChangePasswordDialog,
         AddRemoveManagerDialog,
-        TransferUserDialog
+        TransferUserDialog,
+        ItineraryComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
