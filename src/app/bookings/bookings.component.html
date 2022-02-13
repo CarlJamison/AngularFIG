@@ -5,3 +5,5 @@
         <span class="m-2" style="flex: 33">Passengers: {{ booking.Passengers }}</span>
         <span class="m-2" style="flex: 33">{{ booking.RecordLocater }}</span>
       </div>
+
+      <h4 *ngIf="bookings && !bookings.length" style="color: gray; margin: auto; max-width: 500px; text-align: center;" class="p-4 card widget">You have no active bookings</h4>

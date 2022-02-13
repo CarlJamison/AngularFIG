@@ -52,4 +52,9 @@ export class BookingService {
     purchase(recordLocater: string){
         return this.http.put<any>(`${environment.apiUrl}/api/Search/Purchase?recordLocater=${recordLocater}`, null).toPromise();
     }
+
+    cancel(recordLocater: string, removeRecord: boolean){
+        return this.http.put<any>
+            (`${environment.apiUrl}/api/Search/Cancel?recordLocater=${recordLocater}&removeRecord=${removeRecord}`, null).toPromise();
+    }
 }
