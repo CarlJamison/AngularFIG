@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Update Email Notifications</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form" (ngSubmit)="add()">
+        <div class="form-group">
+            <label for="published">Add Email</label>
+            <input placeholder="example@example.com" type="text" formControlName="Email" class="form-control"/>
+        </div>
+    </form>
+
+      <button style="margin: 8px 16px" (click)="add()" [disabled]="loading" class="widget-search-filter btn btn-primary">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Add
+      </button>
+
+      <div class="info-section">
+        <h6 style="flex: 100">Emails</h6>
+        
+        <div *ngFor="let email of emails">
+          {{ email }}
+          <button mat-icon-button (click)="remove(email)" color="primary">
+            <span class="material-icons">remove</span>
+          </button>
+        </div>
+        
+        <div *ngIf="!emails.length">No emails assigned</div>
+      </div>
+
+      <div style="display: flex;">
+        <button style="margin: 8px 16px" (click)="save()" [disabled]="loading" class="widget-search-filter btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Save
+        </button>
+        <button mat-button (click)="dialogRef.close()">Cancel</button>
+      </div>
+</div>

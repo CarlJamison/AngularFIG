@@ -11,7 +11,8 @@ export class AdminComponent implements OnInit {
     tab = 0;
     pricingForm: FormGroup;
     searchForm: FormGroup;
-    orgs: any[] = []
+    orgs: any[] = [];
+    emails: any[] = [];
     currentOrg: ""
 
     constructor(
@@ -30,6 +31,8 @@ export class AdminComponent implements OnInit {
 
         this.adminService.GetOrganizations().then(data => this.orgs = data );
 
+        this.adminService.GetNotificationEmails().then(data => this.emails = data );
+
         this.pricingForm = this.formBuilder.group({
             published: ['', Validators.required],
             consolidated: ['', Validators.required],
@@ -44,9 +47,16 @@ export class AdminComponent implements OnInit {
 
         this.GetUnconfirmed();
     }
+
+    getEmails(type){
+        return this.emails
+            .filter(e => e.Type == type)
+            .map(e => e.Email);
+    }
     
     get f() { return this.pricingForm.controls; }
     get s() { return this.searchForm.controls; }
+
     search(){
         this.loading = true;
         var orgId = this.s.orgSearch.value
@@ -55,10 +65,12 @@ export class AdminComponent implements OnInit {
             this.users = users;
         });
     }
+
     getOrgName(id){
         var org = this.orgs.find(o => o.Id == id);
         return org ? org.Name : '(Unassigned)';
     }
+
     transfer(user){
         var dialogRef = this.dialog.open(TransferUserDialog, {
             data: { orgs: this.orgs, user }
@@ -108,6 +120,18 @@ export class AdminComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(data => this.orgs = data ? data : this.orgs);
+    }
+
+    editEmails(type) {
+        var dialogRef = this.dialog.open(AddRemoveEmailDialog, {
+          data: {
+              emails: this.getEmails(type),
+              type: type
+          },
+          width: '650px',
+        });
+
+        dialogRef.afterClosed().subscribe(data => this.emails = data ? data : this.emails);
     }
 
     saveOrganization(org){
@@ -298,5 +322,45 @@ export class TransferUserDialog implements OnInit {
         
         this.userService.TransferUser(this.user.Id, this.f.transferOrg.value)
             .then(() => this.dialogRef.close(this.f.transferOrg.value));
+    }
+}
+@Component({ templateUrl: 'add-remove-email.html', styleUrls: ['admin.component.css'] })
+export class AddRemoveEmailDialog implements OnInit {
+    constructor(
+        public dialogRef: MatDialogRef<AddRemoveEmailDialog>,
+        private adminService: AdminService,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private formBuilder: FormBuilder) {}
+
+    loading = false
+    form: FormGroup;
+    emails: any[] = [];
+
+    add(){
+        if (this.form.invalid) return;
+
+        this.emails.push(this.f.Email.value);
+    }
+
+    remove(email){
+        this.emails = this.emails.filter(e => e != email);
+    }
+
+    ngOnInit() {
+        this.form = this.formBuilder.group({
+            Email: ['', Validators.required]
+        });
+
+        this.emails = this.data.emails;
+    }
+
+    get f() { return this.form.controls; }
+
+    save(){
+        if (this.loading) return;
+        this.loading = true;
+        
+        this.adminService.UpdateNotificationEmails(this.data.type, this.emails)
+            .then(data => this.dialogRef.close(data));
     }
 }

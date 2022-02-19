@@ -18,6 +18,14 @@ export class AdminService {
         return this.http.get<any>(`${environment.apiUrl}/api/Admin/Organizations`).toPromise();
     }
 
+    GetNotificationEmails() {
+        return this.http.get<any>(`${environment.apiUrl}/api/Admin/Emails`).toPromise();
+    }
+
+    UpdateNotificationEmails(type, emailList){
+        return this.http.post<any>(`${environment.apiUrl}/api/Admin/Emails?type=${type}`, emailList).toPromise();
+    }
+
     SaveOrganization(org){
         return this.http.post<any>(`${environment.apiUrl}/api/Admin/Organizations`, org).toPromise();
     }

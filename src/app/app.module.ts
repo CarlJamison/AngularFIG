@@ -10,7 +10,7 @@ import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { BookComponent } from './book'
-import { AddEditOrganizationDialog, AddRemoveManagerDialog, AdminComponent, TransferUserDialog } from './admin';
+import { AddEditOrganizationDialog, AddRemoveManagerDialog, AdminComponent, TransferUserDialog, AddRemoveEmailDialog } from './admin';
 import { ForgotAccountComponent } from './forgot-account';
 import { CreateAccountComponent } from './create-account';
 import { AccountComponent, ChangePasswordDialog, EditProfileDialog } from './account';
@@ -78,6 +78,7 @@ import { ItineraryComponent } from './itinerary';
         ChangePasswordDialog,
         AddRemoveManagerDialog,
         TransferUserDialog,
+        AddRemoveEmailDialog,
         ItineraryComponent
     ],
     providers: [

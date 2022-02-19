@@ -23,7 +23,7 @@ jobs:
 
       - name: npm install
         run: |
-          npm install --only=prod
+          npm install
         working-directory: .
         
       - name: build

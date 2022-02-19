@@ -4,6 +4,7 @@
         <div class="nav-tab" (click)="tab = 1" [ngClass]="{'active-side-nav-tab': tab == 1}" ><span class="material-icons">groups</span>Organization</div>
         <div class="nav-tab" (click)="tab = 2" [ngClass]="{'active-side-nav-tab': tab == 2}" ><span class="material-icons">sell</span>Pricing</div>
         <div class="nav-tab" (click)="tab = 3" [ngClass]="{'active-side-nav-tab': tab == 3}" ><span class="material-icons">airplane_ticket</span>Bookings</div>
+        <div class="nav-tab" (click)="tab = 4" [ngClass]="{'active-side-nav-tab': tab == 3}" ><span class="material-icons">mail</span>Emails</div>
     </div>
     <div style="width: 100%; overflow: auto;">
         <div style="padding: 16px" [ngSwitch]="tab">
@@ -204,6 +205,20 @@
               </form>
             </div>
             <div *ngSwitchCase="3">Bookings</div>
+            <div *ngSwitchCase="4">
+              <div class="info-section">
+                <div style="display: flex;">
+                  <h6 style="flex: 100">Purchase Notification</h6>
+                  <button mat-icon-button (click)="editEmails(0)" color="primary">
+                    <span class="material-icons">edit</span>
+                  </button>
+                </div>
+                
+                <div *ngFor="let email of getEmails(0)">
+                  {{ email }}</div>
+                <div *ngIf="!getEmails(0).length">There are currently no emails assigned</div>
+              </div>
+            </div>
         </div>
     </div>
 </div>
