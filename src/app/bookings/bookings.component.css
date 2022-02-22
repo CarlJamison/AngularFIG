@@ -1,13 +1,18 @@
-.booking{
+.booking, .booking-header{
     margin: auto;
     max-width: 700px;
     background-color: white;
     border-radius: 8px;
-    margin-top: 32px;
+    margin-top: 12px;
     color: #007db0;
     box-shadow: #3232324a 0px 3px 8px;
     letter-spacing: 1px;
     padding-bottom: 8px;
+    font-size: 14px;
+}
+
+.booking-header{
+    color:rgb(70, 70, 70);
 }
 
 .booking:hover{

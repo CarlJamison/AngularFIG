@@ -31,7 +31,7 @@ export class ItineraryComponent {
         return (new Date(date)).toLocaleDateString();
     }
 
-    get cancelled() { return this.itinerary.BookingStats == 1 || this.itinerary.Status == "cancelled"}
+    get cancelled() { return this.itinerary.BookingStatus == 1 || this.itinerary.Status == "cancelled"}
 
     cancel(){
         this.cLoading = true;
