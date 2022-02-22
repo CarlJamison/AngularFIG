@@ -152,13 +152,17 @@
               {{ showPostSearch ? 'chevron_left' : 'chevron_right' }}</span>
           </button>
         </div>
+        <div class="stops mb-4" style="width: unset;" *ngIf="showPostSearch && contractTypes && contractTypes.length > 1">
+          <div>Contract Types</div>
+          <mat-checkbox *ngFor="let type of contractTypes" class="mat-primary" [(ngModel)]="type.PostInclude">{{ type.Name }}</mat-checkbox>
+        </div>
         <div class="time-range-slider" *ngIf="showPostSearch">
           <div>Outbound trip</div>
           <div class="d-flex" style="flex-direction: column;">
             <mat-slider (input)="this.departureFromTime = $event.value" [max]="24" [min]="0" [step]="0.25" class="from-slider"></mat-slider>
             <mat-slider (input)="this.departureToTime = $event.value" [(ngModel)]="departureToTime" [max]="24" [min]="0" [step]="0.25" class="to-slider" style="margin-top: -32px"></mat-slider>
           </div>
-          <div class="d-flex mb-2">Departure: {{ formatLabel(departureFromTime) }} - {{ formatLabel(departureToTime) }}</div>
+          <div class="d-flex">Departure: {{ formatLabel(departureFromTime) }} - {{ formatLabel(departureToTime) }}</div>
           <div class="d-flex" style="flex-direction: column;">
             <mat-slider (input)="this.arrivalFromTime = $event.value" [max]="24" [min]="0" [step]="0.25" class="from-slider"></mat-slider>
             <mat-slider (input)="this.arrivalToTime = $event.value" [(ngModel)]="arrivalToTime" [max]="24" [min]="0" [step]="0.25" class="to-slider" style="margin-top: -32px"></mat-slider>
@@ -171,7 +175,7 @@
             <mat-slider (input)="this.retDepartureFromTime = $event.value" [max]="24" [min]="0" [step]="0.25" class="from-slider"></mat-slider>
             <mat-slider (input)="this.retDepartureToTime = $event.value" [(ngModel)]="retDepartureToTime" [max]="24" [min]="0" [step]="0.25" class="to-slider" style="margin-top: -32px"></mat-slider>
           </div>
-          <div class="d-flex mb-2">Departure: {{ formatLabel(retDepartureFromTime) }} - {{ formatLabel(retDepartureToTime) }}</div>
+          <div class="d-flex">Departure: {{ formatLabel(retDepartureFromTime) }} - {{ formatLabel(retDepartureToTime) }}</div>
           <div class="d-flex" style="flex-direction: column;">
             <mat-slider (input)="this.retArrivalFromTime = $event.value" [max]="24" [min]="0" [step]="0.25" class="from-slider"></mat-slider>
             <mat-slider (input)="this.retArrivalToTime = $event.value" [(ngModel)]="retArrivalToTime" [max]="24" [min]="0" [step]="0.25" class="to-slider" style="margin-top: -32px"></mat-slider>

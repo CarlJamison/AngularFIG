@@ -87,9 +87,9 @@ export class HomeComponent {
 
         this.accountService.ProfileDetails().then(c => {
             this.contractTypes = [];
-            if(c.HasCON) this.contractTypes.push({ Value: "PRI", Name: "Consolidated", Include: true});
-            if(c.HasMIS) this.contractTypes.push({ Value: "MIS", Name: "Humanitarian", Include: true});
-            if(c.HasPUB) this.contractTypes.push({ Value: "PUB", Name: "Published", Include: true});
+            if(c.HasCON) this.contractTypes.push({ Value: "PRI", Name: "Consolidated", Include: true, PostInclude: true});
+            if(c.HasMIS) this.contractTypes.push({ Value: "MIS", Name: "Humanitarian", Include: true, PostInclude: true});
+            if(c.HasPUB) this.contractTypes.push({ Value: "PUB", Name: "Published", Include: true, PostInclude: true});
             this.f.from.setValue(c.DefaultAirport);
         })
 
@@ -165,7 +165,7 @@ export class HomeComponent {
 
             return this.retDepartureFromTime < dep && dep < this.retDepartureToTime
                 && this.retArrivalFromTime < arr && arr < this.retArrivalToTime;
-        });
+        }).filter(i => this.contractTypes.some(c => c.Value == i.contractType && c.PostInclude));
     }
 
     dateString(date: string){

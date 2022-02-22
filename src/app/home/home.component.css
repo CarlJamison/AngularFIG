@@ -90,7 +90,7 @@ button.widget-search-filter.confirm-button{
 }
 
 .post-search{
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 116px;
     background-color: #707070; /*#525252*/
@@ -112,6 +112,8 @@ button.widget-search-filter.confirm-button{
 }
 
 .stops{
+    display: flex;
+    flex-direction: column;
     letter-spacing: 1px;
     border: solid 1px white;
     padding: 12px;
