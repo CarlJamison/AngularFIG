@@ -138,7 +138,7 @@ export class HomeComponent {
     
     get f() { return this.searchForm.controls; }
 
-    get filteredItineraries(){
+    get filteredItineraries() {
         return this.itineraries.filter(i => {
             var stops = this.tripType == 'OW' ? i.flights.length : i.flights.length / 2;
             //{NonStop: true, OneStop: true, TwoStop: true};
@@ -147,6 +147,8 @@ export class HomeComponent {
                 || (stops == 2 && this.numStops.OneStop)
                 || (stops >= 3 && this.numStops.TwoStop);
         }).filter(i => {
+            if(this.departureFromTime == 0 && this.departureToTime == 24 &&
+                this.arrivalFromTime == 0 && this.arrivalToTime == 24) return true;
             var outboundFlights = this.getFlights(i.flights, '1')
             var depFlight = new Date(outboundFlights[0].departureAirportDate);
             var arrFlight = new Date(outboundFlights[outboundFlights.length - 1].arrivalAirportDate);
@@ -155,8 +157,19 @@ export class HomeComponent {
 
             return this.departureFromTime < dep && dep < this.departureToTime
                 && this.arrivalFromTime < arr && arr < this.arrivalToTime;
+        /*}).filter(i => {
+            return i.flights.every(f => {
+                if(f == i.flights[0]) return true;
+                var last = i.flights[i.flights.findIndex(l => l == f) - 1];
+                if(last.tripId != f.tripId) return true;
+                var connection = Math.abs(new Date(last.arrivalAirportDate).getTime() - new Date(f.departureAirportDate).getTime()) / 36e5;
+                console.log(connection)
+                return true;
+            });*/
         }).filter(i => {
             if(this.searchedTripType == 'OW') return true;
+            if(this.retDepartureFromTime == 0 && this.retDepartureToTime == 24 &&
+                this.retArrivalFromTime == 0 && this.retArrivalToTime == 24) return true;
             var returnFlights = this.getFlights(i.flights, '2')
             var depFlight = new Date(returnFlights[0].departureAirportDate);
             var arrFlight = new Date(returnFlights[returnFlights.length - 1].arrivalAirportDate);
