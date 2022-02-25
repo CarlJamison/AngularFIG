@@ -21,6 +21,7 @@ const routes: Routes = [
     { path: 'forgotPassword', component: ForgotAccountComponent },
     { path: 'Register', component: CreateAccountComponent },
     { path: 'itinerary', component: ItineraryComponent },
+    { path: 'feedback', component: AccountComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }

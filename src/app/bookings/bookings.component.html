@@ -1,6 +1,6 @@
 ﻿
 
-      <div class="booking-header p-2 d-flex" >
+      <div *ngIf="bookings && bookings.length" class="booking-header p-2 d-flex" >
         <span class="m-2" style="flex: 40">Name: Route</span>
         <span class="m-2" style="text-align: center; flex: 15">Passengers</span>
         <span class="m-2" style="text-align: center; flex: 15">Reference</span>

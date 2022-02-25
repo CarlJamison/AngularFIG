@@ -16,6 +16,23 @@
 </div>
 
 <div *ngIf="itinerary" class="m-3 p-4 card widget">
+    <h3 style="flex: 100;">Itinerary</h3>
+    <mat-divider></mat-divider>
+    <div style="height: 16px;"></div>
+    <div style="padding-left: 20px" *ngFor="let flight of getFlights('1')">{{flight.carrierCode}} {{flight.flightNumber}}
+      - {{flight.departureDateString}} {{flight.departureAirport}} 
+      <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">east</span>
+     {{flight.arrivalDateString}} {{flight.arrivalAirport}}
+    </div>
+    <mat-divider style="margin: 12px;"></mat-divider>
+    <div style="padding-left: 20px" *ngFor="let flight of getFlights('2')">{{flight.carrierCode}} {{flight.flightNumber}}
+      - {{flight.departureDateString}} {{flight.departureAirport}} 
+      <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">east</span>
+      {{flight.arrivalDateString}} {{flight.arrivalAirport}}
+    </div>
+  </div>
+
+<div *ngIf="itinerary" class="m-3 p-4 card widget">
     <div class="d-flex">
         <h3 style="flex: 100">Travelers</h3>
         <h5 class="tag" style="text-transform: capitalize;">{{ itinerary.Passengers.length }}</h5>
