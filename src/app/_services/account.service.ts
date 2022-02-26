@@ -41,4 +41,8 @@ export class AccountService {
     SaveProfileDetails(profile) {
         return this.http.post<any>(`${environment.apiUrl}/api/Account/ProfileDetails`, profile).toPromise();
     }
+
+    SubmitFeedback(feedback) {
+        return this.http.post<any>(`${environment.apiUrl}/api/Account/SendFeedback`, { Feedback: feedback }).toPromise();
+    }
 }

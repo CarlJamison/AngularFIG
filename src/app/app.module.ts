@@ -36,6 +36,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { CreditCardDirectivesModule } from 'angular-cc-library';
 import { BookingsComponent } from './bookings';
 import { ItineraryComponent } from './itinerary';
+import { FeedbackComponent } from './feedback';
 
 @NgModule({
     imports: [
@@ -79,7 +80,8 @@ import { ItineraryComponent } from './itinerary';
         AddRemoveManagerDialog,
         TransferUserDialog,
         AddRemoveEmailDialog,
-        ItineraryComponent
+        ItineraryComponent,
+        FeedbackComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },

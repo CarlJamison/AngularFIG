@@ -206,17 +206,17 @@
             </div>
             <div *ngSwitchCase="3">Bookings</div>
             <div *ngSwitchCase="4">
-              <div class="info-section">
+              <div *ngFor="let type of notificationTypes" class="info-section">
                 <div style="display: flex;">
-                  <h6 style="flex: 100">Purchase Notification</h6>
-                  <button mat-icon-button (click)="editEmails(0)" color="primary">
+                  <h6 style="flex: 100">{{ type.Name }}</h6>
+                  <button mat-icon-button (click)="editEmails(type.Value)" color="primary">
                     <span class="material-icons">edit</span>
                   </button>
                 </div>
                 
-                <div *ngFor="let email of getEmails(0)">
+                <div *ngFor="let email of getEmails(type.Value)">
                   {{ email }}</div>
-                <div *ngIf="!getEmails(0).length">There are currently no emails assigned</div>
+                <div *ngIf="!getEmails(type.Value).length">There are currently no emails assigned</div>
               </div>
             </div>
         </div>

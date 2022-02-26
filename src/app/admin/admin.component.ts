@@ -13,7 +13,12 @@ export class AdminComponent implements OnInit {
     searchForm: FormGroup;
     orgs: any[] = [];
     emails: any[] = [];
-    currentOrg: ""
+    currentOrg: "";
+    notificationTypes = [
+        {Name: 'Purchase Notifications', Value: 0},
+        {Name: 'Registration Notifications', Value: 1},
+        {Name: 'Feedback Notifications', Value: 2}
+    ]
 
     constructor(
         public dialog: MatDialog,

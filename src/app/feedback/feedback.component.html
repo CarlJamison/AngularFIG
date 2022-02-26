@@ -1,0 +1,18 @@
+﻿<div style="max-width: 600px; margin: auto" class="offset-md-3">
+    <div class="card">
+        <h4 class="card-header">Contact Us</h4>
+        <div *ngIf="!success" class="card-body">
+            <div style="padding: 0 32px">Submit your feedback below and we will address it as soon as possible</div>
+            <mat-form-field class="p-3" style="width: 100%;" appearance="fill">
+                <mat-label>Message</mat-label>
+                <textarea style="height: 300px" [(ngModel)]="feedbackText" matInput></textarea>
+            </mat-form-field>
+            <button style="margin: 8px 16px" (click)="submit()" [disabled]="loading" class="widget-search-filter btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Submit
+              </button>
+        </div>
+
+        <div style="text-align: center" class="p-3" *ngIf="success">Thanks!  We have recieved your feedback.</div>
+    </div>
+</div>
