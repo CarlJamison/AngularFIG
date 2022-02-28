@@ -12,6 +12,7 @@ export class AdminComponent implements OnInit {
     pricingForm: FormGroup;
     searchForm: FormGroup;
     orgs: any[] = [];
+    bookings: any[] = [];
     emails: any[] = [];
     currentOrg: "";
     notificationTypes = [
@@ -35,6 +36,8 @@ export class AdminComponent implements OnInit {
         });
 
         this.adminService.GetOrganizations().then(data => this.orgs = data );
+
+        this.adminService.GetBookings().then(data => this.bookings = data );
 
         this.adminService.GetNotificationEmails().then(data => this.emails = data );
 

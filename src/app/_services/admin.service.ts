@@ -18,6 +18,10 @@ export class AdminService {
         return this.http.get<any>(`${environment.apiUrl}/api/Admin/Organizations`).toPromise();
     }
 
+    GetBookings() {
+        return this.http.get<any>(`${environment.apiUrl}/api/Admin/Bookings`).toPromise();
+    }
+
     GetNotificationEmails() {
         return this.http.get<any>(`${environment.apiUrl}/api/Admin/Emails`).toPromise();
     }
