@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({ templateUrl: 'home.component.html', styleUrls: ['home.component.css'] })
 export class HomeComponent {
@@ -38,6 +39,7 @@ export class HomeComponent {
         private airportService: AirportService,
         private searchService: SearchService,
         private router: Router,
+        private snackBar: MatSnackBar,
         private accountService: AccountService,
         private bookingService: BookingService,
         private formBuilder: FormBuilder) { }
@@ -266,8 +268,9 @@ export class HomeComponent {
 
     book(itinerary){
         this.bookingService.set(itinerary);
-        this.bookingService.confirm().then(data => 
-            this.router.navigate(['book']));
+        this.bookingService.confirm()
+            .then(() => this.router.navigate(['book']))
+            .catch(error => this.snackBar.open(error, null, {duration: 9000}));
     }
 
     formatLabel(value: number) {

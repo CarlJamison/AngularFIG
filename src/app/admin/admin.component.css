@@ -55,3 +55,7 @@
     padding: 16px;
     margin: 16px 0;
 }
+
+.table td{
+    vertical-align: middle;
+}

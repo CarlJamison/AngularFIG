@@ -45,4 +45,12 @@ export class AdminService {
     UpdateManagers(orgId, managerList){
         return this.http.post<any>(`${environment.apiUrl}/api/Admin/Organizations/Managers?orgId=${orgId}`, managerList).toPromise();
     }
+
+    Ticket(bookingId){
+        return this.http.put<any>(`${environment.apiUrl}/api/Admin/Ticket?bookingId=${bookingId}`, null).toPromise();
+    }
+    ResetTicket(bookingId){
+        return this.http.put<any>(`${environment.apiUrl}/api/Admin/ResetTicket?bookingId=${bookingId}`, null).toPromise();
+    }
+    
 }

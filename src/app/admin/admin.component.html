@@ -204,7 +204,37 @@
               </button>
               </form>
             </div>
-            <div *ngSwitchCase="3">Bookings</div>
+            <div *ngSwitchCase="3">
+              <mat-tab-group (selectedIndexChange)="bTab = $event">
+                <mat-tab label="Booked ({{bookings[0].length}})"></mat-tab>
+                <mat-tab label="Purchased ({{bookings[1].length}})"></mat-tab>
+                <mat-tab label="Ticketed ({{bookings[2].length}})"></mat-tab>
+              </mat-tab-group>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Tickets</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Departure Date</th>
+                    <th scope="col">Reference</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let book of getBookings()">
+                    <td>{{ book.Name }}</td>
+                    <td>{{ book.Passengers }}</td>
+                    <td>{{ book.BookingDate }}</td>
+                    <td>{{ book.DepartureDate }}</td>
+                    <td>{{ book.RecordLocater }}</td>
+                    <td style="text-transform: capitalize">{{ book.RecordStatus }}</td>
+                    <td><button *ngIf="bTab != 0" (click)="ticket(book)" mat-button color="primary">{{ bTab == 1 ? 'Ticket' : 'Reset Ticket' }}</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div *ngSwitchCase="4">
               <div *ngFor="let type of notificationTypes" class="info-section">
                 <div style="display: flex;">

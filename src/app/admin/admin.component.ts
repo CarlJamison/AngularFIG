@@ -9,6 +9,7 @@ export class AdminComponent implements OnInit {
     users: any[];
     unconfirmed: any[];
     tab = 0;
+    bTab = 0;
     pricingForm: FormGroup;
     searchForm: FormGroup;
     orgs: any[] = [];
@@ -37,7 +38,7 @@ export class AdminComponent implements OnInit {
 
         this.adminService.GetOrganizations().then(data => this.orgs = data );
 
-        this.adminService.GetBookings().then(data => this.bookings = data );
+        this.adminService.GetBookings().then(data => this.processBookings(data));
 
         this.adminService.GetNotificationEmails().then(data => this.emails = data );
 
@@ -54,6 +55,33 @@ export class AdminComponent implements OnInit {
         });
 
         this.GetUnconfirmed();
+    }
+
+    processBookings(data){
+        data.forEach(b => {
+            b.DepartureDate = this.dateString(b.DepartureDate);
+            b.BookingDate = this.dateString(b.BookingDate);
+        })
+        
+        this.bookings[0] = data.filter(b => b.RecordStatus == 'reserved');
+        this.bookings[1] = data.filter(b => b.Status == 0 && b.RecordStatus == 'guaranteed');
+        this.bookings[2] = data.filter(b => b.Status == 2 && b.RecordStatus == 'guaranteed');
+    }
+
+    dateString(date: string){
+        return (new Date(date)).toLocaleDateString();
+    }
+
+    getBookings(){
+        return this.bookings[this.bTab];
+    }
+
+    ticket(booking){
+        if(booking.Status == 0){
+            this.adminService.Ticket(booking.Id).then(data => this.processBookings(data));
+        }else{
+            this.adminService.ResetTicket(booking.Id).then(data => this.processBookings(data));
+        }
     }
 
     getEmails(type){
