@@ -266,6 +266,10 @@ export class HomeComponent {
         }
     }
 
+    icon(airline){
+        return `https://booking.itgtravel.net/images/logos/${airline}.gif`
+    }
+
     book(itinerary){
         this.bookingService.set(itinerary);
         this.bookingService.confirm()
