@@ -155,7 +155,7 @@ export class HomeComponent {
             var depFlight = new Date(outboundFlights[0].departureAirportDate);
             var arrFlight = new Date(outboundFlights[outboundFlights.length - 1].arrivalAirportDate);
             var dep = depFlight.getHours() + (depFlight.getMinutes() / 60);
-            var arr = arrFlight.getHours() + (arrFlight.getMinutes() / 60)
+            var arr = arrFlight.getHours() + (arrFlight.getMinutes() / 60);
 
             return this.departureFromTime < dep && dep < this.departureToTime
                 && this.arrivalFromTime < arr && arr < this.arrivalToTime;
@@ -183,8 +183,12 @@ export class HomeComponent {
         }).filter(i => this.contractTypes.some(c => c.Value == i.contractType && c.PostInclude));
     }
 
-    dateString(date: string){
+    timeString(date: string){
         return (new Date(date)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    dateString(date: string){
+        return (new Date(date)).toLocaleString([], { weekday: 'short', month: 'short', day: 'numeric' });
     }
 
     search(){
@@ -242,8 +246,10 @@ export class HomeComponent {
             this.itineraries = data;
             this.itineraries.forEach(i => {
                 i.flights.forEach(f => {
-                    f.departureDateString = this.dateString(f.departureAirportDate);
-                    f.arrivalDateString = this.dateString(f.arrivalAirportDate);
+                    f.departureDateString = this.timeString(f.departureAirportDate);
+                    f.arrivalDateString = this.timeString(f.arrivalAirportDate);
+                    f.departureString = this.dateString(f.departureAirportDate);
+                    f.arrivalString = this.dateString(f.arrivalAirportDate);
                 });
             })
         },

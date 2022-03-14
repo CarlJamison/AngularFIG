@@ -196,21 +196,42 @@
               </div>
             </div>
             <div style="flex: 100">
-              <div style="padding-left: 20px" *ngFor="let flight of getFlights(itinerary.flights, '1')">
-                <img src="{{icon(flight.carrierCode)}}" width="16" height="16" title="{{flight.carrierName}}">
-                {{flight.carrierCode}} {{flight.flightNumber}}
-                - {{flight.departureDateString}} {{flight.departureAirport}} 
-                <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">east</span>
-               {{flight.arrivalDateString}} {{flight.arrivalAirport}}
+              <div *ngIf="!itinerary.showInfo">
+                <div style="padding-left: 20px" *ngFor="let flight of getFlights(itinerary.flights, '1')">
+                  <img src="{{icon(flight.carrierCode)}}" width="16" height="16" title="{{flight.carrierName}}">
+                  {{flight.carrierCode}} {{flight.flightNumber}}
+                  - {{flight.departureDateString}} {{flight.departureAirport}} 
+                  <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">east</span>
+                 {{flight.arrivalDateString}} {{flight.arrivalAirport}}
+                </div>
+                <mat-divider style="margin: 12px;"></mat-divider>
+                <div style="padding-left: 20px" *ngFor="let flight of getFlights(itinerary.flights, '2')">
+                  <img src="{{icon(flight.carrierCode)}}" width="16" height="16" title="{{flight.carrierName}}">
+                  {{flight.carrierCode}} {{flight.flightNumber}}
+                  - {{flight.departureDateString}} {{flight.departureAirport}} 
+                  <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">east</span>
+                  {{flight.arrivalDateString}} {{flight.arrivalAirport}}
+                </div>
               </div>
-              <mat-divider style="margin: 12px;"></mat-divider>
-              <div style="padding-left: 20px" *ngFor="let flight of getFlights(itinerary.flights, '2')">
-                <img src="{{icon(flight.carrierCode)}}" width="16" height="16" title="{{flight.carrierName}}">
-                {{flight.carrierCode}} {{flight.flightNumber}}
-                - {{flight.departureDateString}} {{flight.departureAirport}} 
-                <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">east</span>
-                {{flight.arrivalDateString}} {{flight.arrivalAirport}}
+              <div *ngIf="itinerary.showInfo">
+                <div style="padding-left: 20px" *ngFor="let flight of itinerary.flights">
+                  <img src="{{icon(flight.carrierCode)}}" width="16" height="16" title="{{flight.carrierName}}">
+                  {{flight.carrierName}} {{flight.flightNumber}} Class {{flight.bookingClass}}
+                  <div class="d-flex" style="padding-left: 32px; margin-top: 8px">
+                    <div style="flex: 100; padding: 8px 0; font-weight: bold">Departing</div>
+                    <div style="flex: 100"><div>{{flight.departureDateString}}</div>{{flight.departureString}}</div>
+                    <div style="flex: 100">{{flight.departureCity}}</div>
+                  </div>
+                  <div class="d-flex" style="padding-left: 32px; margin-top: 8px">
+                    <div style="flex: 100; padding: 8px 0; font-weight: bold">Arrival</div>
+                    <div style="flex: 100"><div>{{flight.arrivalDateString}}</div>{{flight.arrivalString}}</div>
+                    <div style="flex: 100">{{flight.arrivalCity}}</div>
+                  </div>
+                  <mat-divider style="margin: 12px;"></mat-divider>
+                </div>
               </div>
+              
+              <button (click)="itinerary.showInfo = !itinerary.showInfo" class="info-button">Show More Info</button>
               <div style="justify-content: end;" class="d-flex">
                 <button (click)="book(itinerary)" class="confirm-button widget-search-filter btn btn-primary">Confirm</button>
               </div>
