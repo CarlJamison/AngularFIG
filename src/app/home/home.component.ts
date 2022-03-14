@@ -34,6 +34,8 @@ export class HomeComponent {
     retArrivalFromTime: number = 0;
     retArrivalToTime: number = 24;
     contractTypes: any[];
+    sliceStart: number = 0;
+    sliceLength: number = 10;
 
     constructor(
         private airportService: AirportService,
@@ -139,6 +141,10 @@ export class HomeComponent {
     }
     
     get f() { return this.searchForm.controls; }
+
+    get displayItineraries(){
+        return this.filteredItineraries.slice(this.sliceStart, this.sliceStart + this.sliceLength);
+    }
 
     get filteredItineraries() {
         return this.itineraries.filter(i => {
@@ -288,6 +294,13 @@ export class HomeComponent {
         var minuteDec = value % 1;
         date.setHours(value - minuteDec, minuteDec * 60);
         return date.toLocaleTimeString("en-us", {hour: "2-digit", minute: "2-digit"});
+    }
+
+    forward(){
+        this.sliceStart += this.sliceLength
+    }
+    back(){
+        this.sliceStart -= this.sliceLength
     }
     
 }

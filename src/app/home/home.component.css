@@ -154,3 +154,19 @@ button.widget-search-filter.confirm-button{
     color: gray;
     margin: 8px 0;
 }
+
+.showing-control div,
+.showing-control button{
+    background-color: white;
+    height: 32px;
+    margin: 16px;
+    border: #007db0 2px solid;
+    border-radius: 10px;
+    text-align: center;
+    color: #007db0;
+    animation-duration: 1s;
+}
+
+.showing-control button:hover{
+    background-color: whitesmoke;
+}

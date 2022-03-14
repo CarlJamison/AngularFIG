@@ -184,7 +184,21 @@
         </div>
       </div>
 
-      <div class="itinerary" *ngFor="let itinerary of filteredItineraries">
+      <div *ngIf="itineraries.length" style="max-width: 700px; margin: auto" class="showing-control d-flex">
+        <span style="flex: 20; text-align: center">
+          <button *ngIf="sliceStart" (click)="back()" style="width: 64px">
+            <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">west</span>
+          </button>
+        </span>
+        <div style="flex: 60">Showing {{sliceStart + 1}}-{{sliceStart + sliceLength}} of {{filteredItineraries.length}} itineraries</div>
+        <span style="flex: 20; text-align: center">
+          <button *ngIf="sliceStart + sliceLength < filteredItineraries.length" (click)="forward()" style="width: 64px">
+            <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">east</span>
+          </button>
+        </span>
+      </div>
+
+      <div class="itinerary" *ngFor="let itinerary of displayItineraries">
           <div class="itinerary-title">{{ itinerary.contractDescription }} Fare: ${{ getTotalPrice(itinerary) }}</div>
           <div class="d-flex">
             <div style="border-right: lightgray solid 1px">
@@ -231,7 +245,7 @@
                 </div>
               </div>
               
-              <button (click)="itinerary.showInfo = !itinerary.showInfo" class="info-button">Show More Info</button>
+              <button (click)="itinerary.showInfo = !itinerary.showInfo" class="info-button">Show {{itinerary.showInfo ? 'Less' : 'More'}} Info</button>
               <div style="justify-content: end;" class="d-flex">
                 <button (click)="book(itinerary)" class="confirm-button widget-search-filter btn btn-primary">Confirm</button>
               </div>
