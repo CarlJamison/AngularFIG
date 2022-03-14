@@ -147,3 +147,10 @@ button.widget-search-filter.confirm-button{
     padding: 8px;
     margin: 12px;
 }
+
+.info-button{
+    width: 100%;
+    border: none;
+    color: gray;
+    margin: 8px 0;
+}
