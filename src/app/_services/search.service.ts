@@ -9,4 +9,8 @@ export class SearchService {
     Search(search) {
         return this.http.post<any>(`${environment.apiUrl}/api/Search`, search).toPromise();
     }
+
+    Request(search) {
+        return this.http.post<any>(`${environment.apiUrl}/api/Group/Request`, search).toPromise();
+    }
 }

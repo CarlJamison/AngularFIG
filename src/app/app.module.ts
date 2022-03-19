@@ -39,6 +39,7 @@ import { CreditCardDirectivesModule } from 'angular-cc-library';
 import { BookingsComponent } from './bookings';
 import { ItineraryComponent } from './itinerary';
 import { FeedbackComponent } from './feedback';
+import { GroupRequestComponent } from './group-request';
 
 @NgModule({
     imports: [
@@ -85,7 +86,8 @@ import { FeedbackComponent } from './feedback';
         TransferUserDialog,
         AddRemoveEmailDialog,
         ItineraryComponent,
-        FeedbackComponent
+        FeedbackComponent,
+        GroupRequestComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },

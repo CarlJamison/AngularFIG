@@ -11,6 +11,7 @@ import { BookComponent } from './book';
 import { BookingsComponent } from './bookings';
 import { ItineraryComponent } from './itinerary';
 import { FeedbackComponent } from './feedback';
+import { GroupRequestComponent } from './group-request';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -21,6 +22,7 @@ const routes: Routes = [
     { path: 'account', component: AccountComponent, canActivate: [AuthGuard]  },
     { path: 'forgotPassword', component: ForgotAccountComponent },
     { path: 'Register', component: CreateAccountComponent },
+    { path: 'Group', component: GroupRequestComponent },
     { path: 'itinerary', component: ItineraryComponent, canActivate: [AuthGuard]  },
     { path: 'feedback', component: FeedbackComponent, canActivate: [AuthGuard]  },
 
