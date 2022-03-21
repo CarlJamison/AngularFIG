@@ -21,8 +21,8 @@ const routes: Routes = [
     { path: 'bookings', component: BookingsComponent, canActivate: [AuthGuard]  },
     { path: 'account', component: AccountComponent, canActivate: [AuthGuard]  },
     { path: 'forgotPassword', component: ForgotAccountComponent },
-    { path: 'Register', component: CreateAccountComponent },
-    { path: 'Group', component: GroupRequestComponent },
+    { path: 'register', component: CreateAccountComponent },
+    { path: 'group', component: GroupRequestComponent },
     { path: 'itinerary', component: ItineraryComponent, canActivate: [AuthGuard]  },
     { path: 'feedback', component: FeedbackComponent, canActivate: [AuthGuard]  },
 

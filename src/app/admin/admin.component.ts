@@ -19,7 +19,8 @@ export class AdminComponent implements OnInit {
     notificationTypes = [
         {Name: 'Purchase Notifications', Value: 0},
         {Name: 'Registration Notifications', Value: 1},
-        {Name: 'Feedback Notifications', Value: 2}
+        {Name: 'Feedback Notifications', Value: 2},
+        {Name: 'Group Request Notifications', Value: 3}
     ]
 
     constructor(
@@ -131,7 +132,7 @@ export class AdminComponent implements OnInit {
     }
 
     getLink(org){
-        return `${window.location.host}/Register?Code=${org.ShareableSuffix}`
+        return `${window.location.host}/register?Code=${org.ShareableSuffix}`
     }
 
     confirmAccount(user){

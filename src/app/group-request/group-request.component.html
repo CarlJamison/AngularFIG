@@ -108,10 +108,6 @@
             <div class="d-flex">
               <mat-checkbox style="justify-content: center; flex: 100; display: flex"
                 class="mat-primary" formControlName="datesFlexible">Flexible Dates</mat-checkbox>
-              <mat-checkbox style="justify-content: center; flex: 100; display: flex"
-                class="mat-primary" formControlName="reoccuringGroup">Reoccuring Group</mat-checkbox>
-              <mat-checkbox style="justify-content: center; flex: 100; display: flex"
-                class="mat-primary" formControlName="confirmedSpace">Space Already Confirmed</mat-checkbox>
             </div>
 
             <mat-form-field class="p-2" style="width: 100%;" appearance="fill">
@@ -126,7 +122,11 @@
             
           </div>
       </form>
-      <div style="text-align: center" class="p-3" *ngIf="success">Your request has been submitted</div>
+
+      <div class="card">
+        <div style="text-align: center" class="p-3" *ngIf="success">Your request has been submitted</div>
+      </div>
+      
       <div *ngIf="error" style="max-width: 500px; margin: 16px auto;" class="alert alert-danger mt-3">{{error}}</div>
 
 

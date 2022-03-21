@@ -24,7 +24,7 @@ export class AccountComponent implements OnInit {
     }
 
     getLink(){
-        return `${window.location.host}/Register?Code=${this.org.ShareableSuffix}`
+        return `${window.location.host}/register?Code=${this.org.ShareableSuffix}`
     }
 
     changePassword(){

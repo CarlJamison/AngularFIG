@@ -1,11 +1,9 @@
 ﻿import { Component } from '@angular/core';
 import { map, startWith } from 'rxjs/operators';
-import { AccountService, AirportService, BookingService, SearchService } from '@app/_services';
+import { AirportService,  SearchService } from '@app/_services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({ templateUrl: 'group-request.component.html', styleUrls: ['group-request.component.css'] })
 export class GroupRequestComponent {
@@ -20,15 +18,10 @@ export class GroupRequestComponent {
     options: string[] = [];
     error: string;
     tripType: string = "RT";
-    cabinClass: string = "coach";
-    showAdvanced: boolean = false;
 
     constructor(
         private airportService: AirportService,
         private searchService: SearchService,
-        private router: Router,
-        private snackBar: MatSnackBar,
-        private bookingService: BookingService,
         private formBuilder: FormBuilder) { }
 
     airlines(){
@@ -48,8 +41,6 @@ export class GroupRequestComponent {
             depDate: ['', Validators.required],
             retDate: ['', Validators.required],
             datesFlexible: [''],
-            reoccuringGroup: [''],
-            confirmedSpace: [''],
             airline: [''],
             comments:[''],
             referralName:[''],
@@ -138,8 +129,6 @@ export class GroupRequestComponent {
             maxBudget: this.f.maxBudget.value,
             airline: this.f.airline.value == "Any" ? null : this.f.airline.value,
             datesFlexible: this.f.datesFlexible.value,
-            reoccuringGroup: !this.f.reoccuringGroup.value,
-            confirmedSpace: this.f.confirmedSpace.value,
             email: this.f.email.value,
             referralName: this.f.referralName.value,
             groupName: this.f.groupName.value,
