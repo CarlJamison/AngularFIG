@@ -1,5 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { map, startWith } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import { AirportService,  SearchService } from '@app/_services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -18,11 +19,16 @@ export class GroupRequestComponent {
     options: string[] = [];
     error: string;
     tripType: string = "RT";
+    referral: string = "";
 
     constructor(
         private airportService: AirportService,
         private searchService: SearchService,
-        private formBuilder: FormBuilder) { }
+        private route: ActivatedRoute,
+        private formBuilder: FormBuilder) {
+
+        route.queryParams.pipe(map(p => p.referral)).subscribe(c => this.referral = c);
+    }
 
     airlines(){
         return this.airportService.Airlines();
@@ -48,6 +54,7 @@ export class GroupRequestComponent {
             groupName: ['', Validators.required]
         });
         this.f.airline.setValue("Any");
+        this.f.referralName.setValue(this.referral);
 
         this.filteredFromOptions = this.f.from.valueChanges.pipe(
             startWith(''),
