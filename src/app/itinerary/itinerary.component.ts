@@ -21,6 +21,7 @@ export class ItineraryComponent {
     getItinerary(id: number){
         this.bookingService.getItinerary(id).then(data => {
             this.itinerary = data;
+            this.itinerary.Name = this.itinerary.Name.split(": ")[0];
             this.itinerary.DateReserved = this.dateString(this.itinerary.DateReserved);
             this.itinerary.DepartureDate = this.dateString(this.itinerary.DepartureDate);
             this.itinerary.ReturnDate = this.dateString(this.itinerary.ReturnDate);

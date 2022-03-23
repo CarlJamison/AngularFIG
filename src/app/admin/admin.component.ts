@@ -66,7 +66,7 @@ export class AdminComponent implements OnInit {
         
         this.bookings[0] = data.filter(b => b.RecordStatus == 'reserved');
         this.bookings[1] = data.filter(b => b.Status == 0 && b.RecordStatus == 'guaranteed');
-        this.bookings[2] = data.filter(b => b.Status == 2 && b.RecordStatus == 'guaranteed');
+        this.bookings[2] = data.filter(b => b.RecordStatus == 'ticketed');
     }
 
     dateString(date: string){
