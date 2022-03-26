@@ -214,9 +214,10 @@
                 <thead>
                   <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Tickets</th>
+                    <th scope="col">User</th>
+                    <th scope="col">#</th>
                     <th scope="col">Created</th>
-                    <th scope="col">Departure Date</th>
+                    <th scope="col">Departure</th>
                     <th scope="col">Reference</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Status</th>
@@ -226,6 +227,8 @@
                 <tbody>
                   <tr *ngFor="let book of getBookings()">
                     <td style="text-transform: capitalize">{{ book.Name }}</td>
+                    <td><div>{{ book.Email }}</div>
+                      <div style="font-size: 14px; color: gray">({{getOrgName(book.OrgId)}})</div></td>
                     <td>{{ book.Passengers }}</td>
                     <td>{{ book.BookingDate }}</td>
                     <td>{{ book.DepartureDate }}</td>

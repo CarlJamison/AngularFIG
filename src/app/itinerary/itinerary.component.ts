@@ -26,14 +26,16 @@ export class ItineraryComponent {
             this.itinerary.DepartureDate = this.dateString(this.itinerary.DepartureDate);
             this.itinerary.ReturnDate = this.dateString(this.itinerary.ReturnDate);
             this.itinerary.Itinerary.forEach(f => {
-                    f.departureDateString = this.timeString(f.departureAirportDate);
-                    f.arrivalDateString = this.timeString(f.arrivalAirportDate);
-                });
+                f.departureDateString = this.timeString(f.departureAirportDate);
+                f.arrivalDateString = this.timeString(f.arrivalAirportDate);
+                f.departureString = this.dateString(f.departureAirportDate);
+                f.arrivalString = this.dateString(f.arrivalAirportDate);
+            });
         }).catch(error => this.error = error);
     }
 
-    private getFlights(id){
-        return this.itinerary.Itinerary.filter(f => f.tripId == id);
+    icon(airline){
+        return `https://booking.itgtravel.net/images/logos/${airline}.gif`
     }
 
     timeString(date: string){
