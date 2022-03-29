@@ -1,5 +1,7 @@
 .card{
     color:rgb(70, 70, 70);
+    max-width: 800px;
+    margin: auto;
 }
 
 .tag{
