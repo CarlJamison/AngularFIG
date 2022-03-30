@@ -2,6 +2,8 @@
 import { AirportService, BookingService } from '@app/_services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({ templateUrl: 'itinerary.component.html', styleUrls: ['itinerary.component.css'] })
 export class ItineraryComponent {
@@ -66,5 +68,26 @@ export class ItineraryComponent {
                 this.error = error;
                 this.pLoading = false;
             })
+    }
+
+    download(){
+        
+        let PDF = new jsPDF('p', 'mm', 'a4');
+        let pdfList = Array.prototype.slice.call(document.getElementsByClassName('pdf-content'));
+
+        var promises = pdfList.map(element => html2canvas(element));
+
+        Promise.all(promises).then(canvi => {
+            canvi.forEach(canvas => {
+                let fileWidth = 208;
+                let fileHeight = (canvas.height * fileWidth) / canvas.width;
+                const FILEURI = canvas.toDataURL('image/png');
+                let position = 0;
+                PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+                if(canvi.findIndex(c => c == canvas) != canvi.length - 1) PDF.addPage();
+            })
+            PDF.save('e-ticket.pdf')
+        });
+        
     }
 }

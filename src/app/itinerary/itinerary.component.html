@@ -1,4 +1,4 @@
-﻿<div *ngIf="itinerary" class="mb-4 p-4 card widget">
+﻿<div *ngIf="itinerary" class="mb-4 p-4 card widget pdf-content">
     <div class="d-flex">
         <h3 style="flex: 100; text-transform: capitalize">{{ itinerary.Name }}</h3>
         <h5 class="tag" style="text-transform: capitalize;">{{ itinerary.Status }}</h5>
@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<div *ngIf="itinerary" class="mb-4 p-4 card widget">
+<div *ngIf="itinerary" class="mb-4 p-4 card widget pdf-content">
     <h3 style="flex: 100;">Itinerary</h3>
     <mat-divider></mat-divider>
     <div style="height: 16px;"></div>
@@ -42,7 +42,7 @@
     </div>
   </div>
 
-<div *ngIf="itinerary" class="mb-4 p-4 card widget">
+<div *ngIf="itinerary" class="mb-4 p-4 card widget pdf-content">
     <div class="d-flex">
         <h3 style="flex: 100">Travelers</h3>
         <h5 class="tag" style="text-transform: capitalize;">{{ itinerary.Passengers.length }}</h5>
@@ -70,6 +70,9 @@
         <button (click)="cancel()" [disabled]="pLoading || cLoading" class="m-3 pr-3 widget-search-filter btn btn-primary">
             <span *ngIf="cLoading" class="spinner-border spinner-border-sm mr-1"></span>
             {{cancelled ? 'Remove Canceled Booking' : 'Cancel' }}
+        </button>
+        <button (click)="download()" class="m-3 pr-3 widget-search-filter btn btn-primary">
+            Download E-Receipt
         </button>
     </div>
     <div *ngIf="error" class="alert alert-danger m-3">{{error}}</div>
