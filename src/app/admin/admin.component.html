@@ -5,6 +5,7 @@
         <div class="nav-tab" (click)="tab = 2" [ngClass]="{'active-side-nav-tab': tab == 2}" ><span class="material-icons">sell</span>Pricing</div>
         <div class="nav-tab" (click)="tab = 3" [ngClass]="{'active-side-nav-tab': tab == 3}" ><span class="material-icons">airplane_ticket</span>Bookings</div>
         <div class="nav-tab" (click)="tab = 4" [ngClass]="{'active-side-nav-tab': tab == 4}" ><span class="material-icons">mail</span>Emails</div>
+        <div class="nav-tab" (click)="tab = 5" [ngClass]="{'active-side-nav-tab': tab == 5}" ><span class="material-icons">assessment</span>Reporting</div>
     </div>
     <div style="width: 100%; overflow: auto;">
         <div style="padding: 16px" [ngSwitch]="tab">
@@ -253,6 +254,50 @@
                   {{ email }}</div>
                 <div *ngIf="!getEmails(type.Value).length">There are currently no emails assigned</div>
               </div>
+            </div>
+            <div *ngSwitchCase="5">
+              <form [formGroup]="reportForm" (ngSubmit)="getReport()">
+                <div class="layout-wrap">
+                  <div class="form-group">
+                    <label>Year</label>
+                    <input type="text" formControlName="Year" class="form-control" [ngClass]="{ 'is-invalid': submitted && r.Year.errors }" />
+                  </div>
+                  <mat-form-field appearance="fill" style="padding: 24px 0 0 16px">
+                    <mat-label>Month</mat-label>
+                    <mat-select formControlName="Month">
+                      <mat-option [value]="-1">Any</mat-option>
+                      <mat-option [value]="1">January</mat-option>
+                      <mat-option [value]="2">February</mat-option>
+                      <mat-option [value]="3">March</mat-option>
+                      <mat-option [value]="4">April</mat-option>
+                      <mat-option [value]="5">May</mat-option>
+                      <mat-option [value]="6">June</mat-option>
+                      <mat-option [value]="7">July</mat-option>
+                      <mat-option [value]="8">August</mat-option>
+                      <mat-option [value]="9">September</mat-option>
+                      <mat-option [value]="10">October</mat-option>
+                      <mat-option [value]="11">November</mat-option>
+                      <mat-option [value]="12">December</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill" style="padding: 24px 0 0 16px">
+                    <mat-label>Org</mat-label>
+                    <mat-select [value]="Any" formControlName="org">
+                      <mat-option [value]="-1">Any</mat-option>
+                      <mat-option [value]="-2">Unassigned</mat-option>
+                      <mat-option *ngFor="let org of orgs" [value]="org.Id">
+                        {{ org.Name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                
+                <button style="margin: 8px 16px" (click)="search()" [disabled]="loading" class="widget-search-filter btn btn-primary">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                  Search
+                </button>
+                <div class="m-1 pt-3" *ngIf="users">{{users.length}} results</div>
+              </form>
             </div>
         </div>
     </div>

@@ -12,6 +12,7 @@ export class AdminComponent implements OnInit {
     bTab = 0;
     pricingForm: FormGroup;
     searchForm: FormGroup;
+    reportForm: FormGroup;
     orgs: any[] = [];
     bookings: any[] = [];
     emails: any[] = [];
@@ -55,6 +56,16 @@ export class AdminComponent implements OnInit {
             orgSearch: ['']
         });
 
+        this.reportForm = this.formBuilder.group({
+            Year: ['', Validators.required],
+            Month: [''],
+            org: ['']
+        });
+
+        this.r.Year.setValue(new Date().getFullYear());
+        this.r.Month.setValue(-1);
+        this.r.org.setValue(-1);
+
         this.GetUnconfirmed();
     }
 
@@ -91,6 +102,7 @@ export class AdminComponent implements OnInit {
             .map(e => e.Email);
     }
     
+    get r() { return this.reportForm.controls; }
     get f() { return this.pricingForm.controls; }
     get s() { return this.searchForm.controls; }
 
