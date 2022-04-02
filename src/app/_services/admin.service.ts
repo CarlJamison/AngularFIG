@@ -46,6 +46,12 @@ export class AdminService {
         return this.http.post<any>(`${environment.apiUrl}/api/Admin/Organizations/Managers?orgId=${orgId}`, managerList).toPromise();
     }
 
+    RetrieveReport(year, month, orgId = -1) {
+        return this.http.get<any>
+            (`${environment.apiUrl}/api/Admin/Report?year=${year}&month=${month}&org=${orgId}`)
+            .toPromise();
+    }
+
     Ticket(bookingId){
         return this.http.put<any>(`${environment.apiUrl}/api/Admin/Ticket?bookingId=${bookingId}`, null).toPromise();
     }

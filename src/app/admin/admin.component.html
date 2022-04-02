@@ -265,7 +265,7 @@
                   <mat-form-field appearance="fill" style="padding: 24px 0 0 16px">
                     <mat-label>Month</mat-label>
                     <mat-select formControlName="Month">
-                      <mat-option [value]="-1">Any</mat-option>
+                      <mat-option [value]="-1">All</mat-option>
                       <mat-option [value]="1">January</mat-option>
                       <mat-option [value]="2">February</mat-option>
                       <mat-option [value]="3">March</mat-option>
@@ -283,7 +283,7 @@
                   <mat-form-field appearance="fill" style="padding: 24px 0 0 16px">
                     <mat-label>Org</mat-label>
                     <mat-select [value]="Any" formControlName="org">
-                      <mat-option [value]="-1">Any</mat-option>
+                      <mat-option [value]="-1">All</mat-option>
                       <mat-option [value]="-2">Unassigned</mat-option>
                       <mat-option *ngFor="let org of orgs" [value]="org.Id">
                         {{ org.Name }}
@@ -292,12 +292,19 @@
                   </mat-form-field>
                 </div>
                 
-                <button style="margin: 8px 16px" (click)="search()" [disabled]="loading" class="widget-search-filter btn btn-primary">
+                <button style="margin: 8px 16px" (click)="getReport()" [disabled]="loading" class="widget-search-filter btn btn-primary">
                   <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                   Search
                 </button>
-                <div class="m-1 pt-3" *ngIf="users">{{users.length}} results</div>
               </form>
+
+              <div *ngIf="report" class="m-3 info-section">
+                <div>Bookings: {{report.Bookings}}</div>
+                <div>Tickets: {{report.Tickets}}</div>
+                <div>Total Revenue: ${{report.Total}}</div>
+                <div>Total Contract Markup: ${{report.ContractMarkup}}</div>
+                <div>Total Organization Markup: ${{report.AdditionalMarkup}}</div>
+              </div>
             </div>
         </div>
     </div>

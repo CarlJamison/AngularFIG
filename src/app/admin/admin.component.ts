@@ -7,6 +7,7 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dial
 export class AdminComponent implements OnInit {
     loading = false;
     users: any[];
+    report; any = null;
     unconfirmed: any[];
     tab = 0;
     bTab = 0;
@@ -112,6 +113,18 @@ export class AdminComponent implements OnInit {
         return this.userService.search(this.s.FirstName.value, this.s.LastName.value, orgId ? orgId : -1).then(users => {
             this.loading = false;
             this.users = users;
+        });
+    }
+
+    getReport(){
+        this.loading = true;
+        var orgId = this.r.org.value
+        return this.adminService.RetrieveReport(this.r.Year.value, this.r.Month.value, orgId ? orgId : -1).then(report => {
+            this.loading = false;
+            report.Total = report.Total.toFixed(2);
+            report.ContractMarkup = report.ContractMarkup.toFixed(2);
+            report.AdditionalMarkup = report.AdditionalMarkup.toFixed(2);
+            this.report = report;
         });
     }
 

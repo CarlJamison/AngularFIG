@@ -1,62 +1,64 @@
-﻿<div *ngIf="itinerary" class="mb-4 p-4 card widget pdf-content">
-    <div class="d-flex">
-        <h3 style="flex: 100; text-transform: capitalize">{{ itinerary.Name }}</h3>
-        <h5 class="tag" style="text-transform: capitalize;">{{ itinerary.Status }}</h5>
-    </div>
-    <mat-divider></mat-divider>
-
-    <div class="p-3">
-        <div class="pt-1" style="font-size: 16px">ITG Reference: {{itinerary.RecordLocater}}</div>
-        <div class="pt-1" style="font-size: 16px">Trip Dates: {{itinerary.DepartureDate}} - {{itinerary.ReturnDate}}</div>
-        <div class="pt-1" style="font-size: 16px">Date Reserved: {{itinerary.DateReserved}}</div>
-        <div *ngIf="itinerary.DateGuaranteed" class="pt-1" style="font-size: 16px">Date Purchased: {{itinerary.DateGuaranteed}}</div>
-        <div class="pt-1" style="font-size: 16px">Validating Airline: {{itinerary.Airline}}</div>
-        <div class="pt-1" style="font-size: 16px">Fare Type: {{ itinerary.ContractType }}</div>
-        <div *ngIf="itinerary.TicketNumbers && itinerary.TicketNumbers.length" class="pt-1" 
-            style="font-size: 16px">Ticket Numbers: <span *ngFor="let number of itinerary.TicketNumbers">{{number}} </span></div>
-    </div>
-</div>
-
-<div *ngIf="itinerary" class="mb-4 p-4 card widget pdf-content">
-    <h3 style="flex: 100;">Itinerary</h3>
-    <mat-divider></mat-divider>
-    <div style="height: 16px;"></div>
-    <div style="padding-left: 20px" *ngFor="let flight of itinerary.Itinerary">
-        <img src="{{icon(flight.carrierCode)}}" width="16" height="16" title="{{flight.carrierName}}">
-        {{flight.carrierName}} {{flight.flightNumber}} Class {{flight.bookingClass}}
-        <div style="padding: 8px 32px">
-            <span style="font-weight: bold">Carrier Locator: </span>
-            <span>{{flight.carrierLocator}}</span>
-        </div>
-        <div class="d-flex" style="padding-left: 32px; margin-top: 8px">
-            <div style="flex: 100; padding: 8px 0; font-weight: bold">Departing</div>
-            <div style="flex: 100"><div>{{flight.departureDateString}}</div>{{flight.departureString}}</div>
-            <div style="flex: 100">{{flight.departureCity}}</div>
-        </div>
-        <div class="d-flex" style="padding-left: 32px; margin-top: 8px">
-            <div style="flex: 100; padding: 8px 0; font-weight: bold">Arrival</div>
-            <div style="flex: 100"><div>{{flight.arrivalDateString}}</div>{{flight.arrivalString}}</div>
-            <div style="flex: 100">{{flight.arrivalCity}}</div>
-        </div>
-        <mat-divider style="margin: 12px;"></mat-divider>
-    </div>
-  </div>
-
-<div *ngIf="itinerary" class="mb-4 p-4 card widget pdf-content">
-    <div class="d-flex">
-        <h3 style="flex: 100">Travelers</h3>
-        <h5 class="tag" style="text-transform: capitalize;">{{ itinerary.Passengers.length }}</h5>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="p-3" *ngFor="let passenger of itinerary.Passengers; index as i;">
+﻿<div class="pdf-content">
+    <div *ngIf="itinerary" class="mb-4 p-4 card widget">
         <div class="d-flex">
-            <div style="flex: 100">Traveler {{i + 1}}: {{passenger.TravelerType == 'CHD' ? 'Child' : 'Adult' }}</div>
-            <div>${{ passenger.Amount }}</div>
+            <h3 style="flex: 100; text-transform: capitalize">{{ itinerary.Name }}</h3>
+            <h5 class="tag" style="text-transform: capitalize;">{{ itinerary.Status }}</h5>
         </div>
-        <h4 class="mat-primary">{{ passenger.FirstName }} {{ passenger.MiddleName }} {{ passenger.LastName }}</h4>
         <mat-divider></mat-divider>
+
+        <div class="p-3">
+            <div class="pt-1" style="font-size: 16px">ITG Reference: {{itinerary.RecordLocater}}</div>
+            <div class="pt-1" style="font-size: 16px">Trip Dates: {{itinerary.DepartureDate}} - {{itinerary.ReturnDate}}</div>
+            <div class="pt-1" style="font-size: 16px">Date Reserved: {{itinerary.DateReserved}}</div>
+            <div *ngIf="itinerary.DateGuaranteed" class="pt-1" style="font-size: 16px">Date Purchased: {{itinerary.DateGuaranteed}}</div>
+            <div class="pt-1" style="font-size: 16px">Validating Airline: {{itinerary.Airline}}</div>
+            <div class="pt-1" style="font-size: 16px">Fare Type: {{ itinerary.ContractType }}</div>
+            <div *ngIf="itinerary.TicketNumbers && itinerary.TicketNumbers.length" class="pt-1" 
+                style="font-size: 16px">Ticket Numbers: <span *ngFor="let number of itinerary.TicketNumbers">{{number}} </span></div>
+        </div>
     </div>
-    <div class="pr-3" style="text-align: right;">Total: ${{ itinerary.Amount }}</div>
+
+    <div *ngIf="itinerary" class="mb-4 p-4 card widget">
+        <h3 style="flex: 100;">Itinerary</h3>
+        <mat-divider></mat-divider>
+        <div style="height: 16px;"></div>
+        <div style="padding-left: 20px" *ngFor="let flight of itinerary.Itinerary">
+            <img src="{{icon(flight.carrierCode)}}" width="16" height="16" title="{{flight.carrierName}}">
+            {{flight.carrierName}} {{flight.flightNumber}} Class {{flight.bookingClass}}
+            <div style="padding: 8px 32px">
+                <span style="font-weight: bold">Carrier Locator: </span>
+                <span>{{flight.carrierLocator}}</span>
+            </div>
+            <div class="d-flex" style="padding-left: 32px; margin-top: 8px">
+                <div style="flex: 100; padding: 8px 0; font-weight: bold">Departing</div>
+                <div style="flex: 100"><div>{{flight.departureDateString}}</div>{{flight.departureString}}</div>
+                <div style="flex: 100">{{flight.departureCity}}</div>
+            </div>
+            <div class="d-flex" style="padding-left: 32px; margin-top: 8px">
+                <div style="flex: 100; padding: 8px 0; font-weight: bold">Arrival</div>
+                <div style="flex: 100"><div>{{flight.arrivalDateString}}</div>{{flight.arrivalString}}</div>
+                <div style="flex: 100">{{flight.arrivalCity}}</div>
+            </div>
+            <mat-divider style="margin: 12px;"></mat-divider>
+        </div>
+    </div>
+
+    <div *ngIf="itinerary" class="mb-4 p-4 card widget">
+        <div class="d-flex">
+            <h3 style="flex: 100">Travelers</h3>
+            <h5 class="tag" style="text-transform: capitalize;">{{ itinerary.Passengers.length }}</h5>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="p-3" *ngFor="let passenger of itinerary.Passengers; index as i;">
+            <div class="d-flex">
+                <div style="flex: 100">Traveler {{i + 1}}: {{passenger.TravelerType == 'CHD' ? 'Child' : 'Adult' }}</div>
+                <div>${{ passenger.Amount }}</div>
+            </div>
+            <h4 class="mat-primary">{{ passenger.FirstName }} {{ passenger.MiddleName }} {{ passenger.LastName }}</h4>
+            <mat-divider></mat-divider>
+        </div>
+        <div class="pr-3" style="text-align: right;">Total: ${{ itinerary.Amount }}</div>
+    </div>
 </div>
 
 <div *ngIf="itinerary" class="mb-4 p-4 card widget">
