@@ -36,6 +36,7 @@ export class HomeComponent {
     contractTypes: any[];
     sliceStart: number = 0;
     sliceLength: number = 10;
+    postSearchAirline: string = "Any";
 
     constructor(
         private airportService: AirportService,
@@ -186,7 +187,8 @@ export class HomeComponent {
 
             return this.retDepartureFromTime < dep && dep < this.retDepartureToTime
                 && this.retArrivalFromTime < arr && arr < this.retArrivalToTime;
-        }).filter(i => this.contractTypes.some(c => c.Value == i.contractType && c.PostInclude));
+        }).filter(i => this.contractTypes.some(c => c.Value == i.contractType && c.PostInclude))
+        .filter(i => this.postSearchAirline == "Any" || i.validatingCarrier == this.postSearchAirline);
     }
 
     timeString(date: string){

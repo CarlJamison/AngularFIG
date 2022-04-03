@@ -182,6 +182,14 @@
           </div>
           <div class="d-flex">Arrival: {{ formatLabel(retArrivalFromTime) }} - {{ formatLabel(retArrivalToTime) }}</div>
         </div>
+        <mat-form-field appearance="fill" style="justify-content: center; flex: 100; display: flex">
+          <mat-label>Airline</mat-label>
+          <mat-select [(ngModel)]="postSearchAirline">
+            <mat-option *ngFor="let airline of airlines()" [value]="airline.value">
+              {{airline.Name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
 
       <div *ngIf="itineraries.length" style="max-width: 700px; margin: auto" class="showing-control d-flex">

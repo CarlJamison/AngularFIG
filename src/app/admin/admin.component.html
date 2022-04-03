@@ -236,7 +236,8 @@
                     <td>{{ book.RecordLocater }}</td>
                     <td>${{ book.Amount }}</td>
                     <td style="text-transform: capitalize">{{ book.RecordStatus }}</td>
-                    <td><button (click)="ticket(book)" mat-button color="primary">Send Ticket</button></td>
+                    <td><button (click)="ticket(book)" mat-button color="primary">
+                      {{book.Status == 2 ? 'Resend' : 'Send'}} Ticket</button></td>
                   </tr>
                 </tbody>
               </table>

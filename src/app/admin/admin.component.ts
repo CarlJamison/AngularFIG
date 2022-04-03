@@ -90,12 +90,11 @@ export class AdminComponent implements OnInit {
     }
 
     ticket(booking){
-        /*if(booking.Status == 0){
-            this.adminService.Ticket(booking.Id).then(data => this.processBookings(data));
-        }else{
-            this.adminService.ResetTicket(booking.Id).then(data => this.processBookings(data));
-        }*/
-        this.adminService.SendTicket(booking.Id).then();
+        this.adminService.SendTicket(booking.Id).then(() => {
+            if(booking.Status == 0){
+                this.adminService.Ticket(booking.Id).then(data => this.processBookings(data));
+            }
+        });
     }
 
     getEmails(type){
