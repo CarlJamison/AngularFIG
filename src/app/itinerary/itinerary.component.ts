@@ -9,6 +9,8 @@ export class ItineraryComponent {
     pLoading = false;
     cLoading = false;
     itinerary;
+    showPurchase: boolean = false;
+    billingReference: string = "";
     error;
 
     constructor(
@@ -59,8 +61,12 @@ export class ItineraryComponent {
     }
 
     purchase(){
+        this.showPurchase = true;
+    }
+
+    confirmPurchase(){
         this.pLoading = true;
-        this.bookingService.purchase(this.itinerary.RecordLocater)
+        this.bookingService.purchase(this.itinerary.RecordLocater, this.billingReference)
             .then(() => this.getItinerary(this.itinerary.Id))
             .catch(error => {
                 this.error = error;

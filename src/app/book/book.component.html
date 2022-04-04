@@ -89,6 +89,11 @@
                 <input placeholder="ExampleEmail@email.com" class="form-control" formControlName="contactEmail" 
                     [ngClass]="{ 'is-invalid': submitted && f.contactEmail.errors }">
             </div>
+            <div *ngIf="doPurchaseStep" class="form-group">
+                <label>Billing Reference</label>
+                <input class="form-control" formControlName="billingReference" [required]="doPurchaseStep"
+                    [ngClass]="{ 'is-invalid': submitted && f.billingReference.errors }">
+            </div>
             <!--<div class="form-group">
                 <label>Card Number</label>
                 <input class="form-control" id="cc-number" formControlName="creditCard" type="tel" autocomplete="cc-number" ccNumber>

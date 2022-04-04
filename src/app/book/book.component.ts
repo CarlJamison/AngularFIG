@@ -49,6 +49,7 @@ export class BookComponent {
         this.form = this.formBuilder.group({
             contactPhoneNumber: ['', [Validators.required]],
             contactEmail: ['', [Validators.required]],
+            billingReference: [''],
             /*creditCard: ['', [CreditCardValidators.validateCCNumber]],
             expirationDate: ['', [CreditCardValidators.validateExpDate]],
             cvc: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(4)]]*/ 
@@ -64,6 +65,7 @@ export class BookComponent {
     onSubmit(){
         this.submitted = true;
         this.error = null;
+        if(!this.doPurchaseStep) this.f.billingReference.setValue(" ");
         if (this.fares.some(f => f.form.invalid) || this.form.invalid || this.loading) {
             return;
         }
@@ -103,7 +105,7 @@ export class BookComponent {
         if(!this.doPurchaseStep) {
             this.router.navigate(['bookings']);
         } else {
-            this.bookingService.purchase(booking)
+            this.bookingService.purchase(booking, this.f.billingReference.value)
                 .then(() => this.router.navigate(['bookings']))
                 .catch(error => this.error = error)
                 .finally(() => this.loading = false);

@@ -49,7 +49,7 @@ export class BookingService {
         return this.http.get<any>(`${environment.apiUrl}/api/Account/Bookings`).toPromise();
     }
 
-    purchase(recordLocater: string){
+    purchase(recordLocater: string, billingReference: string = null){
         return this.http.put<any>(`${environment.apiUrl}/api/Search/Purchase?recordLocater=${recordLocater}`, null).toPromise();
     }
 
