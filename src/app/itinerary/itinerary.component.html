@@ -54,7 +54,9 @@
                 <div style="flex: 100">Traveler {{i + 1}}: {{passenger.TravelerType == 'CHD' ? 'Child' : 'Adult' }}</div>
                 <div>${{ passenger.Amount }}</div>
             </div>
-            <h4 class="mat-primary">{{ passenger.FirstName }} {{ passenger.MiddleName }} {{ passenger.LastName }}</h4>
+            <h4 style="text-transform: capitalize" class="mat-primary">
+                {{ passenger.FirstName }} {{ passenger.MiddleName }} {{ passenger.LastName }}
+            </h4>
             <mat-divider></mat-divider>
         </div>
         <div class="pr-3" style="text-align: right;">Total: ${{ itinerary.Amount }}</div>

@@ -50,7 +50,7 @@ export class BookingService {
     }
 
     purchase(recordLocater: string, billingReference: string = null){
-        return this.http.put<any>(`${environment.apiUrl}/api/Search/Purchase?recordLocater=${recordLocater}`, null).toPromise();
+        return this.http.put<any>(`${environment.apiUrl}/api/Search/Purchase?recordLocater=${recordLocater}&billingReference=${billingReference}`, null).toPromise();
     }
 
     cancel(recordLocater: string, removeRecord: boolean){

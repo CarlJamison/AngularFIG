@@ -221,6 +221,7 @@
                     <th scope="col">Departure</th>
                     <th scope="col">Reference</th>
                     <th scope="col">Amount</th>
+                    <th scope="col">Billing</th>
                     <th scope="col">Status</th>
                     <th scope="col"></th>
                   </tr>
@@ -235,8 +236,9 @@
                     <td>{{ book.DepartureDate }}</td>
                     <td>{{ book.RecordLocater }}</td>
                     <td>${{ book.Amount }}</td>
+                    <td *ngIf="bTab">{{ book.BillingReference }}</td>
                     <td style="text-transform: capitalize">{{ book.RecordStatus }}</td>
-                    <td><button (click)="ticket(book)" mat-button color="primary">
+                    <td *ngIf="bTab == 2"><button (click)="ticket(book)" mat-button color="primary">
                       {{book.Status == 2 ? 'Resend' : 'Send'}} Ticket</button></td>
                   </tr>
                 </tbody>

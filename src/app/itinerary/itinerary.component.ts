@@ -25,6 +25,7 @@ export class ItineraryComponent {
             this.itinerary = data;
             this.itinerary.Name = this.itinerary.Name.split(": ")[0];
             this.itinerary.DateReserved = this.dateString(this.itinerary.DateReserved);
+            this.itinerary.DateGuaranteed = this.dateString(this.itinerary.DateGuaranteed);
             this.itinerary.DepartureDate = this.dateString(this.itinerary.DepartureDate);
             this.itinerary.ReturnDate = this.dateString(this.itinerary.ReturnDate);
             this.itinerary.Itinerary.forEach(f => {
