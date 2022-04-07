@@ -76,7 +76,6 @@ export class ItineraryComponent {
     }
 
     download(){
-        
         var doc = new jsPDF('p', 'pt', 'a4');
         var html = document.getElementsByClassName('pdf-content')[0] as HTMLElement;
         html = html.cloneNode(true) as HTMLElement;
@@ -85,13 +84,12 @@ export class ItineraryComponent {
             html, 
             {
                 callback: doc => doc.save('e-ticket.pdf'),
-                width: 575,
-                windowWidth: 575,
-                x: 10,
-                y: 10
+                width: 545,
+                windowWidth: 545,
+                margin: 25,
+                autoPaging: 'text'
             }
         );
-        
     }
 
     filterElement(element){

@@ -85,7 +85,7 @@
             <span *ngIf="cLoading" class="spinner-border spinner-border-sm mr-1"></span>
             {{cancelled ? 'Remove Canceled Booking' : 'Cancel' }}
         </button>
-        <button (click)="download()" class="m-3 pr-3 widget-search-filter btn btn-primary">
+        <button *ngIf="itinerary.Status == 'ticketed'" (click)="download()" class="m-3 pr-3 widget-search-filter btn btn-primary">
             Download E-Receipt
         </button>
     </div>
