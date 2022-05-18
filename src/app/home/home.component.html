@@ -182,7 +182,7 @@
           </div>
           <div class="d-flex">Arrival: {{ formatLabel(retArrivalFromTime) }} - {{ formatLabel(retArrivalToTime) }}</div>
         </div>
-        <mat-form-field appearance="fill" style="justify-content: center; flex: 100; display: flex">
+        <mat-form-field appearance="fill" *ngIf="showPostSearch" style="padding: 12px 12px 0 12px">
           <mat-label>Airline</mat-label>
           <mat-select [(ngModel)]="postSearchAirline">
             <mat-option *ngFor="let airline of airlines()" [value]="airline.value">
@@ -198,7 +198,7 @@
             <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">west</span>
           </button>
         </span>
-        <div style="flex: 60">Showing {{sliceStart + 1}}-{{sliceStart + sliceLength}} of {{filteredItineraries.length}} itineraries</div>
+        <div style="flex: 60; display: table;">Showing {{sliceStart + 1}}-{{sliceStart + sliceLength}} of {{filteredItineraries.length}} itineraries</div>
         <span style="flex: 20; text-align: center">
           <button *ngIf="sliceStart + sliceLength < filteredItineraries.length" (click)="forward()" style="width: 64px">
             <span class="material-icons" style="top: 2px; position: relative; font-size: 16px;">east</span>
