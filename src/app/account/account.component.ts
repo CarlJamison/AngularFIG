@@ -1,5 +1,5 @@
 ﻿import { Component, Inject, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddEditOrganizationDialog } from '@app/admin';
 import { AccountService } from '@app/_services';
@@ -60,11 +60,11 @@ export class EditProfileDialog implements OnInit {
         public dialogRef: MatDialogRef<EditProfileDialog>,
         private accountService: AccountService,
         @Inject(MAT_DIALOG_DATA) public data: any,
-        private formBuilder: UntypedFormBuilder) {}
+        private formBuilder: FormBuilder) {}
 
     loading=false
     submitted=false
-    profileForm: UntypedFormGroup;
+    profileForm: FormGroup;
 
     ngOnInit() {
         this.profileForm = this.formBuilder.group({
@@ -101,13 +101,13 @@ export class ChangePasswordDialog implements OnInit {
         public dialogRef: MatDialogRef<EditProfileDialog>,
         private accountService: AccountService,
         @Inject(MAT_DIALOG_DATA) public data: any,
-        private formBuilder: UntypedFormBuilder) {}
+        private formBuilder: FormBuilder) {}
 
     loading=false;
     submitted=false;
     success=false;
     error='';
-    passwordForm: UntypedFormGroup;
+    passwordForm: FormGroup;
 
     ngOnInit() {
         this.passwordForm = this.formBuilder.group({

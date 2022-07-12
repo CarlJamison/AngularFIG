@@ -35,7 +35,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-//import { CreditCardDirectivesModule } from 'angular-cc-library';
+import { CreditCardDirectivesModule } from 'angular-cc-library';
 import { BookingsComponent } from './bookings';
 import { ItineraryComponent } from './itinerary';
 import { FeedbackComponent } from './feedback';

@@ -1,14 +1,14 @@
 ﻿import { Component } from '@angular/core';
 import { AirportService, BookingService } from '@app/_services';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-//import { CreditCardValidators } from 'angular-cc-library';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CreditCardValidators } from 'angular-cc-library';
 import { Router } from '@angular/router';
 
 @Component({ templateUrl: 'book.component.html', styleUrls: ['book.component.css'] })
 export class BookComponent {
     loading = false;
     submitted = false;
-    form: UntypedFormGroup;
+    form: FormGroup;
     error: string;
     itinerary;
     confirmation;
@@ -20,7 +20,7 @@ export class BookComponent {
         private bookingService: BookingService,
         private router: Router,
         private airportService: AirportService,
-        private formBuilder: UntypedFormBuilder) { }
+        private formBuilder: FormBuilder) { }
 
     ngOnInit() { 
         this.itinerary = this.bookingService.get();

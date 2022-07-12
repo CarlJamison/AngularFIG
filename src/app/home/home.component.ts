@@ -1,7 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { map, startWith } from 'rxjs/operators';
 import { AccountService, AirportService, BookingService, SearchService } from '@app/_services';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class HomeComponent {
     loading = false;
     submitted = false;
-    searchForm: UntypedFormGroup;
+    searchForm: FormGroup;
     itineraries: any[] = [];
     filteredFromOptions: Observable<string[]>;
     filteredToOptions: Observable<string[]>;
@@ -45,7 +45,7 @@ export class HomeComponent {
         private snackBar: MatSnackBar,
         private accountService: AccountService,
         private bookingService: BookingService,
-        private formBuilder: UntypedFormBuilder) { }
+        private formBuilder: FormBuilder) { }
 
     airlines(){
         return this.airportService.Airlines();
