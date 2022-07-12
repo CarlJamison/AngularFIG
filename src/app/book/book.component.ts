@@ -1,7 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { AirportService, BookingService } from '@app/_services';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { CreditCardValidators } from 'angular-cc-library';
+//import { CreditCardValidators } from 'angular-cc-library';
 import { Router } from '@angular/router';
 
 @Component({ templateUrl: 'book.component.html', styleUrls: ['book.component.css'] })
