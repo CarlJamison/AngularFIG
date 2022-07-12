@@ -1,6 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { AirportService, BookingService } from '@app/_services';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { CreditCardValidators } from 'angular-cc-library';
 import { Router } from '@angular/router';
 
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 export class BookComponent {
     loading = false;
     submitted = false;
-    form: FormGroup;
+    form: UntypedFormGroup;
     error: string;
     itinerary;
     confirmation;
@@ -20,7 +20,7 @@ export class BookComponent {
         private bookingService: BookingService,
         private router: Router,
         private airportService: AirportService,
-        private formBuilder: FormBuilder) { }
+        private formBuilder: UntypedFormBuilder) { }
 
     ngOnInit() { 
         this.itinerary = this.bookingService.get();

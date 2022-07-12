@@ -1,6 +1,6 @@
 ﻿import { Component, Inject, OnInit } from '@angular/core';
 import { AccountService, UserService, AdminService } from '@app/_services';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({ templateUrl: 'admin.component.html', styleUrls: ['admin.component.css'] })
@@ -11,9 +11,9 @@ export class AdminComponent implements OnInit {
     unconfirmed: any[];
     tab = 0;
     bTab = 0;
-    pricingForm: FormGroup;
-    searchForm: FormGroup;
-    reportForm: FormGroup;
+    pricingForm: UntypedFormGroup;
+    searchForm: UntypedFormGroup;
+    reportForm: UntypedFormGroup;
     orgs: any[] = [];
     bookings: any[] = [];
     emails: any[] = [];
@@ -27,7 +27,7 @@ export class AdminComponent implements OnInit {
 
     constructor(
         public dialog: MatDialog,
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         private userService: UserService,
         private adminService: AdminService,
         private accountService: AccountService) { }
@@ -222,11 +222,11 @@ export class AddEditOrganizationDialog implements OnInit {
         private adminService: AdminService,
         private accountService: AccountService,
         @Inject(MAT_DIALOG_DATA) public data: any,
-        private formBuilder: FormBuilder) {}
+        private formBuilder: UntypedFormBuilder) {}
 
     loading=false
     submitted=false
-    orgForm: FormGroup;
+    orgForm: UntypedFormGroup;
 
     ngOnInit() {
         this.orgForm = this.formBuilder.group({
@@ -300,11 +300,11 @@ export class AddRemoveManagerDialog implements OnInit {
         private adminService: AdminService,
         private userService: UserService,
         @Inject(MAT_DIALOG_DATA) public data: any,
-        private formBuilder: FormBuilder) {}
+        private formBuilder: UntypedFormBuilder) {}
 
     loading=false
     submitted=false
-    form: FormGroup;
+    form: UntypedFormGroup;
     searchResults: any[];
     managers:any[] = [];
 
@@ -355,10 +355,10 @@ export class TransferUserDialog implements OnInit {
         public dialogRef: MatDialogRef<AddEditOrganizationDialog>,
         private userService: UserService,
         @Inject(MAT_DIALOG_DATA) public data: any,
-        private formBuilder: FormBuilder) {}
+        private formBuilder: UntypedFormBuilder) {}
 
     loading=false
-    form: FormGroup;
+    form: UntypedFormGroup;
     orgs;
     user;
 
@@ -392,10 +392,10 @@ export class AddRemoveEmailDialog implements OnInit {
         public dialogRef: MatDialogRef<AddRemoveEmailDialog>,
         private adminService: AdminService,
         @Inject(MAT_DIALOG_DATA) public data: any,
-        private formBuilder: FormBuilder) {}
+        private formBuilder: UntypedFormBuilder) {}
 
     loading = false
-    form: FormGroup;
+    form: UntypedFormGroup;
     emails: any[] = [];
 
     add(){
