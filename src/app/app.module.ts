@@ -65,7 +65,7 @@ import { GroupRequestComponent } from './group-request';
         MatSelectModule,
         MatDividerModule,
         MatSliderModule,
-        CreditCardDirectivesModule,
+        //CreditCardDirectivesModule,
         MatTabsModule,
         MatSnackBarModule
     ],
