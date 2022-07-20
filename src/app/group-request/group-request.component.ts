@@ -2,7 +2,7 @@
 import { map, startWith } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { AirportService,  SearchService } from '@app/_services';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
@@ -10,7 +10,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 export class GroupRequestComponent {
     loading = false;
     submitted = false;
-    searchForm: FormGroup;
+    searchForm: UntypedFormGroup;
     success: boolean = false;
     filteredFromOptions: Observable<string[]>;
     filteredToOptions: Observable<string[]>;
@@ -25,7 +25,7 @@ export class GroupRequestComponent {
         private airportService: AirportService,
         private searchService: SearchService,
         private route: ActivatedRoute,
-        private formBuilder: FormBuilder) {
+        private formBuilder: UntypedFormBuilder) {
 
         route.queryParams.pipe(map(p => p.referral)).subscribe(c => this.referral = c);
     }

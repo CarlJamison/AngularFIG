@@ -1,13 +1,13 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AccountService } from '@app/_services';
 
 @Component({ templateUrl: 'forgot-account.component.html' })
 export class ForgotAccountComponent implements OnInit {
-    loginForm: FormGroup;
+    loginForm: UntypedFormGroup;
     loading = false;
     submitted = false;
     returnUrl: string;
@@ -15,7 +15,7 @@ export class ForgotAccountComponent implements OnInit {
     success = false;
 
     constructor(
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         private route: ActivatedRoute,
         private accountService: AccountService
     ) {}

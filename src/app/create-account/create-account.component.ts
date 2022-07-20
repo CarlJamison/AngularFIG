@@ -1,13 +1,13 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { first, map } from 'rxjs/operators';
 
 import { AccountService, AuthenticationService } from '@app/_services';
 
 @Component({ templateUrl: 'create-account.component.html' })
 export class CreateAccountComponent implements OnInit {
-    loginForm: FormGroup;
+    loginForm: UntypedFormGroup;
     loading = false;
     submitted = false;
     success = false;
@@ -16,7 +16,7 @@ export class CreateAccountComponent implements OnInit {
     shareableCode = null;
 
     constructor(
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         private router: Router,
         private authenticationService: AuthenticationService,
         private accountService: AccountService,
