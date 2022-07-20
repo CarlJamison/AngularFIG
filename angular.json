@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-8-basic-authentication-example": {
+    "itgtrips": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -68,14 +68,14 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-8-basic-authentication-example:build"
+            "browserTarget": "itgtrips:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-8-basic-authentication-example:build:production"
+              "browserTarget": "itgtrips:build:production"
             },
             "development": {
-              "browserTarget": "angular-8-basic-authentication-example:build:development"
+              "browserTarget": "itgtrips:build:development"
             }
           },
           "defaultConfiguration": "development"

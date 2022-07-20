@@ -1,46 +1,46 @@
 ﻿<div class="col-md-6 offset-md-3 mt-5">
-    <div class="card">
-        <h4 class="card-header">ITGTravel Register</h4>
+    <div class="card" style="border: initial">
+        <h4 class="card-header">Create an account</h4>
         <div class="card-body">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div *ngIf="!success" class="form-group">
                     <label for="username">Email</label>
-                    <input placeholder="example@example.com" type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                    <input autocomplete="email" placeholder="example@example.com" type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                         <div *ngIf="f.username.errors.required">Username is required</div>
                     </div>
                 </div>
                 <div *ngIf="!success" class="form-group">
                     <label for="username">First Name</label>
-                    <input placeholder="First name" type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                    <input autocomplete="given-name" placeholder="First name" type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
                     <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                        <div *ngIf="f.firstName.errors.required">Username is required</div>
+                        <div *ngIf="f.firstName.errors.required">First name is required</div>
                     </div>
                 </div>
                 <div *ngIf="!success" class="form-group">
                     <label for="username">Last Name</label>
-                    <input placeholder="Last name" type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                    <input autocomplete="family-name" placeholder="Last name" type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
                     <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                        <div *ngIf="f.lastName.errors.required">Username is required</div>
+                        <div *ngIf="f.lastName.errors.required">Last name is required</div>
                     </div>
                 </div>
                 <div *ngIf="!success" class="form-group">
                     <label for="username">Phone Number</label>
-                    <input placeholder="123-456-7890" type="text" formControlName="phoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" />
+                    <input autocomplete="tel" placeholder="123-456-7890" type="text" formControlName="phoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" />
                     <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
-                        <div *ngIf="f.phoneNumber.errors.required">Username is required</div>
+                        <div *ngIf="f.phoneNumber.errors.required">Phone number is required</div>
                     </div>
                 </div>
                 <div *ngIf="!success" class="form-group">
                     <label for="password">Password</label>
-                    <input placeholder="password" type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <input autocomplete="new-password" placeholder="Password" type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                         <div *ngIf="f.password.errors.required">Password is required</div>
                     </div>
                 </div>
                 <div *ngIf="!success" class="form-group">
                     <label for="confirm_password">Confirm Password</label>
-                    <input placeholder="password" type="password" formControlName="confirm_password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirm_password.errors }" />
+                    <input autocomplete="new-password" placeholder="Confirm password" type="password" formControlName="confirm_password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirm_password.errors }" />
                     <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
                         <div *ngIf="f.confirm_password.errors.required">Password is required</div>
                     </div>
