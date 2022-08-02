@@ -20,11 +20,11 @@
                   <div class="layout-wrap">
                     <div class="form-group">
                       <label >First Name</label>
-                      <input placeholder="First Name" type="text" formControlName="FirstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }" />
+                      <input placeholder="First Name" type="text" formControlName="FirstName" class="form-control" />
                     </div>
                     <div class="form-group">
                       <label >Last Name</label>
-                      <input placeholder="Last Name" type="text" formControlName="LastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }" />
+                      <input placeholder="Last Name" type="text" formControlName="LastName" class="form-control"/>
                     </div>
                     <mat-form-field appearance="fill" style="padding: 24px 0 0 16px">
                       <mat-label>Org</mat-label>
@@ -189,15 +189,15 @@
               <form [formGroup]="pricingForm" (ngSubmit)="onSubmit()" style="max-width: 300px">
                 <div class="form-group">
                   <label for="published">Published</label>
-                  <input placeholder="$0.00" type="number" formControlName="published" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.published.errors }" />
+                  <input placeholder="$0.00" type="number" formControlName="published" class="form-control"/>
                 </div>
                 <div class="form-group">
                   <label for="consolidated">Consolidated</label>
-                  <input placeholder="$0.00" type="number" formControlName="consolidated" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.consolidated.errors }" />
+                  <input placeholder="$0.00" type="number" formControlName="consolidated" class="form-control"/>
                 </div>
                 <div class="form-group">
                   <label for="humanitarian">Humanitarian</label>
-                  <input placeholder="$0.00" type="number" formControlName="humanitarian" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.humanitarian.errors }" />
+                  <input placeholder="$0.00" type="number" formControlName="humanitarian" class="form-control"/>
                 </div>
                 <button [disabled]="loading" class="widget-search-filter btn btn-primary">
                   <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
@@ -263,7 +263,7 @@
                 <div class="layout-wrap">
                   <div class="form-group">
                     <label>Year</label>
-                    <input type="text" formControlName="Year" class="form-control" [ngClass]="{ 'is-invalid': submitted && r.Year.errors }" />
+                    <input type="text" formControlName="Year" class="form-control"/>
                   </div>
                   <mat-form-field appearance="fill" style="padding: 24px 0 0 16px">
                     <mat-label>Month</mat-label>
@@ -285,7 +285,7 @@
                   </mat-form-field>
                   <mat-form-field appearance="fill" style="padding: 24px 0 0 16px">
                     <mat-label>Org</mat-label>
-                    <mat-select [value]="Any" formControlName="org">
+                    <mat-select [value]="-1" formControlName="org">
                       <mat-option [value]="-1">All</mat-option>
                       <mat-option [value]="-2">Unassigned</mat-option>
                       <mat-option *ngFor="let org of orgs" [value]="org.Id">

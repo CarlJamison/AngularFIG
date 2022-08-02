@@ -100,30 +100,30 @@ export class HomeComponent {
 
     }
 
-    private getTotalPrice(itinerary){
+    public getTotalPrice(itinerary){
         var numberOfFares = itinerary.fares.reduce((partial_sum, a) => partial_sum + +a.numPax, 0);
         return ((numberOfFares * +itinerary.markup + +itinerary.totalCcPrice) * 1.04).toFixed(2);
     }
 
-    private toAmount(amount){
+    public toAmount(amount){
         return (+amount).toFixed(2)
     }
 
-    private getFareType(fare){
+    public getFareType(fare){
         var fareType = fare.travelerType;
         return fareType == 'ADT' ? 'Adult' : fareType == 'CHD' ? 'Child' : fareType;
     }
 
-    private getFareAmount(fare, itinerary){
+    public getFareAmount(fare, itinerary){
         return (+fare.ccPricePerPax + +itinerary.markup) * 1.04;
     }
 
-    private getAverageAmount(itinerary){
+    public getAverageAmount(itinerary){
         var numberOfFares = itinerary.fares.reduce((partial_sum, a) => partial_sum + +a.numPax, 0);
         return (+this.getTotalPrice(itinerary) / numberOfFares).toFixed(2);
     }
 
-    private getFlights(flights, id){
+    public getFlights(flights, id){
         return flights.filter(f => f.tripId == id);
     }
 

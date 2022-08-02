@@ -1,5 +1,5 @@
 ﻿<div *ngIf="confirmation && confirmation.warnings" class="m-5 mt-1 p-3 rules">{{ confirmation.warnings }}</div>
-<form *ngFor="let fare of fares; index as i;" [formGroup]="fare.form" (ngSubmit)="book()" class="m-3 pb-3 card widget">
+<form *ngFor="let fare of fares; index as i;" [formGroup]="fare.form" class="m-3 pb-3 card widget">
     <h5 class="m-3">Passenger {{i + 1}}: {{ fare.travelerType == 'CHD' ? 'Child' : fare.travelerType == 'ADT' ? 'Adult' : fare.travelerType }}</h5>
     <div class="booking-form layout-wrap">
         <div class="form-group">

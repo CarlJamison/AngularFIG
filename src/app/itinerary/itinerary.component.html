@@ -73,8 +73,7 @@
         <div class="d-flex px-3" *ngIf="showPurchase" style="border: 1px #007db0 solid; border-radius: 4px;">
             <div class="form-group">
                 <label>Billing Reference</label>
-                <input class="form-control"  [required]="showPurchase" [(ngModel)]="billingReference"
-                    [ngClass]="{ 'is-invalid': submitted && f.billingReference.errors }">
+                <input class="form-control"  [required]="showPurchase" [(ngModel)]="billingReference">
             </div>
             <button (click)="confirmPurchase()" [disabled]="pLoading || cLoading" class="m-3 pr-3 widget-search-filter btn btn-primary">
                 <span *ngIf="pLoading" class="spinner-border spinner-border-sm mr-1"></span>
