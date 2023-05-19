@@ -1,6 +1,6 @@
 ﻿import { Component, Inject, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MMatLegacyDialog as MatDialog MMatLegacyDialogRef as MatDialogRef MMAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA} from '@@angular/material/legacy-dialog;
 import { AddEditOrganizationDialog } from '@app/admin';
 import { AccountService } from '@app/_services';
 

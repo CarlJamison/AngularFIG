@@ -1,7 +1,7 @@
 ﻿import { Component, Inject, OnInit } from '@angular/core';
 import { AccountService, UserService, AdminService } from '@app/_services';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MMatLegacyDialog as MatDialog MMAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA MMatLegacyDialogRef as MatDialogRef} from '@@angular/material/legacy-dialog;
 
 @Component({ templateUrl: 'admin.component.html', styleUrls: ['admin.component.css'] })
 export class AdminComponent implements OnInit {
